@@ -1,0 +1,159 @@
+/* General styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.debut {
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 17px;
+  height: 45px;
+  background-color: rgb(174, 178, 173);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 50%;
+}
+
+p {
+  color: black;
+  margin: 0;
+}
+
+span {
+  color: rgb(31, 31, 31);
+}
+
+.profile-details {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 5px;
+}
+
+.admin_name {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Sidebar Navigation */
+nav {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 170px;
+  height: calc(100vh - 70px);
+  background-color: rgb(174, 178, 173);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav.open {
+  transform: translateX(0);
+}
+
+.nav {
+  transform: translateX(-100%);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #160101;
+  transition: all 0.3s ease;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.links_name {
+  margin-left: 15px;
+}
+
+.log_out {
+  position: absolute;
+  bottom: 2%;
+}
+
+.log_out span {
+  color: rgb(245, 59, 59);
+}
+
+/* Content Area */
+.content-area {
+  padding: 20px;
+  margin-left: 180px;
+  margin-top: 70px;
+  background-color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+  }
+
+  nav {
+    transform: translateX(-100%);
+  }
+
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .content-area {
+    margin-left: 0;
+  }
+}
