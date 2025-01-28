@@ -1,6 +1,25 @@
 import React, { useState } from 'react';
-import { Outlet, NavLink } from 'react-router-dom'; // Import NavLink
-import { FaTachometerAlt, FaExchangeAlt, FaTruck, FaUsers, FaHistory, FaCalculator, FaSignOutAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import {
+  FaTachometerAlt,
+  FaExchangeAlt,
+  FaTruck,
+  FaUsers,
+  FaHistory,
+  FaCalculator,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import "./Principale.css";
+
+{/* 
+import Accueil from "./pages/Accueil/Accueil.jsx";
+import Transactions from "./pages/Transactions/Transactions.jsx";
+import Fournisseurs from "./pages/Fournisseurs/Fournisseurs.jsx";
+import Beneficiaires from "./pages/Beneficiaires/Beneficiaires.jsx";
+import Historique from "./pages/Historique/Historiques.jsx";
+import Calculs from "./pages/Calculs/Calculs.jsx";
+Configuration des routes */}
+
 import "./Principale.css";
 
 const Principale = () => {
@@ -32,46 +51,46 @@ const Principale = () => {
             <div className="sidebar">
               <ul className="nav-links">
                 <li>
-                  <NavLink to="accueil" activeClassName="active">
+                  <Link to="/accueil" className="active">
                     <FaTachometerAlt className="icon" />
                     <span className="links_name">Accueil</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="transactions" activeClassName="active">
+                  <Link to="/transactions">
                     <FaExchangeAlt className="icon" />
                     <span className="links_name">Transactions</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="fournisseurs" activeClassName="active">
+                  <Link to="/fournisseurs">
                     <FaTruck className="icon" />
                     <span className="links_name">Fournisseurs</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="beneficiaires" activeClassName="active">
+                  <Link to="/beneficiaires">
                     <FaUsers className="icon" />
                     <span className="links_name">Bénéficiaires</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="historique" activeClassName="active">
+                  <Link to="/historique">
                     <FaHistory className="icon" />
                     <span className="links_name">Historique</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="calculs" activeClassName="active">
+                  <Link to="/calculs">
                     <FaCalculator className="icon" />
                     <span className="links_name">Calculs</span>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="log_out">
-                  <NavLink to="/" activeClassName="active">
+                  <Link to="/">
                     <FaSignOutAlt className="icon" />
                     <span className="links_name">Déconnexion</span>
-                  </NavLink>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -80,8 +99,17 @@ const Principale = () => {
 
         <div className="content-area">
           <div className="routage">
-            {/* L'Outlet ici charge le contenu de la route sélectionnée */}
-            <Outlet />
+            {/* Configuration des routes 
+
+            <Routes>
+              <Route path="/accueil" element={<Accueil />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/fournisseurs" element={<Fournisseurs />} />
+              <Route path="/beneficiaires" element={<Beneficiaires />} />
+              <Route path="/historique" element={<Historique />} />
+              <Route path="/calculs" element={<Calculs />} />
+            </Routes>
+             Configuration des routes */}
           </div>
         </div>
       </div>
@@ -90,3 +118,4 @@ const Principale = () => {
 };
 
 export default Principale;
+

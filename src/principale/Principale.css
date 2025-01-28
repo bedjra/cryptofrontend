@@ -1,17 +1,12 @@
-/* General styles */
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+/*
+body{
+  background-color: #fff;
 
+}*/
 .debut {
   height: 100%;
   width: 100%;
+  background-color: #fff;
 }
 
 .content {
@@ -20,9 +15,9 @@ html {
   left: 0;
   width: 100%;
   padding: 17px;
-  height: 45px;
-  background-color: rgb(174, 178, 173);
+  height: 40px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
   z-index: 1000;
 }
 
@@ -30,7 +25,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  height: 100%;
 }
 
 .dots {
@@ -42,13 +37,21 @@ html {
 .dot {
   width: 10px;
   height: 10px;
-  background-color: blue;
+  background-color: #0073e6;
   border-radius: 50%;
 }
 
-p {
-  color: black;
-  margin: 0;
+h6 {
+  font-weight: bold;
+  font-style: italic; /* Applique l'effet italique */
+  color: #333; /* Vous pouvez ajuster la couleur selon vos préférences */
+  letter-spacing: 2px; /* Espacement entre les lettres pour un effet plus aérien */
+  text-transform: uppercase; /* Transforme le texte en majuscules */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre discrète pour du relief */
+  display: inline-block;
+  transform: skewY(
+    -5deg
+  ); /* Incline légèrement le texte pour un effet dynamique */
 }
 
 span {
@@ -61,7 +64,7 @@ span {
   cursor: pointer;
 }
 
-.profile-avatar {
+.profile-details img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -69,91 +72,224 @@ span {
   margin-right: 5px;
 }
 
-.admin_name {
+.profile-details .admin_name {
   font-size: 16px;
   color: #333;
 }
 
-/* Sidebar Navigation */
+.wrapper {
+  display: flex;
+  height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+}
+
 nav {
   position: fixed;
-  top: 70px;
+  top: 65px;
   left: 0;
-  width: 170px;
-  height: calc(100vh - 70px);
-  background-color: rgb(174, 178, 173);
+  width: 220px;
+  height: calc(100vh - 60px);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 999;
-  transition: transform 0.3s ease-in-out;
-}
+  text-decoration: none;
 
-.nav.open {
-  transform: translateX(0);
-}
-
-.nav {
-  transform: translateX(-100%);
 }
 
 .nav-links {
-  list-style: none;
-  padding: 0;
+  list-style-type: none; /* Remove bullet points from the list */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
-.nav-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #160101;
-  transition: all 0.3s ease;
-  padding: 8px 20px;
-  border-radius: 5px;
+.nav-links li {
+  margin-bottom: 15px; /* Add spacing between navigation items */
 }
 
-.links_name {
-  margin-left: 15px;
+.nav-links li:last-child {
+  margin-bottom: 0; /* Remove spacing after the last item */
 }
+
+.nav-links a {
+  text-decoration: none; /* Remove the underline from links */
+  display: flex; /* Flexbox for aligning icons and text */
+  align-items: center; /* Center items vertically */
+  color: #0b0b0b; /* Active item text color */
+  font-size: 18px;
+  padding: 15px 15px; /* Padding for better click area */
+  border-radius: 8px; /* Rounded corners for the hover effect */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.nav-links a .icon {
+  margin-right: 10px; /* Add spacing between icon and text */
+  font-size: 20px; /* Icon size */
+}
+
+
+.nav-links a.active span {
+  color: #0073e6; /* Span text color for the active link */
+}
+.nav-links a.active {
+  color: #0073e6; /* Text and icon color for the active link */
+}
+
+.nav-links a.active .icon {
+  color: #0073e6; /* Icon color for the active link */
+}
+
+
+
 
 .log_out {
   position: absolute;
-  bottom: 2%;
+  bottom: -0.3%;
 }
 
 .log_out span {
   color: rgb(245, 59, 59);
 }
 
-/* Content Area */
-.content-area {
-  padding: 20px;
-  margin-left: 180px;
-  margin-top: 70px;
-  background-color: #fff;
+.sub-menu {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 200px;
 }
 
-/* Responsive Styles */
+.nav-links li:hover .sub-menu {
+  display: block;
+}
+
+.sub-link {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.sub-link:hover {
+  background-color: #333;
+}
+
+
+
+.content-area {
+  padding: 70px;
+  padding-left: 225px;
+  height: auto;
+  margin-left: 220px; /* Décale le contenu à droite du nav */
+  width: 100%;
+  overflow-y: auto; /* Assure que le contenu déborde proprement si nécessaire */
+
+    position: absolute; /* Assure que le conteneur occupe tout l'espace */
+    top: 0;
+    right: 0; /* Étend jusqu'au bord droit */
+    bottom: 0; /* Étend jusqu'au bas */
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse */
+  
+  
+}
+
+/* Conteneur parent pour le nav et le routage */
+.wrapper {
+  display: flex;
+  height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+}
+
+.routage {
+  padding: 5px;
+}
+
+/* Responsive styles */
+
+/* Pour les petits écrans (moins de 768px de large) */
 @media (max-width: 768px) {
-  .menu-icon {
+  .wrapper {
+    flex-direction: column; /* Passe la disposition en colonne pour les petits écrans */
+    height: auto; /* Permet au contenu de se développer selon sa taille */
+  }
+
+  /* On cache le menu latéral sur les petits écrans et le rend accessible sur un clic par exemple */
+  .sidebar {
+    display: none;
+  }
+
+  /* Lorsque le nav est ouvert (par exemple via un bouton ou un hamburger menu) */
+  .sidebar.open {
     display: block;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 40px;
-  }
-
-  nav {
-    transform: translateX(-100%);
-  }
-
-  .nav.open {
-    transform: translateX(0);
+    width: 100%; /* Le nav occupe toute la largeur */
+    position: relative;
   }
 
   .content-area {
-    margin-left: 0;
+    margin-left: 0; /* Supprime le décalage pour les petits écrans */
+    padding-left: 0; /* Supprime l'espace à gauche */
+    padding-top: 50px;
+  }
+  .content {
+    padding: 10px;
+    height: 50px; /* Réduit la hauteur du header */
+  }
+
+  .header-container {
+    padding: 0px 0px; /* Moins de padding sur les petits écrans */
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+  h6 {
+    display: none;
+  }
+
+  .profile-details .admin_name {
+    display: none; /* Cache le texte sur les petits écrans */
+  }
+
+  .profile-details img {
+    width: 35px;  /* Réduit légèrement la taille de l'image pour les petits écrans */
+    height: 35px;
+  }
+
+
+ 
+  nav {
+    display: none;
+  }
+}
+
+/* Pour les grands écrans (plus de 1200px de large) */
+@media (min-width: 1200px) {
+
+  
+  .content {
+    padding: 20px;
+    height: 65px; /* Augmente la hauteur du header */
+  }
+
+  .header-container {
+    padding: 0px 0px; /* Plus d'espace sur les grands écrans */
+  }
+
+  h6 {
+    font-size: 1.8rem; /* Augmente la taille du texte sur les grands écrans */
+    letter-spacing: 3px; /* Plus d'espacement entre les lettres */
+  }
+
+  .profile-details img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .profile-details .admin_name {
+    font-size: 18px;
   }
 }
