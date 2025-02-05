@@ -43,18 +43,23 @@
   right: -50px;
   bottom: -90px;
 }
-
+.formm{
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  height: auto;
+  width: 470px;
+}
 form {
   height: auto;
   width: 450px;
-  background-color: rgba(255, 255, 255, 0.9); /* Blanc légèrement transparent */
+  background-color:#f3f4f6; 
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
   border-radius: 10px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 40px gba(241, 241, 242, 0.6);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   padding: 50px 35px;
 }
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculs en Temps Réel</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #4caf50;
+    }
+
+    .calculator {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+
+    .results {
+      margin-top: 1.5rem;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .results p {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .results span {
+      font-weight: bold;
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculs en Temps Réel</h1>
+
+  <div class="calculator">
+    <!-- Input Fields -->
+    <div class="form-group">
+      <label for="taux-convenu">Taux Convenu (FCFA):</label>
+      <input type="number" id="taux-convenu" placeholder="Entrez le taux convenu">
+    </div>
+
+    <div class="form-group">
+      <label for="taux-du-jour">Taux du Jour (FCFA):</label>
+      <input type="number" id="taux-du-jour" placeholder="Entrez le taux du jour">
+    </div>
+
+    <div class="form-group">
+      <label for="quantite-usdt">Quantité Disponible en USDT:</label>
+      <input type="number" id="quantite-usdt" placeholder="Entrez la quantité disponible en USDT">
+    </div>
+
+    <div class="form-group">
+      <label for="commission">Commission (en % pour les bénéficiaires):</label>
+      <input type="number" id="commission" placeholder="Entrez la commission (en %)">
+    </div>
+
+    <!-- Results -->
+    <div class="results">
+      <p>Bénéfice par USDT : <span id="benefice-par-usdt">0</span> FCFA</p>
+      <p>Bénéfice Total (FCFA) : <span id="benefice-total">0</span> FCFA</p>
+      <p>Bénéfice Bénéficiaire (FCFA) : <span id="benefice-beneficiaire">0</span> FCFA</p>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const tauxConvenuInput = document.getElementById("taux-convenu");
+    const tauxDuJourInput = document.getElementById("taux-du-jour");
+    const quantiteUsdtInput = document.getElementById("quantite-usdt");
+    const commissionInput = document.getElementById("commission");
+
+    const beneficeParUsdtResult = document.getElementById("benefice-par-usdt");
+    const beneficeTotalResult = document.getElementById("benefice-total");
+    const beneficeBeneficiaireResult = document.getElementById("benefice-beneficiaire");
+
+    // Function to calculate results
+    function calculateResults() {
+      const tauxConvenu = parseFloat(tauxConvenuInput.value) || 0;
+      const tauxDuJour = parseFloat(tauxDuJourInput.value) || 0;
+      const quantiteUsdt = parseFloat(quantiteUsdtInput.value) || 0;
+      const commission = parseFloat(commissionInput.value) || 0;
+
+      // Calculations
+      const beneficeParUsdt = tauxConvenu - tauxDuJour;
+      const beneficeTotal = beneficeParUsdt * quantiteUsdt;
+      const beneficeBeneficiaire = (commission / 100) * quantiteUsdt * beneficeParUsdt;
+
+      // Update Results
+      beneficeParUsdtResult.textContent = beneficeParUsdt.toFixed(2);
+      beneficeTotalResult.textContent = beneficeTotal.toFixed(2);
+      beneficeBeneficiaireResult.textContent = beneficeBeneficiaire.toFixed(2);
+    }
+
+    // Event Listeners for Inputs
+    tauxConvenuInput.addEventListener("input", calculateResults);
+    tauxDuJourInput.addEventListener("input", calculateResults);
+    quantiteUsdtInput.addEventListener("input", calculateResults);
+    commissionInput.addEventListener("input", calculateResults);
+  </script>
+</body>
+</html>

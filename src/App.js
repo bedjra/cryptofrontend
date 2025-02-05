@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Login />} />
 
         {/* Route principale avec routes enfants */}
-        <Route path="/" element={<Principale />}>
+        <Route path="" element={<Principale />}>
           
           {/* Routes enfants */}
           <Route path="accueil" element={<Accueil />} />

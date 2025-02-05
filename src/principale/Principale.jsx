@@ -10,6 +10,7 @@ const Principale = () => {
     <div className="debut">
       <div className="content">
         <header className="header-container">
+        <img className='inge' src="/menu.png" alt="Profile" />
           <div className="dots">
             <span className="dot"></span>
             <span className="dot"></span>
@@ -43,6 +44,19 @@ const Principale = () => {
                     <span className="links_name">Transactions</span>
                   </NavLink>
                 </li>
+                
+                <li>
+                  <NavLink to="calculs" activeClassName="active">
+                    <FaCalculator className="icon" />
+                    <span className="links_name">Calculs</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="historique" activeClassName="active">
+                    <FaHistory className="icon" />
+                    <span className="links_name">Historique</span>
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink to="fournisseurs" activeClassName="active">
                     <FaTruck className="icon" />
@@ -55,18 +69,7 @@ const Principale = () => {
                     <span className="links_name">Bénéficiaires</span>
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="historique" activeClassName="active">
-                    <FaHistory className="icon" />
-                    <span className="links_name">Historique</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="calculs" activeClassName="active">
-                    <FaCalculator className="icon" />
-                    <span className="links_name">Calculs</span>
-                  </NavLink>
-                </li>
+           
                 <li className="log_out">
                   <NavLink to="/" activeClassName="active">
                     <FaSignOutAlt className="icon" />

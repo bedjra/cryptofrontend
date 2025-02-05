@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .grid {
+            display: flex;
+            gap: 20px;
+        }
+        .grid > div {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .bg-blue { background: #cce5ff; }
+        .bg-green { background: #d4edda; }
+        .bg-yellow { background: #fff3cd; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+            <div class="card bg-blue">
+                <h3>Total Transactions</h3>
+                <p>10</p>
+            </div>
+            <div class="card bg-green">
+                <h3>Montant Total (FCFA)</h3>
+                <p>1 500 000 FCFA</p>
+            </div>
+            <div class="card bg-yellow">
+                <h3>Bénéfices Totaux</h3>
+                <p>250 000 FCFA</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Transactions Récentes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Montant (FCFA)</th>
+                        <th>Taux Convenu</th>
+                        <th>Bénéfice (FCFA)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>100 000 FCFA</td>
+                        <td>685</td>
+                        <td>15 000 FCFA</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>200 000 FCFA</td>
+                        <td>690</td>
+                        <td>25 000 FCFA</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>500 000 FCFA</td>
+                        <td>680</td>
+                        <td>50 000 FCFA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Fournisseurs</h3>
+            <ul>
+                <li>Fournisseur 1: Taux 680, Quantité 500 USDT</li>
+                <li>Fournisseur 2: Taux 690, Quantité 300 USDT</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Bénéficiaires</h3>
+            <ul>
+                <li>Bénéficiaire 1: Commission 5%, Bénéfice 1 500 FCFA</li>
+                <li>Bénéficiaire 2: Commission 10%, Bénéfice 3 000 FCFA</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

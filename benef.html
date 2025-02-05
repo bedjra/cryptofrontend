@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bénéficiaires</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    header .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    header .navbar a:hover {
+      color: #00bcd4;
+    }
+
+    /* Page Title */
+    .page-title {
+      padding: 2rem;
+      background: #00bcd4;
+      color: #fff;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+    }
+
+    /* Table Section */
+    .beneficiaires {
+      padding: 2rem;
+    }
+
+    .beneficiaires h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .beneficiaires table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .beneficiaires th,
+    .beneficiaires td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .beneficiaires th {
+      background: #00bcd4;
+      color: #fff;
+    }
+
+    .beneficiaires tr:hover {
+      background: #f1f1f1;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #333;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Wiicode Togo</div>
+    <nav class="navbar">
+      <a href="#">Accueil</a>
+      <a href="#">Transactions</a>
+      <a href="#">Fournisseurs</a>
+      <a href="#">Bénéficiaires</a>
+      <a href="#">Historique</a>
+      <a href="#">Déconnexion</a>
+    </nav>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-title">
+    <h1>Liste des Bénéficiaires</h1>
+  </section>
+
+  <!-- Table Section -->
+  <section class="beneficiaires">
+    <h2>Informations des Bénéficiaires</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Téléphone</th>
+          <th>Email</th>
+          <th>Adresse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Kouassi</td>
+          <td>Adjo</td>
+          <td>+228 90123456</td>
+          <td>adjo.kouassi@gmail.com</td>
+          <td>Lomé, Togo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Adebayor</td>
+          <td>Kwame</td>
+          <td>+228 98123456</td>
+          <td>kwame.adebayor@yahoo.com</td>
+          <td>Atakpamé, Togo</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Mensah</td>
+          <td>Ama</td>
+          <td>+228 92123456</td>
+          <td>ama.mensah@hotmail.com</td>
+          <td>Kpalimé, Togo</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Wiicode Togo. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>

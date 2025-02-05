@@ -96,7 +96,6 @@ nav {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 999;
   text-decoration: none;
-
 }
 
 .nav-links {
@@ -129,20 +128,17 @@ nav {
   font-size: 20px; /* Icon size */
 }
 
-
 .nav-links a.active span {
   color: #0073e6; /* Span text color for the active link */
 }
 .nav-links a.active {
-  color: #0073e6; /* Text and icon color for the active link */
+  background-color: #0b0b0b;
+  color: #f3f3f3; /* Text and icon color for the active link */
 }
 
 .nav-links a.active .icon {
-  color: #0073e6; /* Icon color for the active link */
+  color: #f3f3f3; /* Text and icon color for the active link */
 }
-
-
-
 
 .log_out {
   position: absolute;
@@ -177,8 +173,6 @@ nav {
   background-color: #333;
 }
 
-
-
 .content-area {
   padding: 70px;
   padding-left: 225px;
@@ -186,14 +180,12 @@ nav {
   margin-left: 220px; /* Décale le contenu à droite du nav */
   width: 100%;
   overflow-y: auto; /* Assure que le contenu déborde proprement si nécessaire */
-
-    position: absolute; /* Assure que le conteneur occupe tout l'espace */
-    top: 0;
-    right: 0; /* Étend jusqu'au bord droit */
-    bottom: 0; /* Étend jusqu'au bas */
-    overflow-y: auto; /* Permet le défilement si le contenu dépasse */
-  
-  
+  background-color: #66616126;
+  position: absolute; /* Assure que le conteneur occupe tout l'espace */
+  top: 0;
+  right: 0; /* Étend jusqu'au bord droit */
+  bottom: 0; /* Étend jusqu'au bas */
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse */
 }
 
 /* Conteneur parent pour le nav et le routage */
@@ -210,6 +202,13 @@ nav {
 
 /* Pour les petits écrans (moins de 768px de large) */
 @media (max-width: 768px) {
+
+  .inge  {
+    margin-left: 5px;
+    width: 23px; /* Réduit légèrement la taille de l'image pour les petits écrans */
+    height: 20px;
+  }
+
   .wrapper {
     flex-direction: column; /* Passe la disposition en colonne pour les petits écrans */
     height: auto; /* Permet au contenu de se développer selon sa taille */
@@ -243,7 +242,7 @@ nav {
   .dot {
     width: 7px;
     height: 7px;
-    background-color: blue;
+    background-color: #0073e6;
     border-radius: 50%;
   }
   h6 {
@@ -255,21 +254,35 @@ nav {
   }
 
   .profile-details img {
-    width: 35px;  /* Réduit légèrement la taille de l'image pour les petits écrans */
+    width: 35px; /* Réduit légèrement la taille de l'image pour les petits écrans */
     height: 35px;
   }
 
-
- 
   nav {
     display: none;
   }
+  .inge {
+    height: 30px;
+    position: absolute;
+    left: 0; /* Ajustez la position selon votre besoin */
+    top: 50%; /* Centrer verticalement par rapport à l'élément parent */
+    transform: translateY(-50%); /* Assure que l'image soit parfaitement centrée */
+    margin-right: 10px; /* Espace entre l'image et les dots */
+  }
+  
+  .dots {
+margin-left: 30px;
+    display: flex;
+    align-items: center;
+  }
+  
 }
 
 /* Pour les grands écrans (plus de 1200px de large) */
 @media (min-width: 1200px) {
-
-  
+  .inge{
+    display: none;
+  }
   .content {
     padding: 20px;
     height: 65px; /* Augmente la hauteur du header */

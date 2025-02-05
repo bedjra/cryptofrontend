@@ -114,41 +114,34 @@ const Transactions = () => {
       <div className="right-box">
         <h2>Gestion des Transactions</h2>
         <table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Montant FCFA</th>
-      <th>Taux</th>
-      <th>Montant USDT</th>
-      <th>Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {transactions.map((transaction) => (
-      <tr key={transaction.id}>
-        <td>{transaction.id}</td>
-        <td>{transaction.montantFCFA}</td>
-        <td>{transaction.tauxConv}</td>
-        <td>{transaction.montantUSDT}</td>
-        <td>
-          {transaction.dateTransaction
-            ? format(new Date(transaction.dateTransaction), "dd/MM/yyyy HH:mm")
-            : "Date invalide"}
-        </td>
-        <td>
-          <button onClick={() => handleEdit(transaction)} className="action-btn">
-            <Edit size={20} color="blue" />
-          </button>
-          <button onClick={() => handleDelete(transaction.id)} className="action-btn">
-            <Trash2 size={20} color="red" />
-          </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
+          <thead>
+            <tr>
+              <th>Montant FCFA</th>
+              <th>Taux</th>
+              <th>Montant USDT</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.montantFCFA}</td>
+                <td>{transaction.tauxConv}</td>
+                <td>{transaction.montantUSDT}</td>
+                <td>{transaction.dateTransaction ? format(new Date(transaction.dateTransaction), "dd/MM/yyyy HH:mm") : "Date invalide"}</td>
+                <td>
+                  <button onClick={() => handleEdit(transaction)} className="action-btn">
+                    <Edit size={20} color="blue" />
+                  </button>
+                  <button onClick={() => handleDelete(transaction.id)} className="action-btn">
+                    <Trash2 size={20} color="red" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
