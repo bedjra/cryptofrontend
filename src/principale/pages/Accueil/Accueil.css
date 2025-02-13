@@ -1,26 +1,6 @@
-
-
-/* Dashboard */
-.dashboard {
-  padding: 2rem;
-}
-
-.dashboard-header {
-  margin-bottom: 2rem;
-}
-
-.dashboard-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.dashboard-header p {
-  color: #555;
-}
-
 /* Summary Cards */
 .summary {
+  padding-top: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;

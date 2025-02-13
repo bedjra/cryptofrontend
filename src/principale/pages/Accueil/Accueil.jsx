@@ -1,32 +1,60 @@
-import React from 'react';
-import './Accueil.css';
+import React, { useEffect, useState } from "react";
+import "./Accueil.css";
 
 const Accueil = () => {
+  // États pour stocker les données du backend
+  const [totalBenefices, setTotalBenefices] = useState(0);
+  const [totalTransactions, setTotalTransactions] = useState(0);
+  const [fournisseursActifs, setFournisseursActifs] = useState(0);
+  const [totalBeneficiaires, setTotalBeneficiaires] = useState(0);
+
+  // Fonction pour récupérer les données
+  useEffect(() => {
+    fetch("http://localhost:5000/total/been")
+        .then((res) => res.json())
+        .then((data) => setTotalBenefices(data.total_benefices || 0))
+        .catch((err) => console.error("Erreur récupération bénéfices :", err));
+
+    fetch("http://localhost:5000/total/tr")
+        .then((res) => res.json())
+        .then((data) => setTotalTransactions(data.total || 0))
+        .catch((err) => console.error("Erreur récupération transactions :", err));
+
+    fetch("http://localhost:5000/total/fr")
+        .then((res) => res.json())
+        .then((data) => setFournisseursActifs(data.total_fournisseurs || 0))
+        .catch((err) => console.error("Erreur récupération fournisseurs :", err));
+
+    fetch("http://localhost:5000/total/bn")
+        .then((res) => res.json())
+        .then((data) => setTotalBeneficiaires(data.total_beneficiaires || 0))
+        .catch((err) => console.error("Erreur récupération bénéficiaires :", err));
+  }, []);
+
   return (
-    <main className="dashboard">
-     
+      <main className="dashboard">
+        {/* Section Résumé Global */}
+        <section className="summary">
+          <div className="card">
+            <h3>Total Bénéfices (FCFA)</h3>
+            <p>{totalBenefices.toLocaleString()}</p> {/* Formatage nombre */}
+          </div>
+          <div className="card">
+            <h3>Total Transactions</h3>
+            <p>{totalTransactions}</p>
+          </div>
+          <div className="card">
+            <h3>Fournisseurs Actifs</h3>
+            <p>{fournisseursActifs}</p>
+          </div>
+          <div className="card">
+            <h3>Bénéficiaires</h3>
+            <p>{totalBeneficiaires}</p>
+          </div>
+        </section>
 
-      {/* Section Résumé Global */}
-      <section className="summary">
-        <div className="card">
-          <h3>Total Bénéfices (FCFA)</h3>
-          <p>5,250,000</p>
-        </div>
-        <div className="card">
-          <h3>Total Transactions</h3>
-          <p>38</p>
-        </div>
-        <div className="card">
-          <h3>Fournisseurs Actifs</h3>
-          <p>12</p>
-        </div>
-        <div className="card">
-          <h3>Bénéficiaires</h3>
-          <p>20</p>
-        </div>
-      </section>
 
-      {/* Section Transactions Récentes */}
+        {/* Section Transactions Récentes
       <section className="recent-transactions">
         <h2>Transactions Récentes</h2>
         <table>
@@ -64,9 +92,17 @@ const Accueil = () => {
           </tbody>
         </table>
       </section>
-    </main>
+      */}
+
+      </main>
   );
 };
 
-
 export default Accueil;
+
+
+
+
+
+
+
