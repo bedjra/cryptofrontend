@@ -35,71 +35,78 @@ const Fournisseurs = () => {
       });
   }, []);
 
-
-
   const handleEnregistrer = async () => {
-  if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId) return;
+    if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId)
+      return;
 
-  try {
-    const fournisseurData = {
-      nom: nomFournisseur,
-      taux_jour: tauxJour.toString().trim(), // Convertit en chaîne avant .trim()
-      quantite_USDT: quantiteDisponible.toString().trim(),
-      transaction_id: transactionId.toString().trim(),
-    };
-
-    if (editingFournisseurId) {
-      const response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
-      console.log("Fournisseur modifié avec succès", response.data.fournisseur);
-
-      setFournisseurs(
-        fournisseurs.map((fournisseur) =>
-          fournisseur.id === editingFournisseurId ? response.data.fournisseur : fournisseur
-        )
-      );
-    } else {
-      const response = await axios.post(`${apiUrl}/add/four`, fournisseurData);
-      console.log("Fournisseur ajouté avec succès", response.data.fournisseur);
-      alert("Fournisseur ajouté avec succès !");
-      setFournisseurs([...fournisseurs, response.data.fournisseur]);
-    }
-
-    // Réinitialisation du formulaire
-    setNomFournisseur("");
-    setTauxJour("");
-    setQuantiteDisponible("");
-    setTransactionId("");
-    setEditingFournisseurId(null);
-  } catch (error) {
-    console.error("Erreur lors de l'enregistrement du fournisseur:", error);
-  }
-};
-
-  
-
-  const handleDelete = async (id) => {
-    const isConfirmed = window.confirm("Voulez-vous vraiment supprimer ce fournisseur ?");
-    if (!isConfirmed) return;
-  
     try {
-      await axios.delete(`${apiUrl}/delete/four/${id}`);
-      setFournisseurs(fournisseurs.filter((fournisseur) => fournisseur.id !== id));
-      alert("Fournisseur supprimé avec succès !");
+      if (editingFournisseurId) {
+        const response = await axios.put(
+          `${apiUrl}/update/four/${editingFournisseurId}`,
+          {
+            nom: nomFournisseur,
+            taux_jour: tauxJour,
+            quantite_USDT: quantiteDisponible,
+            transaction_id: transactionId,
+          }
+        );
+        console.log(
+          "Fournisseur modifié avec succès",
+          response.data.fournisseur
+        );
+
+        setFournisseurs(
+          fournisseurs.map((fournisseur) =>
+            fournisseur.id === editingFournisseurId
+              ? response.data.fournisseur
+              : fournisseur
+          )
+        );
+      } else {
+        const response = await axios.post(`${apiUrl}/add/four`, {
+          nom: nomFournisseur,
+          taux_jour: tauxJour,
+          quantite_USDT: quantiteDisponible,
+          transaction_id: transactionId,
+        });
+        console.log(
+          "Fournisseur ajouté avec succès",
+          response.data.fournisseur
+        );
+        alert("Fournisseur ajouté avec succès !");
+        setFournisseurs([...fournisseurs, response.data.fournisseur]);
+      }
+
+      setNomFournisseur("");
+      setTauxJour("");
+      setQuantiteDisponible("");
+      setTransactionId("");
+      setEditingFournisseurId(null);
     } catch (error) {
-      console.error("Erreur lors de la suppression du fournisseur:", error);
-      alert("Erreur lors de la suppression !");
+      console.error("Erreur lors de l'enregistrement du fournisseur:", error);
     }
   };
-  
 
- const handleEdit = (fournisseur) => {
-  setNomFournisseur(fournisseur.nom);
-  setTauxJour(fournisseur.taux_jour.toString()); // Convertit en chaîne
-  setQuantiteDisponible(fournisseur.quantite_USDT.toString());
-  setTransactionId(fournisseur.transaction_id.toString());
-  setEditingFournisseurId(fournisseur.id);
-  console.log("Modification du fournisseur en cours:", fournisseur);
-};
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${apiUrl}/delete/four/${id}`);
+      console.log("Fournisseur supprimé avec succès, ID:", id);
+      setFournisseurs(
+        fournisseurs.filter((fournisseur) => fournisseur.id !== id)
+      );
+    } catch (error) {
+      console.error("Erreur lors de la suppression du fournisseur:", error);
+    }
+  };
+
+  const handleEdit = (fournisseur) => {
+    setNomFournisseur(fournisseur.nom);
+    setTauxJour(fournisseur.taux_jour);
+    setQuantiteDisponible(fournisseur.quantite_USDT);
+    setTransactionId(fournisseur.transaction_id);
+    setEditingFournisseurId(fournisseur.id);
+    console.log("Modification du fournisseur en cours:", fournisseur);
+  };
 
   // Fetch and display details of a supplier
   const handleShowDetails = async (id) => {
@@ -107,10 +114,7 @@ const Fournisseurs = () => {
       const response = await axios.get(`${apiUrl}/four/${id}`);
       setSelectedFournisseur(response.data.fournisseur);
     } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des détails du fournisseur:",
-        error
-      );
+      console.error("Erreur lors de la récupération des détails du fournisseur:", error);
     }
   };
 
@@ -173,14 +177,14 @@ const Fournisseurs = () => {
             required
           />
         </div>
-        {/* Section des bénéficiaires 
-         <div className="input-group beneficiaires-row">
+        {/* Section des bénéficiaires */}
+        <div className="input-group beneficiaires-row">
           <h3>Bénéficiaires</h3>
           <a className="a" onClick={addBeneficiaire}>
-            ➕
+            ➕ 
           </a>
-          </div>
-          {beneficiaires.map((beneficiaire, index) => (
+        </div>
+        {beneficiaires.map((beneficiaire, index) => (
           <div key={index} className="beneficiaire-row">
             <input
               type="text"
@@ -199,17 +203,12 @@ const Fournisseurs = () => {
               required
             />
             {index > 0 && (
-              <a
-                className="b delete-icon"
-                onClick={() => removeBeneficiaire(index)}
-              >
+              <a className="b delete-icon" onClick={() => removeBeneficiaire(index)}>
                 ❌
               </a>
             )}
           </div>
-         ))}{" "}
-      */}
-
+        ))}{" "}
         <div className="button-group">
           <button className="btn" onClick={handleEnregistrer}>
             {editingFournisseurId ? "MODIFIER" : "ENREGISTRER"}
@@ -238,22 +237,13 @@ const Fournisseurs = () => {
                 <td>{fournisseur.taux_jour}</td>
                 <td>{fournisseur.quantite_USDT}</td>
                 <td>
-                  <button
-                    onClick={() => handleEdit(fournisseur)}
-                    className="action-btn"
-                  >
+                  <button onClick={() => handleEdit(fournisseur)} className="action-btn">
                     <Edit size={20} color="blue" />
                   </button>
-                  <button
-                    onClick={() => handleDelete(fournisseur.id)}
-                    className="action-btn"
-                  >
+                  <button onClick={() => handleDelete(fournisseur.id)} className="action-btn">
                     <Trash2 size={20} color="red" />
                   </button>
-                  <button
-                    onClick={() => handleShowDetails(fournisseur.id)}
-                    className="action-btn"
-                  >
+                  <button onClick={() => handleShowDetails(fournisseur.id)} className="action-btn">
                     <Eye size={20} color="green" />
                   </button>
                 </td>
@@ -264,69 +254,15 @@ const Fournisseurs = () => {
 
         {/* Popup Détails */}
         {selectedFournisseur && (
-          <div className="popup-overlay" onClick={handleClosePopup}>
-            <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-              <div className="popup-content-header">
-                <h2>Détails du fournisseur </h2>
-              </div>
-              <div className="popup-body">
-                <p>
-                  <strong>ID:</strong> {selectedFournisseur.id}
-                </p>
-                <p>
-                  <strong>Nom:</strong> {selectedFournisseur.nom}
-                </p>
-                <p>
-                  <strong>Taux du Jour:</strong> {selectedFournisseur.taux_jour}
-                </p>
-                <p>
-                  <strong>Quantité Disponible:</strong>{" "}
-                  {selectedFournisseur.quantite_USDT}
-                </p>
-                {/* Détails de la Transaction */}
-                {selectedFournisseur.transaction && (
-                  <div className="transaction-details">
-                    <h3>Transaction</h3>
-                    <p>
-                      <strong>ID Transaction:</strong>{" "}
-                      {selectedFournisseur.transaction.id}
-                    </p>
-                    <p>
-                      <strong>Montant (FCFA):</strong>{" "}
-                      {selectedFournisseur.transaction.montant_FCFA}
-                    </p>
-                    <p>
-                      <strong>Taux Convenu:</strong>{" "}
-                      {selectedFournisseur.transaction.taux_convenu}
-                    </p>
-                    <p>
-                      <strong>Montant (USDT):</strong>{" "}
-                      {selectedFournisseur.transaction.montant_USDT}
-                    </p>
-                    
-                  </div>
-                )}
-
-                {/* Détails de la Transaction 
-                <div className="beneficiaires">
-                  {selectedFournisseur.beneficiaires.map((beneficiaire) => (
-                    <div key={beneficiaire.id} className="beneficiaire">
-                      <p>
-                        <strong>Nom:</strong> {beneficiaire.nom}
-                      </p>
-                      <p>
-                        <strong>Commis USDT:</strong>{" "}
-                        {beneficiaire.commission_USDT}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              */}
-
-                <button className="close-btn" onClick={handleClosePopup}>
-                  Fermer
-                </button>
-              </div>
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <h2>Détails du Fournisseur</h2>
+              <p><strong>ID:</strong> {selectedFournisseur.id}</p>
+              <p><strong>Nom:</strong> {selectedFournisseur.nom}</p>
+              <p><strong>Taux du Jour:</strong> {selectedFournisseur.taux_jour}</p>
+              <p><strong>Quantité Disponible:</strong> {selectedFournisseur.quantite_USDT}</p>
+              <p><strong>ID Transaction:</strong> {selectedFournisseur.transaction_id}</p>
+              <button onClick={handleClosePopup}>Fermer</button>
             </div>
           </div>
         )}
