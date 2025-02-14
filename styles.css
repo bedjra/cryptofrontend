@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fournisseurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Liste des Fournisseurs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom du Fournisseur</th>
+                    <th>Taux du Jour</th>
+                    <th>Quantité Disponible (USDT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fournisseur 1</td>
+                    <td>680</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Fournisseur 2</td>
+                    <td>690</td>
+                    <td>300</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
