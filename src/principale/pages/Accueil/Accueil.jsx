@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Accueil.css";
+import { DollarSign, CreditCard, Truck, Users } from "lucide-react";
+import {FaExchangeAlt} from "react-icons/fa";
 
 const Accueil = () => {
   // États pour stocker les données du backend
@@ -34,27 +36,44 @@ const Accueil = () => {
   return (
       <main className="dashboard">
         {/* Section Résumé Global */}
-        <section className="summary">
+        <section className="summary grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="card">
-            <h3>Total Bénéfices (FCFA)</h3>
-            <p>{totalBenefices.toLocaleString()}</p> {/* Formatage nombre */}
+            <DollarSign className="icon text-green-500" />
+
+            <div>
+              <h3 className="text-lg font-semibold">Total Bénéfices (FCFA)</h3>
+              <p className="text-xl font-bold">{totalBenefices.toLocaleString()}</p>
+            </div>
           </div>
+
           <div className="card">
-            <h3>Total Transactions</h3>
-            <p>{totalTransactions}</p>
+            <FaExchangeAlt className="icon text-blue-500" />
+            <div>
+              <h3 className="text-lg font-semibold">Total Transactions</h3>
+              <p className="text-xl font-bold">{totalTransactions}</p>
+            </div>
           </div>
+
           <div className="card">
-            <h3>Fournisseurs Actifs</h3>
-            <p>{fournisseursActifs}</p>
+            <Truck className="icon text-orange-500" />
+            <div>
+              <h3 className="text-lg font-semibold">Fournisseurs Actifs</h3>
+              <p className="text-xl font-bold">{fournisseursActifs}</p>
+            </div>
           </div>
+
           <div className="card">
-            <h3>Bénéficiaires</h3>
-            <p>{totalBeneficiaires}</p>
+            <Users className="icon text-purple-500" />
+            <div>
+              <h3 className="text-lg font-semibold">Total Bénéficiaires</h3>
+              <p className="text-xl font-bold">{totalBeneficiaires}</p>
+            </div>
           </div>
         </section>
 
 
-        {/* Section Transactions Récentes
+
+          {/* Section Transactions Récentes
       <section className="recent-transactions">
         <h2>Transactions Récentes</h2>
         <table>

@@ -286,7 +286,7 @@ const Fournisseurs = () => {
                 {/* Détails de la Transaction */}
                 {selectedFournisseur.transaction && (
                   <div className="transaction-details">
-                    <h3>Transaction</h3>
+                    <h3>Transaction Associé</h3>
                     <p>
                       <strong>ID Transaction:</strong>{" "}
                       {selectedFournisseur.transaction.id}

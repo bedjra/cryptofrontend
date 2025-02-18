@@ -12,7 +12,7 @@ const Transactions = () => {
   const [montantUSDT, setMontantUSDT] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [editingTransactionId, setEditingTransactionId] = useState(null);
-  
+
   // Récupérer toutes les transactions au chargement du composant
   useEffect(() => {
     axios
@@ -35,7 +35,7 @@ const Transactions = () => {
 
   const handleEnregistrer = async () => {
     if (!montantFCFA || !tauxConv) return;
-  
+
     try {
       if (editingTransactionId) {
         // Mise à jour de la transaction
@@ -43,15 +43,15 @@ const Transactions = () => {
           montantFCFA,
           tauxConv,
         });
-  
+
         console.log("Réponse de mise à jour:", response.data); // 🔍 Vérifier la réponse reçue
-  
+
         setTransactions(
           transactions.map((transaction) =>
             transaction.id === editingTransactionId ? response.data.transaction : transaction
           )
         );
-  
+
         console.log("Transactions mises à jour:", transactions); // 🔍 Vérifier si le tableau est mis à jour
       } else {
         // Ajout d'une nouvelle transaction
@@ -59,10 +59,10 @@ const Transactions = () => {
           montantFCFA,
           tauxConv,
         });
-  
+
         setTransactions([...transactions, response.data.transaction]);
       }
-  
+
       setMontantFCFA("");
       setTauxConv("");
       setMontantUSDT("");
@@ -71,7 +71,7 @@ const Transactions = () => {
       console.error("Erreur lors de l'enregistrement de la transaction:", error);
     }
   };
-  
+
 
   const handleDelete = async (id) => {
     try {
@@ -114,40 +114,40 @@ const Transactions = () => {
       <div className="right-box">
         <h2>Gestion des Transactions</h2>
         <table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Montant FCFA</th>
-      <th>Taux</th>
-      <th>Montant USDT</th>
-      <th>Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {transactions.map((transaction) => (
-      <tr key={transaction.id}>
-        <td>{transaction.id}</td>
-        <td>{transaction.montantFCFA}</td>
-        <td>{transaction.tauxConv}</td>
-        <td>{transaction.montantUSDT}</td>
-        <td>
-          {transaction.dateTransaction
-            ? format(new Date(transaction.dateTransaction), "dd/MM/yyyy HH:mm")
-            : "Date invalide"}
-        </td>
-        <td>
-          <button onClick={() => handleEdit(transaction)} className="action-btn">
-            <Edit size={20} color="blue" />
-          </button>
-          <button onClick={() => handleDelete(transaction.id)} className="action-btn">
-            <Trash2 size={20} color="red" />
-          </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Montant FCFA</th>
+              <th>Taux</th>
+              <th>Montant USDT</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.id}</td>
+                <td>{transaction.montantFCFA}</td>
+                <td>{transaction.tauxConv}</td>
+                <td>{transaction.montantUSDT}</td>
+                <td>
+                  {transaction.dateTransaction
+                    ? format(new Date(transaction.dateTransaction), "dd/MM/yyyy HH:mm")
+                    : "Date invalide"}
+                </td>
+                <td>
+                  <button onClick={() => handleEdit(transaction)} className="action-btn">
+                    <Edit size={20} color="blue" />
+                  </button>
+                  <button onClick={() => handleDelete(transaction.id)} className="action-btn">
+                    <Trash2 size={20} color="red" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
       </div>
     </div>

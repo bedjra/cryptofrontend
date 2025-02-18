@@ -3,29 +3,63 @@
   padding-top: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  margin-left: 40px;
+
 }
 
 .card {
-  background: #fff;
-  border-radius: 8px;
-  padding: 1rem;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
 
 .card h3 {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #555;
+  margin-right: 20px;
   margin-bottom: 0.5rem;
 }
 
 .card p {
   font-size: 1.5rem;
-  color: #00bcd4;
+  color: #0073e6;
   font-weight: bold;
 }
+
+
+.card .icon {
+  font-size: 56px;
+  height : 50px ;
+  width: 50px;
+  color: #050505; /* Couleur principale (bleu) */
+}
+
+/* Ajustement pour très petits écrans */
+@media (max-width: 480px) {
+  .summary {
+    grid-template-columns: 1fr; /* 1 seule colonne */
+    margin-left: 0;
+    padding: 0 10px;
+  }
+}
+
+/* Ajustement pour tablettes */
+@media (max-width: 768px) {
+  .summary {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-left: 20px;
+  }
+}
+
+
 
 /* Recent Transactions */
 .recent-transactions h2 {

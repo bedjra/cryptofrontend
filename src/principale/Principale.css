@@ -277,6 +277,13 @@ margin-left: 30px;
   }
   
 }
+/* Ajustement pour tablettes */
+@media (max-width: 768px) {
+  .profile-details .admin_name {
+    display: none; /* Cache le texte sur les petits écrans */
+  }
+}
+
 
 /* Pour les grands écrans (plus de 1200px de large) */
 @media (min-width: 1200px) {
