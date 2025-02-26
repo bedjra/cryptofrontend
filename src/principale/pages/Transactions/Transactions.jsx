@@ -27,7 +27,7 @@ const Transactions = () => {
 
   useEffect(() => {
     if (montantFCFA && tauxConv) {
-      setMontantUSDT((parseFloat(montantFCFA) / parseFloat(tauxConv)).toFixed(6));
+      setMontantUSDT((parseFloat(montantFCFA) / parseFloat(tauxConv)).toFixed(2));
     } else {
       setMontantUSDT("");
     }

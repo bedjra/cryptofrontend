@@ -51,6 +51,7 @@ const Fournisseurs = () => {
     if (editingFournisseurId) {
       const response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
       console.log("Fournisseur modifié avec succès", response.data.fournisseur);
+      alert("Fournisseur modifié avec succès !");
 
       setFournisseurs(
         fournisseurs.map((fournisseur) =>
