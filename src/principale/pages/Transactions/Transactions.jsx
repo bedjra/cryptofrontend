@@ -112,7 +112,7 @@ const Transactions = () => {
       </div>
 
       <div className="right-box">
-        <h2>Gestion des Transactions</h2>
+        <h2 style={{ marginBottom: 30 }}> Gestion des Transactions</h2>
         <table>
           <thead>
             <tr>

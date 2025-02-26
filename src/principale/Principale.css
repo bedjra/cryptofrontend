@@ -129,7 +129,7 @@ nav {
 }
 
 .nav-links a.active span {
-  color: #0073e6; /* Span text color for the active link */
+  color: white; /* Span text color for the active link */
 }
 .nav-links a.active {
   background-color: #0b0b0b;

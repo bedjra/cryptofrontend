@@ -131,7 +131,9 @@ const Beneficiaires = () => {
             </div>
 
             <div className="right-box">
-                <h2>Liste des Bénéficiaires</h2>
+                <h2 style={{ marginBottom: 30 }}>Liste des Bénéficiaires
+                    
+                </h2>
                 <table>
                     <thead>
                     <tr>

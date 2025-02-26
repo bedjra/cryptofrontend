@@ -219,7 +219,7 @@ const Fournisseurs = () => {
 
       {/* Gestion des Fournisseurs */}
       <div className="right-box">
-        <h2>Gestion des Fournisseurs</h2>
+        <h2 style={{ marginBottom: 30 }}>Gestion des Fournisseurs</h2>
         <table>
           <thead>
             <tr>
