@@ -10,6 +10,7 @@ const Fournisseurs = () => {
   const [tauxJour, setTauxJour] = useState("");
   const [quantiteDisponible, setQuantiteDisponible] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [transactions, setTransactions] = useState([]);
   const [fournisseurs, setFournisseurs] = useState([]);
   const [editingFournisseurId, setEditingFournisseurId] = useState(null);
   const [beneficiaires, setBeneficiaires] = useState([
@@ -17,6 +18,7 @@ const Fournisseurs = () => {
   ]);
   const [selectedFournisseur, setSelectedFournisseur] = useState(null); // State for selected fournisseur
 
+  //GET ALL 
   useEffect(() => {
     axios
       .get(`${apiUrl}/all/four`)
@@ -36,52 +38,52 @@ const Fournisseurs = () => {
   }, []);
 
 
-
+  //SAVE ET MODIFIER
   const handleEnregistrer = async () => {
-  if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId) return;
+    if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId) return;
 
-  try {
-    const fournisseurData = {
-      nom: nomFournisseur,
-      taux_jour: tauxJour.toString().trim(), // Convertit en chaîne avant .trim()
-      quantite_USDT: quantiteDisponible.toString().trim(),
-      transaction_id: transactionId.toString().trim(),
-    };
+    try {
+      const fournisseurData = {
+        nom: nomFournisseur,
+        taux_jour: tauxJour.toString().trim(), // Convertit en chaîne avant .trim()
+        quantite_USDT: quantiteDisponible.toString().trim(),
+        transaction_id: transactionId.toString().trim(),
+      };
 
-    if (editingFournisseurId) {
-      const response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
-      console.log("Fournisseur modifié avec succès", response.data.fournisseur);
-      alert("Fournisseur modifié avec succès !");
+      if (editingFournisseurId) {
+        const response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
+        console.log("Fournisseur modifié avec succès", response.data.fournisseur);
+        alert("Fournisseur modifié avec succès !");
 
-      setFournisseurs(
-        fournisseurs.map((fournisseur) =>
-          fournisseur.id === editingFournisseurId ? response.data.fournisseur : fournisseur
-        )
-      );
-    } else {
-      const response = await axios.post(`${apiUrl}/add/four`, fournisseurData);
-      console.log("Fournisseur ajouté avec succès", response.data.fournisseur);
-      alert("Fournisseur ajouté avec succès !");
-      setFournisseurs([...fournisseurs, response.data.fournisseur]);
+        setFournisseurs(
+          fournisseurs.map((fournisseur) =>
+            fournisseur.id === editingFournisseurId ? response.data.fournisseur : fournisseur
+          )
+        );
+      } else {
+        const response = await axios.post(`${apiUrl}/add/four`, fournisseurData);
+        console.log("Fournisseur ajouté avec succès", response.data.fournisseur);
+        alert("Fournisseur ajouté avec succès !");
+        setFournisseurs([...fournisseurs, response.data.fournisseur]);
+      }
+
+      // Réinitialisation du formulaire
+      setNomFournisseur("");
+      setTauxJour("");
+      setQuantiteDisponible("");
+      setTransactionId("");
+      setEditingFournisseurId(null);
+    } catch (error) {
+      console.error("Erreur lors de l'enregistrement du fournisseur:", error);
     }
+  };
 
-    // Réinitialisation du formulaire
-    setNomFournisseur("");
-    setTauxJour("");
-    setQuantiteDisponible("");
-    setTransactionId("");
-    setEditingFournisseurId(null);
-  } catch (error) {
-    console.error("Erreur lors de l'enregistrement du fournisseur:", error);
-  }
-};
 
-  
 
   const handleDelete = async (id) => {
     const isConfirmed = window.confirm("Voulez-vous vraiment supprimer ce fournisseur ?");
     if (!isConfirmed) return;
-  
+
     try {
       await axios.delete(`${apiUrl}/delete/four/${id}`);
       setFournisseurs(fournisseurs.filter((fournisseur) => fournisseur.id !== id));
@@ -91,16 +93,16 @@ const Fournisseurs = () => {
       alert("Erreur lors de la suppression !");
     }
   };
-  
 
- const handleEdit = (fournisseur) => {
-  setNomFournisseur(fournisseur.nom);
-  setTauxJour(fournisseur.taux_jour.toString()); // Convertit en chaîne
-  setQuantiteDisponible(fournisseur.quantite_USDT.toString());
-  setTransactionId(fournisseur.transaction_id.toString());
-  setEditingFournisseurId(fournisseur.id);
-  console.log("Modification du fournisseur en cours:", fournisseur);
-};
+
+  const handleEdit = (fournisseur) => {
+    setNomFournisseur(fournisseur.nom);
+    setTauxJour(fournisseur.taux_jour.toString()); // Convertit en chaîne
+    setQuantiteDisponible(fournisseur.quantite_USDT.toString());
+    setTransactionId(fournisseur.transaction_id.toString());
+    setEditingFournisseurId(fournisseur.id);
+    console.log("Modification du fournisseur en cours:", fournisseur);
+  };
 
   // Fetch and display details of a supplier
   const handleShowDetails = async (id) => {
@@ -134,8 +136,25 @@ const Fournisseurs = () => {
     setBeneficiaires(updatedBeneficiaires);
   };
 
+    // Récupérer la liste des transactions au chargement
+    useEffect(() => {
+      const fetchTransactions = async () => {
+        try {
+          const response = await axios.get(`${apiUrl}/trans/mont`);       
+          setTransactions(response.data.transactions);
+        } catch (error) {
+          console.error("Erreur lors de la récupération des transactions:", error);
+        }
+      };
+  
+      fetchTransactions();
+    }, []);
+  
+
   return (
     <div className="container">
+
+      {/* le formulaire d'ajout des Fournisseurs */}
       <div className="left-box">
         <h2>{editingFournisseurId ? "Modifier" : "Ajouter"} un Fournisseur</h2>
         <div className="input-group">
@@ -166,22 +185,28 @@ const Fournisseurs = () => {
           />
         </div>
         <div className="input-group">
-          <label>ID de Transaction</label>
-          <input
-            type="text"
-            value={transactionId}
-            onChange={(e) => setTransactionId(e.target.value)}
-            required
-          />
+          <label>Transaction</label>
+          <select
+          value={transactionId}
+          onChange={(e) => setTransactionId(e.target.value)}
+          required
+        >
+          <option value="">Sélectionner une transaction</option>
+          {transactions.map((transaction) => (
+            <option key={transaction.id} value={transaction.id}>
+              {`Id: ${transaction.id} - Montant: ${transaction.montantFCFA} FCFA`}
+            </option>
+          ))}
+        </select>
         </div>
-        {/* Section des bénéficiaires 
-         <div className="input-group beneficiaires-row">
+        {/* Section des bénéficiaires */}
+        <div className="input-group beneficiaires-row">
           <h3>Bénéficiaires</h3>
           <a className="a" onClick={addBeneficiaire}>
             ➕
           </a>
-          </div>
-          {beneficiaires.map((beneficiaire, index) => (
+        </div>
+        {beneficiaires.map((beneficiaire, index) => (
           <div key={index} className="beneficiaire-row">
             <input
               type="text"
@@ -208,8 +233,8 @@ const Fournisseurs = () => {
               </a>
             )}
           </div>
-         ))}{" "}
-      */}
+        ))}{" "}
+
 
         <div className="button-group">
           <button className="btn" onClick={handleEnregistrer}>
@@ -220,7 +245,7 @@ const Fournisseurs = () => {
 
       {/* Gestion des Fournisseurs */}
       <div className="right-box">
-        <h2 style={{ marginBottom: 30 }}>Gestion des Fournisseurs</h2>
+        <h2 style={{ marginBottom: 30 }}>Gestion des Fournisseurs & Bénéficiaires</h2>
         <table>
           <thead>
             <tr>
@@ -304,15 +329,19 @@ const Fournisseurs = () => {
                       <strong>Montant (USDT):</strong>{" "}
                       {selectedFournisseur.transaction.montant_USDT}
                     </p>
-                    
+
                   </div>
                 )}
 
-                {/* Détails de la Transaction 
+                {/* Détails de la Transaction */}
                 <div className="beneficiaires">
                   {selectedFournisseur.beneficiaires.map((beneficiaire) => (
                     <div key={beneficiaire.id} className="beneficiaire">
+                      <h3>Bénéficiaires Associés</h3>
+
                       <p>
+                        <strong>Id:</strong> {beneficiaire.id}
+                      </p><p>
                         <strong>Nom:</strong> {beneficiaire.nom}
                       </p>
                       <p>
@@ -322,7 +351,7 @@ const Fournisseurs = () => {
                     </div>
                   ))}
                 </div>
-              */}
+
 
                 <button className="close-btn" onClick={handleClosePopup}>
                   Fermer
