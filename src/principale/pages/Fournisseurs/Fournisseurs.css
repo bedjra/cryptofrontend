@@ -386,6 +386,35 @@ td:last-child {
     margin: 10px 0;
 }
 
+.details-container {
+    display: flex;
+    justify-content: space-between; /* Sépare les colonnes avec un espace entre elles */
+    gap: 20px; /* Ajoute un espacement entre les colonnes */
+  }
+  
+  .column {
+    width: 48%; /* Chaque colonne prend 48% de la largeur */
+  }
+  
+  .popup-body {
+    padding: 20px;
+  }
+  
+  .beneficiaires {
+    margin-top: 20px;
+  }
+  
+  .beneficiaire {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  h5{
+    color: red;
+  }
+  
+
 /* Animation d'ouverture (transparence et échelle) */
 @keyframes fadeIn {
     from {

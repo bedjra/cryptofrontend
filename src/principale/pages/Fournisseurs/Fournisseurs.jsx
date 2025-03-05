@@ -40,28 +40,43 @@ const Fournisseurs = () => {
 
   //SAVE ET MODIFIER
   const handleEnregistrer = async () => {
-    if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId) return;
+    if (!nomFournisseur || !tauxJour || !quantiteDisponible || !transactionId) {
+      alert("Veuillez remplir tous les champs avant de continuer.");
+      return;
+    }
+
+    // Vérification des bénéficiaires
+    for (let i = 0; i < beneficiaires.length; i++) {
+      if (!beneficiaires[i].nom.trim() || !beneficiaires[i].commission_USDT.toString().trim()) {
+        alert(`Veuillez remplir tous les champs du bénéficiaire ${i + 1}.`);
+        return;
+      }
+    }
 
     try {
       const fournisseurData = {
         nom: nomFournisseur,
-        taux_jour: tauxJour.toString().trim(), // Convertit en chaîne avant .trim()
+        taux_jour: tauxJour.toString().trim(),
         quantite_USDT: quantiteDisponible.toString().trim(),
         transaction_id: transactionId.toString().trim(),
+        beneficiaires: beneficiaires.map(b => ({
+          nom: b.nom.trim(),
+          commission_USDT: b.commission_USDT.toString().trim(),
+        }))
       };
 
+      let response;
       if (editingFournisseurId) {
-        const response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
+        response = await axios.put(`${apiUrl}/update/four/${editingFournisseurId}`, fournisseurData);
         console.log("Fournisseur modifié avec succès", response.data.fournisseur);
         alert("Fournisseur modifié avec succès !");
-
         setFournisseurs(
           fournisseurs.map((fournisseur) =>
             fournisseur.id === editingFournisseurId ? response.data.fournisseur : fournisseur
           )
         );
       } else {
-        const response = await axios.post(`${apiUrl}/add/four`, fournisseurData);
+        response = await axios.post(`${apiUrl}/add/four`, fournisseurData);
         console.log("Fournisseur ajouté avec succès", response.data.fournisseur);
         alert("Fournisseur ajouté avec succès !");
         setFournisseurs([...fournisseurs, response.data.fournisseur]);
@@ -72,11 +87,14 @@ const Fournisseurs = () => {
       setTauxJour("");
       setQuantiteDisponible("");
       setTransactionId("");
+      setBeneficiaires([]);
       setEditingFournisseurId(null);
     } catch (error) {
       console.error("Erreur lors de l'enregistrement du fournisseur:", error);
+      alert("Une erreur est survenue. Veuillez réessayer.");
     }
   };
+
 
 
 
@@ -94,17 +112,29 @@ const Fournisseurs = () => {
     }
   };
 
-
+  //Pre-remplir le formulaire pour la mofication
   const handleEdit = (fournisseur) => {
     setNomFournisseur(fournisseur.nom);
-    setTauxJour(fournisseur.taux_jour.toString()); // Convertit en chaîne
+    setTauxJour(fournisseur.taux_jour.toString());
     setQuantiteDisponible(fournisseur.quantite_USDT.toString());
     setTransactionId(fournisseur.transaction_id.toString());
     setEditingFournisseurId(fournisseur.id);
+
+    // Vérifier si le fournisseur a des bénéficiaires et les pré-remplir
+    setBeneficiaires(
+      fournisseur.beneficiaires && Array.isArray(fournisseur.beneficiaires)
+        ? fournisseur.beneficiaires.map((b) => ({
+          nom: b.nom || "",
+          commission_USDT: b.commission_USDT ? b.commission_USDT.toString() : "",
+        }))
+        : []
+    );
+
     console.log("Modification du fournisseur en cours:", fournisseur);
   };
 
-  // Fetch and display details of a supplier
+
+  // les details 
   const handleShowDetails = async (id) => {
     try {
       const response = await axios.get(`${apiUrl}/four/${id}`);
@@ -136,20 +166,20 @@ const Fournisseurs = () => {
     setBeneficiaires(updatedBeneficiaires);
   };
 
-    // Récupérer la liste des transactions au chargement
-    useEffect(() => {
-      const fetchTransactions = async () => {
-        try {
-          const response = await axios.get(`${apiUrl}/trans/mont`);       
-          setTransactions(response.data.transactions);
-        } catch (error) {
-          console.error("Erreur lors de la récupération des transactions:", error);
-        }
-      };
-  
-      fetchTransactions();
-    }, []);
-  
+  // Récupérer la liste des transactions au chargement
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/trans/mont`);
+        setTransactions(response.data.transactions);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des transactions:", error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
 
   return (
     <div className="container">
@@ -187,17 +217,17 @@ const Fournisseurs = () => {
         <div className="input-group">
           <label>Transaction</label>
           <select
-          value={transactionId}
-          onChange={(e) => setTransactionId(e.target.value)}
-          required
-        >
-          <option value="">Sélectionner une transaction</option>
-          {transactions.map((transaction) => (
-            <option key={transaction.id} value={transaction.id}>
-              {`Id: ${transaction.id} - Montant: ${transaction.montantFCFA} FCFA`}
-            </option>
-          ))}
-        </select>
+            value={transactionId}
+            onChange={(e) => setTransactionId(e.target.value)}
+            required
+          >
+            <option value="">Sélectionner une transaction</option>
+            {transactions.map((transaction) => (
+              <option key={transaction.id} value={transaction.id}>
+                {`Id: ${transaction.id} - Montant: ${transaction.montantFCFA} FCFA`}
+              </option>
+            ))}
+          </select>
         </div>
         {/* Section des bénéficiaires */}
         <div className="input-group beneficiaires-row">
@@ -293,66 +323,49 @@ const Fournisseurs = () => {
           <div className="popup-overlay" onClick={handleClosePopup}>
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
               <div className="popup-content-header">
-                <h2>Détails du fournisseur </h2>
+                <h2>Détails du fournisseur</h2>
               </div>
+
               <div className="popup-body">
-                <p>
-                  <strong>ID:</strong> {selectedFournisseur.id}
-                </p>
-                <p>
-                  <strong>Nom:</strong> {selectedFournisseur.nom}
-                </p>
-                <p>
-                  <strong>Taux du Jour:</strong> {selectedFournisseur.taux_jour}
-                </p>
-                <p>
-                  <strong>Quantité Disponible:</strong>{" "}
-                  {selectedFournisseur.quantite_USDT}
-                </p>
-                {/* Détails de la Transaction */}
-                {selectedFournisseur.transaction && (
-                  <div className="transaction-details">
-                    <h3>Transaction Associé</h3>
-                    <p>
-                      <strong>ID Transaction:</strong>{" "}
-                      {selectedFournisseur.transaction.id}
-                    </p>
-                    <p>
-                      <strong>Montant (FCFA):</strong>{" "}
-                      {selectedFournisseur.transaction.montant_FCFA}
-                    </p>
-                    <p>
-                      <strong>Taux Convenu:</strong>{" "}
-                      {selectedFournisseur.transaction.taux_convenu}
-                    </p>
-                    <p>
-                      <strong>Montant (USDT):</strong>{" "}
-                      {selectedFournisseur.transaction.montant_USDT}
-                    </p>
+                {/* Conteneur des détails en deux colonnes */}
+                <div className="details-container">
 
+                  {/* Colonne de gauche - Informations du fournisseur */}
+                  <div className="column">
+                    <h5 >Fournisseur</h5>
+                    <p><strong>ID:</strong> {selectedFournisseur.id}</p>
+                    <p><strong>Nom:</strong> {selectedFournisseur.nom}</p>
+                    <p><strong>Taux du Jour:</strong> {selectedFournisseur.taux_jour}</p>
+                    <p><strong>Quantité Disponible:</strong> {selectedFournisseur.quantite_USDT}</p>
                   </div>
-                )}
 
-                {/* Détails de la Transaction */}
+                  {/* Colonne de droite - Détails de la transaction */}
+                  {selectedFournisseur.transaction && (
+
+                    <div className="column">
+                      <h5>Transaction</h5>
+                      <p><strong>ID Transaction:</strong> {selectedFournisseur.transaction.id}</p>
+                      <p><strong>Montant (FCFA):</strong> {selectedFournisseur.transaction.montant_FCFA}</p>
+                      <p><strong>Taux Convenu:</strong> {selectedFournisseur.transaction.taux_convenu}</p>
+                      <p><strong>Montant (USDT):</strong> {selectedFournisseur.transaction.montant_USDT}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Section des bénéficiaires */}
+
                 <div className="beneficiaires">
                   {selectedFournisseur.beneficiaires.map((beneficiaire) => (
                     <div key={beneficiaire.id} className="beneficiaire">
-                      <h3>Bénéficiaires Associés</h3>
-
-                      <p>
-                        <strong>Id:</strong> {beneficiaire.id}
-                      </p><p>
-                        <strong>Nom:</strong> {beneficiaire.nom}
-                      </p>
-                      <p>
-                        <strong>Commis USDT:</strong>{" "}
-                        {beneficiaire.commission_USDT}
-                      </p>
+                      <h5>Bénéficiaire</h5>
+                      <p><strong>ID:</strong> {beneficiaire.id}</p>
+                      <p><strong>Nom:</strong> {beneficiaire.nom}</p>
+                      <p><strong>Commission (USDT):</strong> {beneficiaire.commission_USDT}</p>
                     </div>
                   ))}
                 </div>
 
-
+                {/* Bouton de fermeture */}
                 <button className="close-btn" onClick={handleClosePopup}>
                   Fermer
                 </button>
@@ -360,6 +373,8 @@ const Fournisseurs = () => {
             </div>
           </div>
         )}
+
+
       </div>
     </div>
   );
