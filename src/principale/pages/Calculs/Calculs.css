@@ -22,39 +22,102 @@
     transform: scale(1.05);
   }
   
-  /* Styles de la popup */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .carre p {
+    padding-top: 10px;
   }
-  
-  .modal-content {
+
+
+/* Pour les écrans moyens (tablettes) */
+@media screen and (max-width: 1024px) {
+  .summar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Pour les petits écrans (mobiles) */
+@media screen and (max-width: 768px) {
+  .summar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .carre {
     background: white;
+    width: 165px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    min-width: 300px;
-  }
-  
-  .modal-content button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    background: #ff4d4d;
-    color: white;
-    border-radius: 5px;
     cursor: pointer;
+    transition: transform 0.2s ease;
   }
-  
-  .modal-content button:hover {
-    background: #cc0000;
+  .carre p {
+    padding-top: 10px;
   }
+
+
+}
   
+/* Styles du popup */
+.moda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.moda-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.carre h3  {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 10px 0;
+  padding-bottom: 15px;
+}
+
+.close-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 50px;
+  background: #e74c3c;;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #e74c3c;
+}
+
+.separator {
+  border: none;
+  height: 1px;
+  background-color: #ccc; 
+  margin-bottom: 20px;
+  margin-top: 3px;
+
+}
+.fcfa{
+  padding-bottom:20px
+}

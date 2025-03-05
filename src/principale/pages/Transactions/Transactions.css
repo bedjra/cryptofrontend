@@ -177,6 +177,9 @@ td:last-child {
 
   .right-box h2 {
     font-size: 18px;
+  }
+   h1 {
+    font-size: 8px;
     text-align: center;
   }
 

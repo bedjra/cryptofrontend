@@ -22,7 +22,7 @@ const Principale = () => {
               Welcome <br /> Admin
             </span>
             &nbsp;
-            <img src="/profile.jpg" alt="Profile" />
+            <img src="/profil.png" alt="Profile" />
           </div>
         </header>
       </div>

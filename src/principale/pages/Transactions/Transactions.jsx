@@ -126,7 +126,7 @@ const Transactions = () => {
           </thead>
           <tbody>
             {transactions.map((transaction) => (
-              <tr key={transaction.id}>
+              <tr >
                 <td>{transaction.id}</td>
                 <td>{transaction.montantFCFA}</td>
                 <td>{transaction.tauxConv}</td>
