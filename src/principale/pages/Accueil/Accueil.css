@@ -1,20 +1,23 @@
 /* Layout des cartes */
 .summary {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cartes alignées sur grands écrans */
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 cartes alignées sur grands écrans */
   gap: 2rem;
   margin: 20px;
 }
 
 @media (max-width: 1024px) {
   .summary {
-    grid-template-columns: repeat(2, 1fr); /* 2 cartes alignées sur moyens écrans */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 cartes alignées sur moyens écrans */
   }
 }
 
 @media (max-width: 600px) {
   .summary {
-    grid-template-columns: repeat(2, 1fr); /* 2 cartes alignées sur petits écrans */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 cartes alignées sur petits écrans */
   }
 }
 
@@ -72,7 +75,65 @@
   color: white;
 }
 
+@media (max-width: 768px) {
+  .card {
+    width: 120%;
+    border-radius: 10px;
+    gap: 10px;
 
+  }
+
+  .card-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+
+  .card-text h3 {
+    font-size: 1rem;
+  }
+
+  .card-text p {
+    font-size: 1.5rem;
+  }
+
+  .card-chart {
+    width: 60px;
+    height: 60px;
+  }
+
+  .card-bottom {
+    height: 50px;
+  }
+
+  .card-bottom .icon {
+    font-size: 25px;
+  }
+
+
+  /* Ajustement du tableau */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  .date-heure {
+    white-space: pre-line;
+    /* Permet le saut de ligne */
+  }
+}
+.dif{
+  background-color: #555;
+}
 
 .global-container {
   display: flex;
@@ -103,10 +164,10 @@ table {
   margin-top: 10px;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ccc;
   padding: 8px;
-  text-align: right;
 }
 
 th {
