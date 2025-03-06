@@ -1,8 +1,4 @@
-/*
-body{
-  background-color: #fff;
 
-}*/
 .debut {
   height: 100%;
   width: 100%;
@@ -43,15 +39,19 @@ body{
 
 h6 {
   font-weight: bold;
-  font-style: italic; /* Applique l'effet italique */
-  color: #333; /* Vous pouvez ajuster la couleur selon vos préférences */
-  letter-spacing: 2px; /* Espacement entre les lettres pour un effet plus aérien */
-  text-transform: uppercase; /* Transforme le texte en majuscules */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre discrète pour du relief */
+  font-style: italic;
+  /* Applique l'effet italique */
+  color: #333;
+  /* Vous pouvez ajuster la couleur selon vos préférences */
+  letter-spacing: 2px;
+  /* Espacement entre les lettres pour un effet plus aérien */
+  text-transform: uppercase;
+  /* Transforme le texte en majuscules */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  /* Ajoute une ombre discrète pour du relief */
   display: inline-block;
-  transform: skewY(
-    -5deg
-  ); /* Incline légèrement le texte pour un effet dynamique */
+  transform: skewY(-5deg);
+  /* Incline légèrement le texte pour un effet dynamique */
 }
 
 span {
@@ -66,11 +66,14 @@ span {
 
 
 .profile-details img {
-  width: 50px; /* Ajuste la taille selon ton besoin */
+  width: 50px;
+  /* Ajuste la taille selon ton besoin */
   height: 50px;
   border-radius: 50%;
-  border: 1px solid black; /* Bordure noire */
-  object-fit: cover; /* Assure que l'image couvre bien tout le cadre */
+  border: 1px solid black;
+  /* Bordure noire */
+  object-fit: cover;
+  /* Assure que l'image couvre bien tout le cadre */
 }
 
 .profile-details .admin_name {
@@ -80,7 +83,8 @@ span {
 
 .wrapper {
   display: flex;
-  height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+  height: calc(100vh - 60px);
+  /* Assurer que la hauteur soit égale */
 }
 
 nav {
@@ -100,45 +104,63 @@ nav {
 }
 
 .nav-links {
-  list-style-type: none; /* Remove bullet points from the list */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+  list-style-type: none;
+  /* Remove bullet points from the list */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
 }
 
 .nav-links li {
-  margin-bottom: 15px; /* Add spacing between navigation items */
+  margin-bottom: 15px;
+  /* Add spacing between navigation items */
 }
 
 .nav-links li:last-child {
-  margin-bottom: 0; /* Remove spacing after the last item */
+  margin-bottom: 0;
+  /* Remove spacing after the last item */
 }
 
 .nav-links a {
-  text-decoration: none; /* Remove the underline from links */
-  display: flex; /* Flexbox for aligning icons and text */
-  align-items: center; /* Center items vertically */
-  color: #0b0b0b; /* Active item text color */
+  text-decoration: none;
+  /* Remove the underline from links */
+  display: flex;
+  /* Flexbox for aligning icons and text */
+  align-items: center;
+  /* Center items vertically */
+  color: #0b0b0b;
+  /* Active item text color */
   font-size: 18px;
-  padding: 15px 15px; /* Padding for better click area */
-  border-radius: 8px; /* Rounded corners for the hover effect */
-  transition: background-color 0.3s ease; /* Smooth hover transition */
+  padding: 15px 15px;
+  /* Padding for better click area */
+  border-radius: 8px;
+  /* Rounded corners for the hover effect */
+  transition: background-color 0.3s ease;
+  /* Smooth hover transition */
 }
 
 .nav-links a .icon {
-  margin-right: 10px; /* Add spacing between icon and text */
-  font-size: 20px; /* Icon size */
+  margin-right: 10px;
+  /* Add spacing between icon and text */
+  font-size: 20px;
+  /* Icon size */
 }
 
 .nav-links a.active span {
-  color: white; /* Span text color for the active link */
+  color: white;
+  /* Span text color for the active link */
 }
+
 .nav-links a.active {
   background-color: #0b0b0b;
-  color: #f3f3f3; /* Text and icon color for the active link */
+  color: #f3f3f3;
+  /* Text and icon color for the active link */
 }
 
 .nav-links a.active .icon {
-  color: #f3f3f3; /* Text and icon color for the active link */
+  color: #f3f3f3;
+  /* Text and icon color for the active link */
 }
 
 .log_out {
@@ -178,21 +200,28 @@ nav {
   padding: 70px;
   padding-left: 225px;
   height: auto;
-  margin-left: 220px; /* Décale le contenu à droite du nav */
+  margin-left: 220px;
+  /* Décale le contenu à droite du nav */
   width: 100%;
-  overflow-y: auto; /* Assure que le contenu déborde proprement si nécessaire */
+  overflow-y: auto;
+  /* Assure que le contenu déborde proprement si nécessaire */
   background-color: #66616126;
-  position: absolute; /* Assure que le conteneur occupe tout l'espace */
+  position: absolute;
+  /* Assure que le conteneur occupe tout l'espace */
   top: 0;
-  right: 0; /* Étend jusqu'au bord droit */
-  bottom: 0; /* Étend jusqu'au bas */
-  overflow-y: auto; /* Permet le défilement si le contenu dépasse */
+  right: 0;
+  /* Étend jusqu'au bord droit */
+  bottom: 0;
+  /* Étend jusqu'au bas */
+  overflow-y: auto;
+  /* Permet le défilement si le contenu dépasse */
 }
 
 /* Conteneur parent pour le nav et le routage */
 .wrapper {
   display: flex;
-  height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+  height: calc(100vh - 60px);
+  /* Assurer que la hauteur soit égale */
 }
 
 .routage {
@@ -200,21 +229,32 @@ nav {
 }
 
 /* Responsive styles */
-
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
+/* Responsive styles */
 
 /* Pour les petits écrans (moins de 768px de large) */
 @media (max-width: 768px) {
 
-  .inge  {
+  .inge {
     margin-left: 5px;
-    width: 23px; /* Réduit légèrement la taille de l'image pour les petits écrans */
+    width: 23px;
+    /* Réduit légèrement la taille de l'image pour les petits écrans */
     height: 20px;
   }
 
 
   .wrapper {
-    flex-direction: column; /* Passe la disposition en colonne pour les petits écrans */
-    height: auto; /* Permet au contenu de se développer selon sa taille */
+    flex-direction: column;
+    /* Passe la disposition en colonne pour les petits écrans */
+    height: auto;
+    /* Permet au contenu de se développer selon sa taille */
   }
 
   /* On cache le menu latéral sur les petits écrans et le rend accessible sur un clic par exemple */
@@ -225,81 +265,105 @@ nav {
   /* Lorsque le nav est ouvert (par exemple via un bouton ou un hamburger menu) */
   .sidebar.open {
     display: block;
-    width: 100%; /* Le nav occupe toute la largeur */
+    width: 55%;
     position: relative;
+    top: 50px;
+    
   }
-
+  .log_out {
+    position: absolute;
+    bottom: 1%;
+  }
   .content-area {
-    margin-left: 0; /* Supprime le décalage pour les petits écrans */
-    padding-left: 0; /* Supprime l'espace à gauche */
+    margin-left: 0;
+    /* Supprime le décalage pour les petits écrans */
+    padding-left: 0;
+    /* Supprime l'espace à gauche */
     padding-top: 50px;
   }
+
   .content {
     padding: 10px;
-    height: 50px; /* Réduit la hauteur du header */
+    height: 50px;
+    /* Réduit la hauteur du header */
   }
 
   .header-container {
-    padding: 0px 0px; /* Moins de padding sur les petits écrans */
+    padding: 0px 0px;
+    /* Moins de padding sur les petits écrans */
   }
+
   .dot {
     width: 7px;
     height: 7px;
     background-color: #0073e6;
     border-radius: 50%;
   }
+
   h6 {
     display: none;
   }
 
   .profile-details .admin_name {
-    display: none; /* Cache le texte sur les petits écrans */
+    display: none;
+    /* Cache le texte sur les petits écrans */
   }
 
   .profile-details img {
-    width: 35px; /* Réduit légèrement la taille de l'image pour les petits écrans */
+    width: 35px;
+    /* Réduit légèrement la taille de l'image pour les petits écrans */
     height: 35px;
   }
 
   nav {
     display: none;
   }
+
   .inge {
     height: 30px;
     position: absolute;
-    left: 0; /* Ajustez la position selon votre besoin */
-    top: 50%; /* Centrer verticalement par rapport à l'élément parent */
-    transform: translateY(-50%); /* Assure que l'image soit parfaitement centrée */
-    margin-right: 10px; /* Espace entre l'image et les dots */
+    left: 0;
+    /* Ajustez la position selon votre besoin */
+    top: 50%;
+    /* Centrer verticalement par rapport à l'élément parent */
+    transform: translateY(-50%);
+    /* Assure que l'image soit parfaitement centrée */
+    margin-right: 10px;
+    /* Espace entre l'image et les dots */
   }
-  
+
   .dots {
-margin-left: 30px;
+    margin-left: 30px;
     display: flex;
     align-items: center;
   }
-  
+
 }
 
 
 
 /* Pour les grands écrans (plus de 1200px de large) */
 @media (min-width: 1200px) {
-  .inge{
+  .inge {
     display: none;
   }
+
   .content {
     padding: 20px;
-    height: 65px; /* Augmente la hauteur du header */
+    height: 65px;
+    /* Augmente la hauteur du header */
   }
 
   .header-container {
-    padding: 0px 0px; /* Plus d'espace sur les grands écrans */
+    padding: 0px 0px;
+    /* Plus d'espace sur les grands écrans */
   }
 
   h6 {
-    font-size: 1.8rem; /* Augmente la taille du texte sur les grands écrans */
-    letter-spacing: 3px; /* Plus d'espacement entre les lettres */
+    font-size: 1.8rem;
+    /* Augmente la taille du texte sur les grands écrans */
+    letter-spacing: 3px;
+    /* Plus d'espacement entre les lettres */
   }
 
   .profile-details img {
@@ -319,6 +383,7 @@ margin-left: 30px;
 
 
 @media (max-width: 768px) {
+
   /* Icône du menu */
   .menu-icon {
     position: fixed;
@@ -330,48 +395,16 @@ margin-left: 30px;
     z-index: 1000;
   }
 
-  /* Conteneur du menu */
-  .sidebar {
-    position: fixed;
-    top:6%; 
-    left: 0;
-    width: 70%;
-
-    background: #2c3e50;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    transition: top 0.5s ease-in-out;
-    border-radius: 0px 0px 10px 10px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* Espacement entre les éléments */
-  }
-
- 
-  .log_out {
-    position: absolute;
-    bottom: 1%;
-    background-color: transparent;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .log_out span {
-    color: rgb(245, 59, 59);
-
-  }
-
-
   /* Liste des liens */
   .nav-links {
     list-style: none;
-    padding: 0;
+    padding: -50px;
     margin: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacement de 10px entre les liens */
+    gap: 10px;
+    /* Espacement de 10px entre les liens */
   }
 
   /* Style des liens */
@@ -379,7 +412,6 @@ margin-left: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
     text-decoration: none;
     color: rgb(8, 8, 8);
     background: white;
@@ -389,8 +421,11 @@ margin-left: 30px;
   }
 
 
+  /* Conteneur du menu */
+  .sidebar {
+    
+    background: #cccccc;
+    
+  }
+
 }
-
-
-
-

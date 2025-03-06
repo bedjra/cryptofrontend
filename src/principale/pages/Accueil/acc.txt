@@ -1,154 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Accueil.css";
 import { DollarSign, CreditCard, Truck, Users } from "lucide-react";
-import {FaExchangeAlt} from "react-icons/fa";
-
-const Accueil = () => {
-  // États pour stocker les données du backend
-  const [totalBenefices, setTotalBenefices] = useState(0);
-  const [totalTransactions, setTotalTransactions] = useState(0);
-  const [fournisseursActifs, setFournisseursActifs] = useState(0);
-  const [totalBeneficiaires, setTotalBeneficiaires] = useState(0);
-
-  // Fonction pour récupérer les données
-  useEffect(() => {
-    fetch("http://localhost:5000/total/been")
-        .then((res) => res.json())
-        .then((data) => setTotalBenefices(data.total_benefices || 0))
-        .catch((err) => console.error("Erreur récupération bénéfices :", err));
-
-    fetch("http://localhost:5000/total/tr")
-        .then((res) => res.json())
-        .then((data) => setTotalTransactions(data.total || 0))
-        .catch((err) => console.error("Erreur récupération transactions :", err));
-
-    fetch("http://localhost:5000/total/fr")
-        .then((res) => res.json())
-        .then((data) => setFournisseursActifs(data.total_fournisseurs || 0))
-        .catch((err) => console.error("Erreur récupération fournisseurs :", err));
-
-    fetch("http://localhost:5000/total/bn")
-        .then((res) => res.json())
-        .then((data) => setTotalBeneficiaires(data.total_beneficiaires || 0))
-        .catch((err) => console.error("Erreur récupération bénéficiaires :", err));
-  }, []);
-
-  return (
-      <main className="dashboard">
-        {/* Section Résumé Global */}
-        <section className="summary grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="card">
-            <DollarSign className="icon text-green-500" />
-
-            <div>
-              <h3 className="text-lg font-semibold">Total Bénéfices (FCFA)</h3>
-              <p className="text-xl font-bold">{totalBenefices.toLocaleString()}</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <FaExchangeAlt className="icon text-blue-500" />
-            <div>
-              <h3 className="text-lg font-semibold">Total Transactions</h3>
-              <p className="text-xl font-bold">{totalTransactions}</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <Truck className="icon text-orange-500" />
-            <div>
-              <h3 className="text-lg font-semibold">Fournisseurs Actifs</h3>
-              <p className="text-xl font-bold">{fournisseursActifs}</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <Users className="icon text-purple-500" />
-            <div>
-              <h3 className="text-lg font-semibold">Total Bénéficiaires</h3>
-              <p className="text-xl font-bold">{totalBeneficiaires}</p>
-            </div>
-          </div>
-        </section>
-
-
-
-          {/* Section Transactions Récentes
-      <section className="recent-transactions">
-        <h2>Transactions Récentes</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Montant (FCFA)</th>
-              <th>Montant (USDT)</th>
-              <th>Fournisseur</th>
-              <th>Bénéfices (FCFA)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2025-01-28</td>
-              <td>500,000</td>
-              <td>730.50</td>
-              <td>Fournisseur A</td>
-              <td>15,000</td>
-            </tr>
-            <tr>
-              <td>2025-01-27</td>
-              <td>300,000</td>
-              <td>438.50</td>
-              <td>Fournisseur B</td>
-              <td>12,000</td>
-            </tr>
-            <tr>
-              <td>2025-01-26</td>
-              <td>1,200,000</td>
-              <td>1,752.00</td>
-              <td>Fournisseur C</td>
-              <td>40,000</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      */}
-
-      </main>
-  );
-};
-
-export default Accueil;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useEffect, useState } from "react";
-import "./Accueil.css";
-import { DollarSign, CreditCard, Truck, Users } from "lucide-react";
 import { FaExchangeAlt } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"; // Importer le style
@@ -217,6 +69,7 @@ const Accueil = () => {
                 text={`${totalTransactions}`}
                 strokeWidth={10}
                 styles={{
+                  
                   path: { stroke: "#2196f3" },
                   text: { fill: "#2196f3", fontSize: "45px" },
                 }}
@@ -268,3 +121,145 @@ const Accueil = () => {
 };
 
 export default Accueil;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Summary Cards */
+.summary {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  margin-left: 40px;
+
+}
+
+.card {
+  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-right: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1.5rem;
+  color: #0073e6;
+  font-weight: bold;
+}
+
+
+.card .icon {
+  font-size: 56px;
+  height : 50px ;
+  width: 50px;
+  color: #050505; /* Couleur principale (bleu) */
+}
+
+/* Ajustement pour très petits écrans */
+@media (max-width: 480px) {
+  .summary {
+    grid-template-columns: 1fr; /* 1 seule colonne */
+    margin-left: 0;
+    padding: 0 10px;
+  }
+}
+
+/* Ajustement pour tablettes */
+@media (max-width: 768px) {
+  .summary {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-left: 20px;
+  }
+}
+
+
+
+/* Recent Transactions */
+.recent-transactions h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.recent-transactions table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recent-transactions th,
+.recent-transactions td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.recent-transactions th {
+  background: #00bcd4;
+  color: #fff;
+}
+
+.recent-transactions tr:hover {
+  background: #f1f1f1;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem 0;
+  background: #333;
+  color: #fff;
+  margin-top: 2rem;
+}
+
+.text-lg  {
+  font-Size: "4px" 
+}

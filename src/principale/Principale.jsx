@@ -4,16 +4,18 @@ import { FaTachometerAlt, FaExchangeAlt, FaTruck, FaUsers, FaHistory, FaCalculat
 import "./Principale.css";
 
 const Principale = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false); // Le menu est fermé par défaut
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Fonction pour basculer l'état du menu
   const toggleNav = () => {
+    console.log('toggleNav called');
     setIsNavOpen(!isNavOpen);
   };
 
   // Ferme le menu si on clique sur un lien (uniquement sur mobile)
   const closeNav = () => {
+    console.log('closeNav called');
     if (isMobile) setIsNavOpen(false);
   };
 
@@ -24,8 +26,18 @@ const Principale = () => {
     };
 
     window.addEventListener("resize", handleResize);
+
+    // Force la fermeture du menu si on charge sur mobile
+    console.log('isMobile:', isMobile);
+    if (isMobile) {
+      console.log('Menu should be closed on mobile');
+      setIsNavOpen(false);
+    }
+
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobile]); // On ajoute [isMobile] comme dépendance pour s'assurer que l'effet se met à jour lorsque la taille de l'écran change
+
+  console.log('isNavOpen:', isNavOpen); // Vérifier la valeur actuelle de isNavOpen
 
   return (
     <div className="debut">
