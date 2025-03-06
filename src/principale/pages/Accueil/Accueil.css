@@ -1,106 +1,75 @@
-/* Summary Cards */
+/* Layout des cartes */
 .summary {
-  padding-top: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* 4 cartes alignées sur grands écrans */
   gap: 2rem;
-  margin-bottom: 4rem;
-  margin-left: 40px;
-
+  margin: 20px;
 }
 
-.card {
-  text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+@media (max-width: 1024px) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr); /* 2 cartes alignées sur moyens écrans */
   }
+}
 
-.card h3 {
-  font-size: 1.2rem;
+@media (max-width: 600px) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr); /* 2 cartes alignées sur petits écrans */
+  }
+}
+
+/* Style des cartes */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  height: 60%;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.card-text h3 {
+  font-size: 1.1rem;
   color: #555;
-  margin-right: 20px;
   margin-bottom: 0.5rem;
 }
 
-.card p {
-  font-size: 1.5rem;
+.card-text p {
+  font-size: 2rem;
   color: #0073e6;
   font-weight: bold;
-}
-
-
-.card .icon {
-  font-size: 56px;
-  height : 50px ;
-  width: 50px;
-  color: #050505; /* Couleur principale (bleu) */
-}
-
-/* Ajustement pour très petits écrans */
-@media (max-width: 480px) {
-  .summary {
-    grid-template-columns: 1fr; /* 1 seule colonne */
-    margin-left: 0;
-    padding: 0 10px;
-  }
-}
-
-/* Ajustement pour tablettes */
-@media (max-width: 768px) {
-  .summary {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    margin-left: 20px;
-  }
-}
-
-
-
-/* Recent Transactions */
-.recent-transactions h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.recent-transactions table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.recent-transactions th,
-.recent-transactions td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.recent-transactions th {
-  background: #00bcd4;
-  color: #fff;
-}
-
-.recent-transactions tr:hover {
-  background: #f1f1f1;
-}
-
-/* Footer */
-.footer {
   text-align: center;
-  padding: 1rem 0;
-  background: #333;
-  color: #fff;
-  margin-top: 2rem;
 }
 
-.text-lg  {
-  font-Size: "4px" 
+.card-chart {
+  width: 80px;
+  height: 80px;
 }
+
+.card-bottom {
+  height: 40%;
+  background: #2196f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-bottom .icon {
+  font-size: 30px;
+  color: white;
+}
+
+

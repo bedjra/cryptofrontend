@@ -263,3 +263,9 @@ export default Accueil;
 .text-lg  {
   font-Size: "4px" 
 }
+
+
+
+
+
+

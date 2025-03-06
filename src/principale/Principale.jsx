@@ -77,23 +77,26 @@ const Principale = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="fournisseurs" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
+                <FaTruck className="icon" />
+                <span className="links_name">Fournisseurs</span>
+              </NavLink>
+            </li>
+            
+            <li>
               <NavLink to="calculs" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaCalculator className="icon" />
                 <span className="links_name">Calculs</span>
               </NavLink>
             </li>
+            
             <li>
               <NavLink to="historique" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaHistory className="icon" />
                 <span className="links_name">Historique</span>
               </NavLink>
             </li>
-            <li>
-              <NavLink to="fournisseurs" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
-                <FaTruck className="icon" />
-                <span className="links_name">Fournisseurs</span>
-              </NavLink>
-            </li>
+            
             <li className="log_out">
               <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaSignOutAlt className="icon" />
