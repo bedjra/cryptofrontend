@@ -1,0 +1,508 @@
+import React, { useState } from 'react';
+import { Outlet, NavLink } from 'react-router-dom';
+import { FaTachometerAlt, FaExchangeAlt, FaTruck, FaUsers, FaHistory, FaCalculator, FaSignOutAlt } from "react-icons/fa";
+import "./Principale.css";
+
+const Principale = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  // Fonction pour basculer l'état du menu
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
+  return (
+    <div className="debut">
+      <div className="content">
+        <header className="header-container">
+          {/* Icône cliquable pour ouvrir/fermer le menu */}
+          <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
+          
+          <div className="dots">
+            <span className="dot"></span>
+            <span className="dot"></span>
+            <span className="dot"></span>
+            <h6>CRYPTO</h6>
+          </div>
+          <div className="profile-details">
+            <span className="admin_name">
+              Welcome <br /> Admin
+            </span>
+            <img src="/profil.png" alt="Profile" />
+          </div>
+        </header>
+      </div>
+
+      <div className="wrapper">
+        <nav className={`sidebar ${isNavOpen ? "open" : ""}`}>
+          <ul className="nav-links">
+            <li>
+              <NavLink to="accueil" activeClassName="active">
+                <FaTachometerAlt className="icon" />
+                <span className="links_name">Accueil</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="transactions" activeClassName="active">
+                <FaExchangeAlt className="icon" />
+                <span className="links_name">Transactions</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="calculs" activeClassName="active">
+                <FaCalculator className="icon" />
+                <span className="links_name">Calculs</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="historique" activeClassName="active">
+                <FaHistory className="icon" />
+                <span className="links_name">Historique</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="fournisseurs" activeClassName="active">
+                <FaTruck className="icon" />
+                <span className="links_name">Fournisseurs</span>
+              </NavLink>
+            </li>
+            <li className="log_out">
+              <NavLink to="/" activeClassName="active">
+                <FaSignOutAlt className="icon" />
+                <span className="links_name">Déconnexion</span>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="content-area">
+          <div className="routage">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Principale;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+body{
+  background-color: #fff;
+
+}*/
+.debut {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+  }
+  
+  .content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 17px;
+    height: 40px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    z-index: 1000;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .dots {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #0073e6;
+    border-radius: 50%;
+  }
+  
+  h6 {
+    font-weight: bold;
+    font-style: italic; /* Applique l'effet italique */
+    color: #333; /* Vous pouvez ajuster la couleur selon vos préférences */
+    letter-spacing: 2px; /* Espacement entre les lettres pour un effet plus aérien */
+    text-transform: uppercase; /* Transforme le texte en majuscules */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre discrète pour du relief */
+    display: inline-block;
+    transform: skewY(
+      -5deg
+    ); /* Incline légèrement le texte pour un effet dynamique */
+  }
+  
+  span {
+    color: rgb(31, 31, 31);
+  }
+  
+  .profile-details {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  
+  .profile-details img {
+    width: 50px; /* Ajuste la taille selon ton besoin */
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black; /* Bordure noire */
+    object-fit: cover; /* Assure que l'image couvre bien tout le cadre */
+  }
+  
+  .profile-details .admin_name {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .wrapper {
+    display: flex;
+    height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+  }
+  
+  nav {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 220px;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    text-decoration: none;
+  }
+  
+  .nav-links {
+    list-style-type: none; /* Remove bullet points from the list */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .nav-links li {
+    margin-bottom: 15px; /* Add spacing between navigation items */
+  }
+  
+  .nav-links li:last-child {
+    margin-bottom: 0; /* Remove spacing after the last item */
+  }
+  
+  .nav-links a {
+    text-decoration: none; /* Remove the underline from links */
+    display: flex; /* Flexbox for aligning icons and text */
+    align-items: center; /* Center items vertically */
+    color: #0b0b0b; /* Active item text color */
+    font-size: 18px;
+    padding: 15px 15px; /* Padding for better click area */
+    border-radius: 8px; /* Rounded corners for the hover effect */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+  }
+  
+  .nav-links a .icon {
+    margin-right: 10px; /* Add spacing between icon and text */
+    font-size: 20px; /* Icon size */
+  }
+  
+  .nav-links a.active span {
+    color: white; /* Span text color for the active link */
+  }
+  .nav-links a.active {
+    background-color: #0b0b0b;
+    color: #f3f3f3; /* Text and icon color for the active link */
+  }
+  
+  .nav-links a.active .icon {
+    color: #f3f3f3; /* Text and icon color for the active link */
+  }
+  
+  .log_out {
+    position: absolute;
+    bottom: -0.3%;
+  }
+  
+  .log_out span {
+    color: rgb(245, 59, 59);
+  }
+  
+  .sub-menu {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 200px;
+  }
+  
+  .nav-links li:hover .sub-menu {
+    display: block;
+  }
+  
+  .sub-link {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sub-link:hover {
+    background-color: #333;
+  }
+  
+  .content-area {
+    padding: 70px;
+    padding-left: 225px;
+    height: auto;
+    margin-left: 220px; /* Décale le contenu à droite du nav */
+    width: 100%;
+    overflow-y: auto; /* Assure que le contenu déborde proprement si nécessaire */
+    background-color: #66616126;
+    position: absolute; /* Assure que le conteneur occupe tout l'espace */
+    top: 0;
+    right: 0; /* Étend jusqu'au bord droit */
+    bottom: 0; /* Étend jusqu'au bas */
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse */
+  }
+  
+  /* Conteneur parent pour le nav et le routage */
+  .wrapper {
+    display: flex;
+    height: calc(100vh - 60px); /* Assurer que la hauteur soit égale */
+  }
+  
+  .routage {
+    padding: 5px;
+  }
+  
+  /* Responsive styles */
+  
+  
+  /* Pour les petits écrans (moins de 768px de large) */
+  @media (max-width: 768px) {
+  
+    .inge  {
+      margin-left: 5px;
+      width: 23px; /* Réduit légèrement la taille de l'image pour les petits écrans */
+      height: 20px;
+    }
+  
+  
+    .wrapper {
+      flex-direction: column; /* Passe la disposition en colonne pour les petits écrans */
+      height: auto; /* Permet au contenu de se développer selon sa taille */
+    }
+  
+    /* On cache le menu latéral sur les petits écrans et le rend accessible sur un clic par exemple */
+    .sidebar {
+      display: none;
+    }
+  
+    /* Lorsque le nav est ouvert (par exemple via un bouton ou un hamburger menu) */
+    .sidebar.open {
+      display: block;
+      width: 100%; /* Le nav occupe toute la largeur */
+      position: relative;
+    }
+  
+    .content-area {
+      margin-left: 0; /* Supprime le décalage pour les petits écrans */
+      padding-left: 0; /* Supprime l'espace à gauche */
+      padding-top: 50px;
+    }
+    .content {
+      padding: 10px;
+      height: 50px; /* Réduit la hauteur du header */
+    }
+  
+    .header-container {
+      padding: 0px 0px; /* Moins de padding sur les petits écrans */
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      background-color: #0073e6;
+      border-radius: 50%;
+    }
+    h6 {
+      display: none;
+    }
+  
+    .profile-details .admin_name {
+      display: none; /* Cache le texte sur les petits écrans */
+    }
+  
+    .profile-details img {
+      width: 35px; /* Réduit légèrement la taille de l'image pour les petits écrans */
+      height: 35px;
+    }
+  
+    nav {
+      display: none;
+    }
+    .inge {
+      height: 30px;
+      position: absolute;
+      left: 0; /* Ajustez la position selon votre besoin */
+      top: 50%; /* Centrer verticalement par rapport à l'élément parent */
+      transform: translateY(-50%); /* Assure que l'image soit parfaitement centrée */
+      margin-right: 10px; /* Espace entre l'image et les dots */
+    }
+    
+    .dots {
+  margin-left: 30px;
+      display: flex;
+      align-items: center;
+    }
+    
+  }
+  
+  
+  
+  /* Pour les grands écrans (plus de 1200px de large) */
+  @media (min-width: 1200px) {
+    .inge{
+      display: none;
+    }
+    .content {
+      padding: 20px;
+      height: 65px; /* Augmente la hauteur du header */
+    }
+  
+    .header-container {
+      padding: 0px 0px; /* Plus d'espace sur les grands écrans */
+    }
+  
+    h6 {
+      font-size: 1.8rem; /* Augmente la taille du texte sur les grands écrans */
+      letter-spacing: 3px; /* Plus d'espacement entre les lettres */
+    }
+  
+    .profile-details img {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .profile-details .admin_name {
+      font-size: 18px;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  @media (max-width: 768px) {
+    /* Icône du menu */
+    .menu-icon {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  
+    /* Conteneur du menu */
+    .sidebar {
+      position: fixed;
+      top: -100%; /* Caché au départ */
+      left: 0;
+      width: 100%;
+      max-width: 280px; /* Largeur du menu */
+      background: #2c3e50;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      transition: top 0.5s ease-in-out;
+      border-radius: 0px 0px 10px 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px; /* Espacement entre les éléments */
+    }
+  
+    /* Quand le menu est ouvert */
+    .sidebar.open {
+      top: 0; /* Descend du haut vers le bas */
+    }
+  
+    /* Liste des liens */
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Espacement de 10px entre les liens */
+    }
+  
+    /* Style des liens */
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: rgb(8, 8, 8);
+      background: white;
+      border-radius: 5px;
+      transition: background 0.3s ease-in-out;
+      width: 100%;
+    }
+  
+    /* Effet au survol */
+    .nav-links a:hover {
+      background: #1abc9c;
+    }
+  }
+  
+  
+  
+  
+
+
+
+
+
