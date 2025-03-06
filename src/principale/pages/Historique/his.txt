@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Historiques.css";
-
 const apiUrl = "http://127.0.0.1:5000";
 
 const Historique = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [periode, setPeriode] = useState("");
 
   useEffect(() => {
-    fetchTransactions();
-  }, [periode]);
+    fetch(`${apiUrl}/cal/all`)
 
-  const fetchTransactions = () => {
-    setLoading(true);
-    let url = `${apiUrl}/cal/peri`;
-    if (periode) {
-      url += `?periode=${periode}`;
-    }
-
-    fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setTransactions(data.transactions || []);
@@ -29,19 +18,18 @@ const Historique = () => {
         console.error("Erreur lors de la récupération des transactions:", error);
         setLoading(false);
       });
-  };
+  }, []);
 
   return (
     <div className="global-container">
       <div className="leftsection">
         <h2>Historique des Transactions</h2>
 
-        <label htmlFor="periode">Filtrer par période :</label>
-        <select id="periode" value={periode} onChange={(e) => setPeriode(e.target.value)}>
-          <option value="">Toutes</option>
-          <option value="jour">Journalier</option>
-          <option value="mois">Mensuel</option>
-          <option value="annee">Annuel</option>
+        <label for="periode">Filtrer par période :</label>
+        <select id="periode">
+            <option value="jour">Journalier</option>
+            <option value="mois">Mensuel</option>
+            <option value="annee">Annuel</option>
         </select>
 
         {loading ? (
@@ -88,7 +76,7 @@ const Historique = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" style={{ textAlign: "center" }}>
+                  <td colSpan="9" style={{ textAlign: "center" }}>
                     Aucune transaction trouvée
                   </td>
                 </tr>
@@ -102,3 +90,6 @@ const Historique = () => {
 };
 
 export default Historique;
+
+
+
