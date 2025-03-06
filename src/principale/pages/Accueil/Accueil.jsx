@@ -6,32 +6,73 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"; // Importer le style
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
+const apiUrl = "http://127.0.0.1:5000";
+
 const Accueil = () => {
   const [totalBenefices, setTotalBenefices] = useState(0);
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [fournisseursActifs, setFournisseursActifs] = useState(0);
   const [totalBeneficiaires, setTotalBeneficiaires] = useState(0);
+  const [fournisseurs, setFournisseurs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [beneficiaires, setBeneficiaires] = useState([]);
+
 
   useEffect(() => {
-    fetch("http://localhost:5000/total/been")
+    fetch(`${apiUrl}/total/been`)
       .then((res) => res.json())
       .then((data) => setTotalBenefices(data.total_benefices || 0))
       .catch((err) => console.error("Erreur récupération bénéfices :", err));
 
-    fetch("http://localhost:5000/total/tr")
+    fetch(`${apiUrl}/total/tr`)
       .then((res) => res.json())
       .then((data) => setTotalTransactions(data.total || 0))
       .catch((err) => console.error("Erreur récupération transactions :", err));
 
-    fetch("http://localhost:5000/total/fr")
+    fetch(`${apiUrl}/total/fr`)
       .then((res) => res.json())
       .then((data) => setFournisseursActifs(data.total_fournisseurs || 0))
       .catch((err) => console.error("Erreur récupération fournisseurs :", err));
 
-    fetch("http://localhost:5000/total/bn")
+    fetch(`${apiUrl}/total/bn`)
       .then((res) => res.json())
       .then((data) => setTotalBeneficiaires(data.total_beneficiaires || 0))
       .catch((err) => console.error("Erreur récupération bénéficiaires :", err));
+
+    fetch(`${apiUrl}/four/taux`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des taux");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setFournisseurs(data.fournisseurs);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Erreur lors de la récupération des taux");
+        setLoading(false);
+      });
+
+    fetch(`${apiUrl}/benef/all`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement des bénéficiaires");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Données bénéficiaires :", data); // ✅ Debug
+        setBeneficiaires(Array.isArray(data.beneficiaires) ? data.beneficiaires : []);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+
+
   }, []);
 
   return (
@@ -137,6 +178,58 @@ const Accueil = () => {
           </div>
         </div>
       </section>
+
+
+      <div className="global-container">
+        {/* Section Gauche */}
+        <div className="left-section">
+          <h2>Répartition du Budget par Bénéficiaire</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Bénéficiaire</th>
+                <th>Commission</th>
+                <th>Bénéfice</th>
+              </tr>
+            </thead>
+            <tbody>
+              {beneficiaires.map((b) => (
+                <tr key={b.id}>
+                  <td>{b.nom}</td>
+                  <td>{b.commission_USDT}</td>  {/* Correction du nom de la clé */}
+                  <td>{b.benefice_FCFA}</td>     {/* Correction du nom de la clé */}
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
+        </div>
+
+        {/* Section Droite */}
+        <div className="right-section">
+          <h2>Taux des Transaction en Temps Réel</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Fournisseur</th>
+                <th>Taux du Jour</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fournisseurs.map((f) => (
+                <tr key={f.id}>
+                  <td>{f.nom}</td>
+                  <td>{f.taux_jour}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
     </main>
   );
 };

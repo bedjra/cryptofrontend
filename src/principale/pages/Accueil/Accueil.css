@@ -73,3 +73,43 @@
 }
 
 
+
+.global-container {
+  display: flex;
+  gap: 5%;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.left-section {
+  flex: 6;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.right-section {
+  flex: 4;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Style pour les tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: right;
+}
+
+th {
+  background-color: #2196f3;
+  color: white;
+}
