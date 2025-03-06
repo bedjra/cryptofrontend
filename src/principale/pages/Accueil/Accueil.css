@@ -113,3 +113,11 @@ th {
   background-color: #2196f3;
   color: white;
 }
+
+
+.leftsection {
+  flex: 6;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}

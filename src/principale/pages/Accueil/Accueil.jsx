@@ -17,12 +17,13 @@ const Accueil = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [beneficiaires, setBeneficiaires] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
 
   useEffect(() => {
     fetch(`${apiUrl}/total/been`)
       .then((res) => res.json())
-      .then((data) => setTotalBenefices(data.total_benefices || 0))
+      .then((data) => setTotalBenefices(data.benefice_global_total || 0)) // Correction ici
       .catch((err) => console.error("Erreur récupération bénéfices :", err));
 
     fetch(`${apiUrl}/total/tr`)
@@ -72,6 +73,11 @@ const Accueil = () => {
         setLoading(false);
       });
 
+    fetch("http://localhost:5000/acc/last")
+      .then((res) => res.json())
+      .then((data) => setTransactions(data.transactions))
+      .catch((err) => console.error("Erreur lors de la récupération :", err));
+
 
   }, []);
 
@@ -82,7 +88,7 @@ const Accueil = () => {
         <div className="card">
           <div className="card-top">
             <div className="card-text">
-              <h3> Bénéfices </h3>
+              <h3> Bénéfices total </h3>
               <p>{totalBenefices.toLocaleString()}</p>
             </div>
 
@@ -179,56 +185,7 @@ const Accueil = () => {
         </div>
       </section>
 
-
-      <div className="global-container">
-        {/* Section Gauche */}
-        <div className="left-section">
-          <h2>Répartition du Budget par Bénéficiaire</h2>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Bénéficiaire</th>
-                <th>Commission</th>
-                <th>Bénéfice</th>
-              </tr>
-            </thead>
-            <tbody>
-              {beneficiaires.map((b) => (
-                <tr key={b.id}>
-                  <td>{b.nom}</td>
-                  <td>{b.commission_USDT}</td>  {/* Correction du nom de la clé */}
-                  <td>{b.benefice_FCFA}</td>     {/* Correction du nom de la clé */}
-                </tr>
-              ))}
-            </tbody>
-
-          </table>
-        </div>
-
-        {/* Section Droite */}
-        <div className="right-section">
-          <h2>Taux des Transaction en Temps Réel</h2>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Fournisseur</th>
-                <th>Taux du Jour</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fournisseurs.map((f) => (
-                <tr key={f.id}>
-                  <td>{f.nom}</td>
-                  <td>{f.taux_jour}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+      
 
     </main>
   );

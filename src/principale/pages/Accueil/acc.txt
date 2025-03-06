@@ -1,271 +1,79 @@
-import React, { useEffect, useState } from "react";
-import "./Accueil.css";
-import { DollarSign, CreditCard, Truck, Users } from "lucide-react";
-import { FaExchangeAlt } from "react-icons/fa";
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css"; // Importer le style
+<div className="global-container">
+        <div className="leftsection">
+          <h2>Historique des Trois dernières Transactions</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date & Heure</th>
+                <th>Montant (FCFA)</th>
+                <th>Fournisseur</th>
+                <th>Bénéfice (FCFA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.map((t, index) => (
+                <tr key={index}>
+                  <td>{t.date}</td>
+                  <td>{t.montant_FCFA} FCFA</td>
+                  <td>
+                    {t.fournisseurs.length > 0
+                      ? t.fournisseurs.map((f) => f.nom).join(", ")
+                      : "Aucun"}
+                  </td>
+                  <td>{t.benefice_total} FCFA</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-const Accueil = () => {
-  // États pour stocker les données du backend
-  const [totalBenefices, setTotalBenefices] = useState(0);
-  const [totalTransactions, setTotalTransactions] = useState(0);
-  const [fournisseursActifs, setFournisseursActifs] = useState(0);
-  const [totalBeneficiaires, setTotalBeneficiaires] = useState(0);
 
-  // Fonction pour récupérer les données
-  useEffect(() => {
-    fetch("http://localhost:5000/total/been")
-      .then((res) => res.json())
-      .then((data) => setTotalBenefices(data.total_benefices || 0))
-      .catch((err) => console.error("Erreur récupération bénéfices :", err));
+      <div className="global-container">
+        {/* Section Gauche */}
+        <div className="left-section">
+          <h2>Répartition du Budget par Bénéficiaire</h2>
 
-    fetch("http://localhost:5000/total/tr")
-      .then((res) => res.json())
-      .then((data) => setTotalTransactions(data.total || 0))
-      .catch((err) => console.error("Erreur récupération transactions :", err));
+          <table>
+            <thead>
+              <tr>
+                <th>Bénéficiaire</th>
+                <th>Commission</th>
+                <th>Bénéfice</th>
+              </tr>
+            </thead>
+            <tbody>
+              {beneficiaires.map((b) => (
+                <tr key={b.id}>
+                  <td>{b.nom}</td>
+                  <td>{b.commission_USDT} USDT</td>  {/* Correction du nom de la clé */}
+                  <td>{b.benefice_FCFA} FCFA</td>     {/* Correction du nom de la clé */}
+                </tr>
+              ))}
+            </tbody>
 
-    fetch("http://localhost:5000/total/fr")
-      .then((res) => res.json())
-      .then((data) => setFournisseursActifs(data.total_fournisseurs || 0))
-      .catch((err) => console.error("Erreur récupération fournisseurs :", err));
-
-    fetch("http://localhost:5000/total/bn")
-      .then((res) => res.json())
-      .then((data) => setTotalBeneficiaires(data.total_beneficiaires || 0))
-      .catch((err) => console.error("Erreur récupération bénéficiaires :", err));
-  }, []);
-
-  return (
-    <main className="dashboard">
-      {/* Section Résumé Global */}
-      <section className="summary grid grid-cols-2 md:grid-cols-4 gap-4">
-        {/* Total Bénéfices */}
-        <div className="card">
-          <DollarSign className="icon text-green-500" />
-          <div>
-            <h3 className="text-lg font-semibold">Total Bénéfices (FCFA)</h3>
-            <div style={{ width: 80, height: 80 }}>
-              <CircularProgressbar
-                value={totalBenefices}
-                text={`${totalBenefices.toLocaleString()}`}
-                strokeWidth={10}
-                styles={{
-                  path: { stroke: "#4caf50" },
-                  text: { fill: "#4caf50", fontSize: "45px" },
-                }}
-              />
-            </div>
-          </div>
+          </table>
         </div>
 
-        {/* Total Transactions */}
-        <div className="card">
-          <FaExchangeAlt className="icon text-blue-500" />
-          <div>
-            <h3 className="text-lg font-semibold">Total Transactions</h3>
-            <div style={{ width: 80, height: 80 }}>
-              <CircularProgressbar
-                value={totalTransactions}
-                text={`${totalTransactions}`}
-                strokeWidth={10}
-                styles={{
-                  
-                  path: { stroke: "#2196f3" },
-                  text: { fill: "#2196f3", fontSize: "45px" },
-                }}
-              />
-            </div>
-          </div>
+        {/* Section Droite */}
+        <div className="right-section">
+          <h2>Taux des Transaction en Temps Réel</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Fournisseur</th>
+                <th>Taux du Jour</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fournisseurs.map((f) => (
+                <tr key={f.id}>
+                  <td>{f.nom}</td>
+                  <td>{f.taux_jour}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-
-        {/* Fournisseurs Actifs */}
-        <div className="card">
-          <Truck className="icon text-orange-500" />
-          <div>
-            <h3 className="text-lg font-semibold">Fournisseurs Actifs</h3>
-            <div style={{ width: 80, height: 80 }}>
-              <CircularProgressbar
-                value={fournisseursActifs}
-                text={`${fournisseursActifs}`}
-                strokeWidth={10}
-                styles={{
-                  path: { stroke: "#ff9800" },
-                  text: { fill: "#ff9800", fontSize: "45px" },
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Total Bénéficiaires */}
-        <div className="card">
-          <Users className="icon text-purple-500" />
-          <div>
-            <h3 className="text-lg font-semibold">Total Bénéficiaires</h3>
-            <div style={{ width: 80, height: 80 }}>
-              <CircularProgressbar
-                value={totalBeneficiaires}
-                text={`${totalBeneficiaires}`}
-                strokeWidth={10}
-                styles={{
-                  path: { stroke: "#9c27b0" },
-                  text: { fill: "#9c27b0", fontSize: "45px" },
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-};
-
-export default Accueil;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Summary Cards */
-.summary {
-  padding-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-  margin-left: 40px;
-
-}
-
-.card {
-  text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-
-.card h3 {
-  font-size: 1.2rem;
-  color: #555;
-  margin-right: 20px;
-  margin-bottom: 0.5rem;
-}
-
-.card p {
-  font-size: 1.5rem;
-  color: #0073e6;
-  font-weight: bold;
-}
-
-
-.card .icon {
-  font-size: 56px;
-  height : 50px ;
-  width: 50px;
-  color: #050505; /* Couleur principale (bleu) */
-}
-
-/* Ajustement pour très petits écrans */
-@media (max-width: 480px) {
-  .summary {
-    grid-template-columns: 1fr; /* 1 seule colonne */
-    margin-left: 0;
-    padding: 0 10px;
-  }
-}
-
-/* Ajustement pour tablettes */
-@media (max-width: 768px) {
-  .summary {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    margin-left: 20px;
-  }
-}
-
-
-
-/* Recent Transactions */
-.recent-transactions h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.recent-transactions table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.recent-transactions th,
-.recent-transactions td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.recent-transactions th {
-  background: #00bcd4;
-  color: #fff;
-}
-
-.recent-transactions tr:hover {
-  background: #f1f1f1;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 1rem 0;
-  background: #333;
-  color: #fff;
-  margin-top: 2rem;
-}
-
-.text-lg  {
-  font-Size: "4px" 
-}
-
-
-
-
-
-
+      </div>
