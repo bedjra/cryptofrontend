@@ -6,9 +6,17 @@
     margin-right: -50px;
     margin-left: 10px;
 }
+.label{
+    width: 300px;
+  }
 @media (max-width: 600px) {
     .historique {
         margin-right: -70px;
         margin-left: 5px;
     }
+    .label{
+        width: 200px;
+      }
+     
   }
+
