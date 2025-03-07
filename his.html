@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historique des Transactions</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    header .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    header .navbar a:hover {
+      color: #00bcd4;
+    }
+
+    /* Page Title */
+    .page-title {
+      padding: 2rem;
+      background: #00bcd4;
+      color: #fff;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+    }
+
+    /* Table Section */
+    .historique {
+      padding: 2rem;
+    }
+
+    .historique h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .historique table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .historique th,
+    .historique td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .historique th {
+      background: #00bcd4;
+      color: #fff;
+    }
+
+    .historique tr:hover {
+      background: #f1f1f1;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #333;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Wiicode Togo</div>
+    <nav class="navbar">
+      <a href="#">Accueil</a>
+      <a href="#">Transactions</a>
+      <a href="#">Fournisseurs</a>
+      <a href="#">Bénéficiaires</a>
+      <a href="#">Historique</a>
+      <a href="#">Déconnexion</a>
+    </nav>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-title">
+    <h1>Historique des Transactions</h1>
+  </section>
+
+  <!-- Table Section -->
+  <section class="historique">
+    <h2>Liste des Transactions</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Montant Total (FCFA)</th>
+          <th>Montant USDT</th>
+          <th>Fournisseurs</th>
+          <th>Bénéfices Réalisés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2025-01-15</td>
+          <td>1,000,000</td>
+          <td>1450</td>
+          <td>Crypto Togo</td>
+          <td>75,000</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>2025-01-20</td>
+          <td>750,000</td>
+          <td>1100</td>
+          <td>Binance Afrique</td>
+          <td>42,000</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>2025-01-25</td>
+          <td>500,000</td>
+          <td>730</td>
+          <td>Exchange Lome</td>
+          <td>36,500</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Wiicode Togo. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>

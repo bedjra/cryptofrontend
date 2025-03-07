@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculs en Temps Réel</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #00bcd4;
+    }
+
+    .calculator {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #00bcd4;
+      outline: none;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .result span {
+      font-weight: bold;
+      color: #00bcd4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculs en Temps Réel</h1>
+
+  <div class="calculator">
+    <!-- Input Fields -->
+    <div class="form-group">
+      <label for="montant-total">Montant Total (FCFA):</label>
+      <input type="number" id="montant-total" placeholder="Entrez le montant total en FCFA">
+    </div>
+
+    <div class="form-group">
+      <label for="montant-usdt">Montant en USDT:</label>
+      <input type="number" id="montant-usdt" placeholder="Entrez le montant en USDT">
+    </div>
+
+    <div class="form-group">
+      <label for="pourcentage-benefice">Pourcentage de Bénéfice (%):</label>
+      <input type="number" id="pourcentage-benefice" placeholder="Entrez le pourcentage de bénéfice">
+    </div>
+
+    <!-- Results -->
+    <div class="result">
+      <p>Bénéfices Réalisés : <span id="benefice-result">0</span> FCFA</p>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const montantTotalInput = document.getElementById("montant-total");
+    const pourcentageBeneficeInput = document.getElementById("pourcentage-benefice");
+    const beneficeResult = document.getElementById("benefice-result");
+
+    // Event Listener for Calculations
+    montantTotalInput.addEventListener("input", calculateBenefice);
+    pourcentageBeneficeInput.addEventListener("input", calculateBenefice);
+
+    function calculateBenefice() {
+      const montantTotal = parseFloat(montantTotalInput.value) || 0;
+      const pourcentageBenefice = parseFloat(pourcentageBeneficeInput.value) || 0;
+
+      // Calculate the benefit
+      const benefice = (montantTotal * pourcentageBenefice) / 100;
+
+      // Display the result
+      beneficeResult.textContent = benefice.toFixed(2);
+    }
+  </script>
+</body>
+</html>
