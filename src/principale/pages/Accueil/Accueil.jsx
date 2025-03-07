@@ -204,7 +204,7 @@ const Accueil = () => {
                 <tr key={b.id}>
                   <td >{b.nom}</td>
                   <td>{b.commission_USDT} USDT</td> {/* Correction du nom de la clé */}
-                  <td >{b.benefice_FCFA} FCFA</td> {/* Correction du nom de la clé */}
+                  <td >{b.benefice_FCFA} </td> {/* Correction du nom de la clé */}
                 </tr>
               ))}
             </tbody>
