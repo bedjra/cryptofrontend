@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Accueil.css";
-import { DollarSign, CreditCard, Truck, Users } from "lucide-react";
+import { DollarSign, Creditcar, Truck, Users } from "lucide-react";
 import { FaExchangeAlt } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"; // Importer le style
@@ -85,14 +85,14 @@ const Accueil = () => {
     <main className="dashboard">
       <section className="summary">
         {/* Total Bénéfices */}
-        <div className="card">
-          <div className="card-top">
-            <div className="card-text">
+        <div className="car">
+          <div className="car-top">
+            <div className="car-text">
               <h3> Bénéfices total </h3>
               <p>{totalBenefices.toLocaleString()}</p>
             </div>
 
-            <div className="card-chart">
+            <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalBenefices}
                 strokeWidth={10}
@@ -105,20 +105,20 @@ const Accueil = () => {
             </div>
 
           </div>
-          <div className="card-bottom">
+          <div className="car-bottom">
             <DollarSign className="icon" />
           </div>
         </div>
 
         {/* Total Transactions */}
-        <div className="card">
+        <div className="car">
 
-          <div className="card-top">
-            <div className="card-text">
+          <div className="car-top">
+            <div className="car-text">
               <h3>Transactions</h3>
               <p>{totalTransactions}</p>
             </div>
-            <div className="card-chart">
+            <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalTransactions}
                 strokeWidth={10}
@@ -131,20 +131,20 @@ const Accueil = () => {
             </div>
           </div>
 
-          <div className="card-bottom">
+          <div className="car-bottom">
             <FaExchangeAlt className="icon" />
           </div>
         </div>
 
         {/* Fournisseurs Actifs */}
-        <div className="card">
+        <div className="car">
 
-          <div className="card-top">
-            <div className="card-text">
+          <div className="car-top">
+            <div className="car-text">
               <h3>Fournisseurs</h3>
               <p>{fournisseursActifs}</p>
             </div>
-            <div className="card-chart">
+            <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={fournisseursActifs}
                 strokeWidth={10}
@@ -156,18 +156,19 @@ const Accueil = () => {
               </CircularProgressbarWithChildren>
             </div>
           </div>
-          <div className="card-bottom">
+          <div className="car-bottom">
+          <h1>Fournisseurs</h1>
           </div>
         </div>
 
         {/* Total Bénéficiaires */}
-        <div className="card">
-          <div className="card-top">
-            <div className="card-text">
+        <div className="car">
+          <div className="car-top">
+            <div className="car-text">
               <h3>Bénéficiaires</h3>
               <p>{totalBeneficiaires}</p>
             </div>
-            <div className="card-chart">
+            <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalBeneficiaires}
                 strokeWidth={10}
@@ -179,7 +180,7 @@ const Accueil = () => {
               </CircularProgressbarWithChildren>
             </div>
           </div>
-          <div className="card-bottom">
+          <div className="car-bottom">
             <Users className="icon" />
           </div>
         </div>
@@ -195,7 +196,7 @@ const Accueil = () => {
               <tr>
                 <th className="dif">Bénéficiaire</th>
                 <th className="dif">Commission</th>
-                <th className="dif"> Bénéfice</th>
+                <th className="dif"> Bénéfice (FCFA)</th>
               </tr>
             </thead>
             <tbody>
@@ -218,13 +219,15 @@ const Accueil = () => {
           <table>
             <thead>
               <tr>
-                <th className="dif">Fournisseur</th>
-                <th className="dif">Taux du Jour</th>
+              <th className="dif">Id</th>
+              <th className="dif">Fournisseur</th>
+              <th className="dif">Taux du jour</th>
               </tr>
             </thead>
             <tbody>
               {fournisseurs.map((f) => (
                 <tr key={f.id}>
+                  <td>{f.id}</td>
                   <td>{f.nom}</td>
                   <td>{f.taux_jour}</td>
                 </tr>
@@ -235,38 +238,40 @@ const Accueil = () => {
       </div>
 
 
-      <div className="global-container">
-        <div className="leftsection">
-          <h2 >Historique des Trois dernières Transactions</h2>
-          <table >
-            <thead >
-              <tr>
-                <th >Date & Heure</th>
-                <th>Montant (FCFA)</th>
-                <th>Fournisseur</th>
-                <th>Bénéfice (FCFA)</th>
+
+
+
+
+      <div className="historique">
+        <h2 >Historique des Trois dernières Transactions</h2>
+        <table >
+          <thead >
+            <tr>
+              <th >Date & Heure</th>
+              <th>Montant</th>
+              <th>Fournisseur</th>
+              <th>Bénéfice (FCFA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((t, index) => (
+              <tr key={index}>
+                <td>{t.date}</td>
+                <td>{t.montant_FCFA} FCFA</td>
+                <td>
+                  {t.fournisseurs.length > 0
+                    ? t.fournisseurs.map((f) => f.nom).join(", ")
+                    : "Aucun"}
+                </td>
+                <td>{t.benefice_total} FCFA</td>
               </tr>
-            </thead>
-            <tbody>
-              {transactions.map((t, index) => (
-                <tr key={index}>
-                  <td>{t.date}</td>
-                  <td>{t.montant_FCFA} FCFA</td>
-                  <td>
-                    {t.fournisseurs.length > 0
-                      ? t.fournisseurs.map((f) => f.nom).join(", ")
-                      : "Aucun"}
-                  </td>
-                  <td>{t.benefice_total} FCFA</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
 
 
-     
+
 
     </main>
   );

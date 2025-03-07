@@ -32,8 +32,9 @@ const Historique = () => {
   };
 
   return (
-    <div className="global-container">
-      <div className="leftsection">
+
+      <div className="historique">
+
         <h2>Historique des Transactions</h2>
 
         <label htmlFor="periode">Filtrer par période :</label>
@@ -99,7 +100,6 @@ const Historique = () => {
           </table>
         )}
       </div>
-    </div>
   );
 };
 
