@@ -50,14 +50,15 @@ const Historique = () => {
           <table>
             <thead>
               <tr>
-                <th>ID Transaction</th>
+                <th>Id</th>
                 <th>Date</th>
                 <th>Montant (FCFA)</th>
                 <th>Taux</th>
+                <th>Montant UDST </th>
                 <th>Fournisseurs</th>
                 <th>Bénéficiaires</th>
-                <th>Bénéfice Bénéficiaire (FCFA)</th>
-                <th>Bénéfice Total (FCFA)</th>
+                <th>Bénéfice Bénéficiaire</th>
+                <th>Bénéfice Total </th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +69,7 @@ const Historique = () => {
                     <td>{new Date(t.date_transaction).toLocaleDateString()}</td>
                     <td>{t.montant_FCFA} FCFA</td>
                     <td>{t.taux_convenu}</td>
+                    <td>{t.montant_USDT}</td>
                     <td>
                       {t.benefices_fournisseurs.length > 0
                         ? t.benefices_fournisseurs.map((f) => f.fournisseur).join(", ")
