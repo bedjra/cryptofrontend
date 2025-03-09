@@ -85,13 +85,13 @@ const Accueil = () => {
     <main className="dashboard">
       <section className="summary">
         {/* Total Bénéfices */}
-        
+
         <div className="car">
           <div className="car-bottom">
             <h1> Bénéfices total </h1>
           </div>
           <div className="car-top">
-          
+
             <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalBenefices}
@@ -114,12 +114,11 @@ const Accueil = () => {
 
         {/* Total Transactions */}
         <div className="car">
-
+        <div className="car-bottom">
+        <h1>Transactions</h1>
+        </div>
           <div className="car-top">
-            <div className="car-text">
-              <h3>Transactions</h3>
-              <p>{totalTransactions}</p>
-            </div>
+            
             <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalTransactions}
@@ -131,21 +130,21 @@ const Accueil = () => {
                 <FaExchangeAlt style={{ color: "black", fontSize: "30px" }} />
               </CircularProgressbarWithChildren>
             </div>
+            <div className="car-text">
+              <p>{totalTransactions}</p>
+            </div>
           </div>
 
-          <div className="car-bottom">
-            <FaExchangeAlt className="icon" />
-          </div>
+         
         </div>
 
         {/* Fournisseurs Actifs */}
         <div className="car">
-
+          <div className="car-bottom">
+            <h1>Fournisseurs</h1>
+          </div>
           <div className="car-top">
-            <div className="car-text">
-              <h3>Fournisseurs</h3>
-              <p>{fournisseursActifs}</p>
-            </div>
+
             <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={fournisseursActifs}
@@ -157,19 +156,19 @@ const Accueil = () => {
                 <Truck style={{ color: "black", fontSize: "30px" }} />
               </CircularProgressbarWithChildren>
             </div>
+            <div className="car-text">
+              <p>{fournisseursActifs}</p>
+            </div>
           </div>
-          <div className="car-bottom">
-            <h1>Fournisseurs</h1>
-          </div>
+
         </div>
 
         {/* Total Bénéficiaires */}
         <div className="car">
+          <div className="car-bottom">
+            <h1>Bénéficiaires</h1>
+          </div>
           <div className="car-top">
-            <div className="car-text">
-              <h3>Bénéficiaires</h3>
-              <p>{totalBeneficiaires}</p>
-            </div>
             <div className="car-chart">
               <CircularProgressbarWithChildren
                 value={totalBeneficiaires}
@@ -181,10 +180,11 @@ const Accueil = () => {
                 <Users style={{ color: "black", fontSize: "30px" }} />
               </CircularProgressbarWithChildren>
             </div>
+            <div className="car-text">
+              <p>{totalBeneficiaires}</p>
+            </div>
           </div>
-          <div className="car-bottom">
-            <Users className="icon" />
-          </div>
+
         </div>
       </section>
 

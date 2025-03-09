@@ -93,17 +93,15 @@
     height: 100%;
   }
 
-  .car-text h3 {
+  .car-bottom h1 {
     font-size: 1rem;
   }
 
-  .car-text p {
-    font-size: 1.5rem;
-  }
+
 
   .car-chart {
     width: 60px;
-    height: 60px;
+    height: 70px;
   }
 
   .car-bottom {
@@ -186,7 +184,6 @@ th {
 .leftsection {
   flex: 6;
   background-color: #f0f0f0;
-  padding: 20px;
   border-radius: 10px;
 }
 
@@ -194,7 +191,6 @@ th {
 .left-section,
 .right-section {
   background-color: #f0f0f0;
-  padding: 20px;
   border-radius: 10px;
   flex: 1;
   /* Chaque section prend sa part de l’espace */
