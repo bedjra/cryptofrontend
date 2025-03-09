@@ -149,16 +149,22 @@
 .left-section {
   flex: 6;
   background-color: #f0f0f0;
-  padding: 20px;
+  padding: 2px;
   border-radius: 10px;
 }
 
 .right-section {
   flex: 4;
   background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 10px;
   margin-right: -60px;
+  text-align: center;
+}
+
+.right-section table{
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
 
 }
 

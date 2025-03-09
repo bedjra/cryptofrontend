@@ -276,9 +276,7 @@ nav {
   }
   .content-area {
     margin-left: 0;
-    /* Supprime le décalage pour les petits écrans */
-    padding-left: 0;
-    /* Supprime l'espace à gauche */
+    padding-left: 0px;
     padding-top: 50px;
   }
 
