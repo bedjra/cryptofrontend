@@ -73,7 +73,7 @@ span {
   border: 1px solid black;
   /* Bordure noire */
   object-fit: cover;
-  /* Assure que l'image couvre bien tout le cadre */
+  pointer-events: none;
 }
 
 .profile-details .admin_name {
@@ -309,6 +309,7 @@ nav {
 
   .profile-details img {
     cursor: pointer;
+    pointer-events: auto;
     width: 35px;
     height: 35px;
   }

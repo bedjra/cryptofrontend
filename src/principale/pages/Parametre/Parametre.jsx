@@ -7,7 +7,6 @@ const Parametre = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Simule une requête API pour récupérer les infos de l'utilisateur
     fetch(`${apiUrl}/user`)
       .then((response) => response.json())
       .then((data) => setUser(data))
@@ -20,12 +19,22 @@ const Parametre = () => {
 
       {user ? (
         <div className="profile-card">
+          {/* Avatar Centré */}
           <img src={user.avatar || "/profil.png"} alt="Avatar" className="avatar" />
-          <div className="user-info">
-            <p><strong>Nom :</strong> {user.nom}</p>
+
+          {/* Nom */}
+          <h3 className="user-name">{user.nom}</h3>
+
+          {/* Email & Téléphone */}
+          <div className="contact-info">
             <p><strong>Email :</strong> {user.email}</p>
-            <p><strong>Rôle :</strong> {user.role}</p>
-            <p><strong>Date d'inscription :</strong> {new Date(user.dateInscription).toLocaleDateString()}</p>
+            <p><strong>Téléphone :</strong> {user.phone || "Non renseigné"}</p>
+          </div>
+
+          {/* Changer Mot de Passe & Déconnexion */}
+          <div className="settings-actions">
+            <button className="change-password">Changer le mot de passe</button>
+            <button className="logout-button">Se déconnecter</button>
           </div>
         </div>
       ) : (
