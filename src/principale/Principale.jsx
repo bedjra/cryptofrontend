@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { FaTachometerAlt, FaExchangeAlt, FaTruck, FaUsers, FaHistory, FaCalculator, FaSignOutAlt } from "react-icons/fa";
 import "./Principale.css";
+import { useNavigate } from "react-router-dom";
 
 const Principale = () => {
   const [isNavOpen, setIsNavOpen] = useState(false); // Le menu est fermé par défaut
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const navigate = useNavigate();
 
   // Fonction pour basculer l'état du menu
   const toggleNav = () => {
@@ -39,13 +41,19 @@ const Principale = () => {
 
   console.log('isNavOpen:', isNavOpen); // Vérifier la valeur actuelle de isNavOpen
 
+
+  // Fonction pour rediriger vers la page Parametre
+  const goToParametre = () => {
+    navigate("/parametre");
+  };
+
   return (
     <div className="debut">
       <div className="content">
         <header className="header-container">
           {/* Icône cliquable pour ouvrir/fermer le menu */}
           <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
-          
+
           <div className="dots">
             <span className="dot"></span>
             <span className="dot"></span>
@@ -56,7 +64,7 @@ const Principale = () => {
             <span className="admin_name">
               Welcome <br /> Admin
             </span>
-            <img src="/profil.png" alt="Profile" />
+            <img src="/profil.png" alt="Profile" onClick={goToParametre} style={{ cursor: "pointer" }} />
           </div>
         </header>
       </div>
@@ -82,21 +90,21 @@ const Principale = () => {
                 <span className="links_name">Fournisseurs</span>
               </NavLink>
             </li>
-            
+
             <li>
               <NavLink to="calculs" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaCalculator className="icon" />
                 <span className="links_name">Calculs</span>
               </NavLink>
             </li>
-            
+
             <li>
               <NavLink to="historique" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaHistory className="icon" />
                 <span className="links_name">Historique</span>
               </NavLink>
             </li>
-            
+
             <li className="log_out">
               <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaSignOutAlt className="icon" />

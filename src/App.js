@@ -10,7 +10,7 @@ import Fournisseurs from "./principale/pages/Fournisseurs/Fournisseurs.jsx";
 import Beneficiaires from "./principale/pages/Beneficiaires/Beneficiaires.jsx";
 import Historique from "./principale/pages/Historique/Historiques.jsx";
 import Calculs from "./principale/pages/Calculs/Calculs.jsx";
-
+import Parametre from "./principale/pages/Parametre/Parametre.jsx";
 function App() {
   return (
     <Router>
@@ -28,6 +28,7 @@ function App() {
           <Route path="beneficiaires" element={<Beneficiaires />} />
           <Route path="historique" element={<Historique />} />
           <Route path="calculs" element={<Calculs />} />
+          <Route path="parametre" element={<Parametre />} />
 
         </Route>
         
