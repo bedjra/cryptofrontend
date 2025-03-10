@@ -78,75 +78,135 @@
     background: #c82333;
   }
   
-
-  .modal-overlay {
+/* Fond semi-transparent derrière la modale */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Effet sombre en arrière-plan */
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.modal {
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Conteneur principal de la modale */
+  .modal {
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-}
-
-.modal-content {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Titre de la modale */
+  .modal h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Contenu de la modale */
+  .modal-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.input-container {
-    position: relative;
-}
-
-.input-container input {
+  }
+  
+  /* Labels */
+  .modal-content label {
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+  }
+  
+  /* Champs de saisie */
+  .modal-content input {
     width: 100%;
-    padding: 10px;
-    padding-right: 40px;
+    padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.input-icon {
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  /* Conteneur des champs de saisie avec icône */
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-container input {
+    flex: 1;
+    padding-right: 35px; /* Espace pour l'icône */
+  }
+  
+  /* Icônes des yeux */
+  .input-container svg {
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: gray;
-}
-
-.modal-buttons {
+    cursor: pointer;
+    color: #666;
+    transition: 0.3s;
+  }
+  
+  .input-container svg:hover {
+    color: #000;
+  }
+  
+  /* Boutons */
+  .modal-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
-    gap: 50px;
-}
-
-.validate-button {
-    background: green;
-    color: white;
+    gap: 80px;
+  }
+  
+  .modal-buttons button {
     padding: 8px 12px;
+    font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-}
+    transition: 0.3s;
+  }
+  
+  /* Bouton Valider */
+  .modal-buttons button:first-child {
+    color: #f50707c2;
+  }
+  
 
-.close-button {
-    background: red;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+  
+  /* Bouton Annuler */
+  .modal-buttons button:last-child {
+    color: #f8f7f7;
+  }
+  
+  .modal-buttons button:last-child:hover {
+    background-color: #e01616;
+  }
+  .modal-buttons .ann{
+    background-color: #e01616;
+
+  }
+  /* Animation d'apparition */
+  @keyframes fadeIn {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  
+  
