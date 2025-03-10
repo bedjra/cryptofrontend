@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Parametre.css";
-import { FaLock, FaSignOutAlt } from "react-icons/fa";
+import { FaLock, FaSignOutAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const apiUrl = "http://127.0.0.1:5000"; // Remplace avec ton URL d'API
 
@@ -12,6 +12,10 @@ const Parametre = () => {
         newPassword: "",
         confirmPassword: "",
     });
+
+    // États pour gérer l'affichage du mot de passe
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     useEffect(() => {
         fetch(`${apiUrl}/user`)
@@ -83,25 +87,33 @@ const Parametre = () => {
                             <label>Nouveau mot de passe</label>
                             <div className="input-container">
                                 <input
-                                    type="password"
+                                    type={showNewPassword ? "text" : "password"}
                                     name="newPassword"
                                     value={formData.newPassword}
                                     onChange={handleChange}
                                     placeholder="Entrez votre nouveau mot de passe"
                                 />
-                                <FaLock className="input-icon" />
+                                {showNewPassword ? (
+                                    <FaEyeSlash className="input-icon" onClick={() => setShowNewPassword(false)} />
+                                ) : (
+                                    <FaEye className="input-icon" onClick={() => setShowNewPassword(true)} />
+                                )}
                             </div>
 
                             <label>Confirmer le mot de passe</label>
                             <div className="input-container">
                                 <input
-                                    type="password"
+                                    type={showConfirmPassword ? "text" : "password"}
                                     name="confirmPassword"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     placeholder="Confirmez votre nouveau mot de passe"
                                 />
-                                <FaLock className="input-icon" />
+                                {showConfirmPassword ? (
+                                    <FaEyeSlash className="input-icon" onClick={() => setShowConfirmPassword(false)} />
+                                ) : (
+                                    <FaEye className="input-icon" onClick={() => setShowConfirmPassword(true)} />
+                                )}
                             </div>
 
                             <div className="modal-buttons">
