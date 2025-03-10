@@ -28,7 +28,7 @@ function App() {
           <Route path="beneficiaires" element={<Beneficiaires />} />
           <Route path="historique" element={<Historique />} />
           <Route path="calculs" element={<Calculs />} />
-          <Route path="parametre" element={<Parametre />} />
+          <Route path="profil" element={<Parametre />} />
 
         </Route>
         

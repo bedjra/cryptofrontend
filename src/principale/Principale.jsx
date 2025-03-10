@@ -44,7 +44,7 @@ const Principale = () => {
 
   // Fonction pour rediriger vers la page Parametre
   const goToParametre = () => {
-    navigate("/parametre");
+    navigate("/profil");
   };
 
   return (
