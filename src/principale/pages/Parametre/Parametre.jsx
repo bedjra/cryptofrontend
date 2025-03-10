@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Parametre.css";
+import { useNavigate } from "react-router-dom";
 import { FaLock, FaSignOutAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const apiUrl = "http://127.0.0.1:5000"; // Remplace avec ton URL d'API
@@ -13,10 +14,15 @@ const Parametre = () => {
         confirmPassword: "",
     });
 
+
     // États pour gérer l'affichage du mot de passe
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.clear(); // Exemple : supprimer les infos stockées
+        navigate("/"); // Rediriger vers la page de login
+    }
     useEffect(() => {
         fetch(`${apiUrl}/user`)
             .then((response) => response.json())
@@ -57,7 +63,7 @@ const Parametre = () => {
                         <button className="change-password" onClick={() => setShowModal(true)}>
                             <FaLock className="icon" /> Changer le mot de passe
                         </button>
-                        <button className="logout-button">
+                        <button className="logout-button" onClick={handleLogout}>
                             <FaSignOutAlt className="icon" /> Se déconnecter
                         </button>
                     </div>
