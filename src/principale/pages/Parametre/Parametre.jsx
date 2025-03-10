@@ -115,6 +115,8 @@ const Parametre = () => {
                     <div className="modal">
                         <h3>Changer le mot de passe</h3>
                         <div className="modal-content">
+                        <label>Ancien mot de passe</label>
+
                             <div className="input-container">
                                 <FaLock className="lock-icon" />
                                 <input
