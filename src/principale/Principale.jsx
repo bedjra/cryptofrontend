@@ -3,12 +3,14 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { FaTachometerAlt, FaExchangeAlt, FaTruck, FaUsers, FaHistory, FaCalculator, FaSignOutAlt } from "react-icons/fa";
 import "./Principale.css";
 import { useNavigate } from "react-router-dom";
+import { FaSearch, FaUserCircle } from "react-icons/fa"; // Icônes de recherche et profil
 
 const Principale = () => {
   const [isNavOpen, setIsNavOpen] = useState(false); // Le menu est fermé par défaut
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
-
+  const [searchActive, setSearchActive] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   // Fonction pour basculer l'état du menu
   const toggleNav = () => {
     console.log('toggleNav called');
@@ -49,28 +51,18 @@ const Principale = () => {
 
   return (
     <div className="debut">
-      <div className="content">
-        <header className="header-container">
-          {/* Icône cliquable pour ouvrir/fermer le menu */}
-          <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
+
+      <div className="wrappe">
+
+        <nav className={`sideba ${isNavOpen ? "open" : ""}`}>
 
           <div className="dots">
             <span className="dot"></span>
             <span className="dot"></span>
             <span className="dot"></span>
-            <h6>CRYPTO</h6>
+            <h6>Crypto</h6>
           </div>
-          <div className="profile-details">
-            <span className="admin_name">
-              Welcome <br /> Admin
-            </span>
-            <img src="/profil.png" alt="Profile" onClick={goToParametre} style={{ cursor: "pointer" }} />
-          </div>
-        </header>
-      </div>
 
-      <div className="wrapper">
-        <nav className={`sidebar ${isNavOpen ? "open" : ""}`}>
           <ul className="nav-links">
             <li>
               <NavLink to="accueil" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
@@ -115,12 +107,46 @@ const Principale = () => {
         </nav>
 
         <div className="content-area">
-          <div className="routage">
-            <Outlet />
+          <div className="headerNew">
+            <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
+
+            <div className={`search-container ${searchActive ? "active" : ""}`}>
+              {!searchActive ? (
+                <div className="search-placeholder" onClick={() => setSearchActive(true)}>
+                  <FaSearch className="search-icon" />
+                  &nbsp;&nbsp; <span className="search-text">Recherche</span>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  className="search-bar"
+                  placeholder="Rechercher..."
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  onBlur={() => setSearchActive(false)} // Cache l'input si on clique ailleurs
+                  autoFocus
+                />
+              )}
+
+            </div>
+            <div className="profile-icon">
+              <img src="/profil.png" alt="Profile" onClick={goToParametre} style={{ cursor: "pointer" }} />
+            </div>
           </div>
+
+          <div className="routage">
+
+            <Outlet />
+    
+          </div>
+
         </div>
       </div>
+
+
     </div>
+
+
   );
 };
 

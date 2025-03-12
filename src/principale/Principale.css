@@ -1,33 +1,9 @@
-
-.debut {
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-}
-
-.content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 17px;
-  height: 40px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  z-index: 1000;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
 .dots {
+  padding-top: 5px;
   display: flex;
   align-items: center;
   gap: 10px;
+  padding-bottom: 15px;
 }
 
 .dot {
@@ -37,114 +13,59 @@
   border-radius: 50%;
 }
 
-h6 {
-  font-weight: bold;
-  font-style: italic;
-  /* Applique l'effet italique */
-  color: #333;
-  /* Vous pouvez ajuster la couleur selon vos préférences */
-  letter-spacing: 2px;
-  /* Espacement entre les lettres pour un effet plus aérien */
-  text-transform: uppercase;
-  /* Transforme le texte en majuscules */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  /* Ajoute une ombre discrète pour du relief */
-  display: inline-block;
-  transform: skewY(-5deg);
-  /* Incline légèrement le texte pour un effet dynamique */
-}
 
 span {
   color: rgb(31, 31, 31);
 }
 
-.profile-details {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-
-.profile-details img {
-  width: 50px;
-  /* Ajuste la taille selon ton besoin */
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid black;
-  /* Bordure noire */
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.profile-details .admin_name {
-  font-size: 16px;
-  color: #333;
-}
-
-.wrapper {
-  display: flex;
-  height: calc(100vh - 60px);
-  /* Assurer que la hauteur soit égale */
+h6 {
+  font-size: 22px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 nav {
   position: fixed;
-  top: 65px;
   left: 0;
   width: 220px;
-  height: calc(100vh - 60px);
+  height: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d3d3d3;
   z-index: 999;
   text-decoration: none;
 }
 
 .nav-links {
   list-style-type: none;
-  /* Remove bullet points from the list */
-  padding: 0;
-  /* Remove default padding */
-  margin: 0;
-  /* Remove default margin */
 }
 
 .nav-links li {
-  margin-bottom: 15px;
-  /* Add spacing between navigation items */
+  margin-bottom: 30px;
 }
 
 .nav-links li:last-child {
   margin-bottom: 0;
-  /* Remove spacing after the last item */
 }
 
 .nav-links a {
+  margin-top: 20px;
   text-decoration: none;
-  /* Remove the underline from links */
   display: flex;
-  /* Flexbox for aligning icons and text */
   align-items: center;
-  /* Center items vertically */
   color: #0b0b0b;
-  /* Active item text color */
-  font-size: 18px;
-  padding: 15px 15px;
-  /* Padding for better click area */
-  border-radius: 8px;
-  /* Rounded corners for the hover effect */
+  font-size: 15px;
+  padding: 10px 15px;
+  border-radius: 5px;
   transition: background-color 0.3s ease;
-  /* Smooth hover transition */
 }
 
 .nav-links a .icon {
   margin-right: 10px;
-  /* Add spacing between icon and text */
-  font-size: 20px;
-  /* Icon size */
+  font-size: 1.1rem;
+  color: #0b0b0b;
 }
 
 .nav-links a.active span {
@@ -153,13 +74,12 @@ nav {
 }
 
 .nav-links a.active {
-  background-color: #0b0b0b;
-  color: #f3f3f3;
-  /* Text and icon color for the active link */
+  background-color: #d3d3d3;
+  color: #555;
 }
 
 .nav-links a.active .icon {
-  color: #f3f3f3;
+  color: #0c0c0c;
   /* Text and icon color for the active link */
 }
 
@@ -172,259 +92,246 @@ nav {
   color: rgb(245, 59, 59);
 }
 
-.sub-menu {
-  display: none;
-  position: absolute;
-  background-color: #444;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  min-width: 200px;
-}
+
 
 .nav-links li:hover .sub-menu {
   display: block;
 }
 
-.sub-link {
-  padding: 10px;
-  color: white;
-  text-decoration: none;
-}
 
-.sub-link:hover {
-  background-color: #333;
-}
+
+
+
+
+
 
 .content-area {
-  padding: 70px;
-  padding-left: 225px;
-  height: auto;
-  margin-left: 220px;
-  /* Décale le contenu à droite du nav */
-  width: 100%;
-  overflow-y: auto;
-  /* Assure que le contenu déborde proprement si nécessaire */
-  background-color: #66616126;
-  position: absolute;
-  /* Assure que le conteneur occupe tout l'espace */
-  top: 0;
-  right: 0;
-  /* Étend jusqu'au bord droit */
-  bottom: 0;
-  /* Étend jusqu'au bas */
-  overflow-y: auto;
-  /* Permet le défilement si le contenu dépasse */
+  flex: 1;
+  /* Prend tout l'espace restant */
+  margin-left: 230px;
+  padding: 10px;
+  transition: margin-left 0.3s ease;
+  height: 100vh;
+  /* Hauteur complète de l'écran */
+
 }
 
-/* Conteneur parent pour le nav et le routage */
-.wrapper {
+.headerNew {
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  flex: 1;
+  /* Prend tout l'espace restant */
+  margin-top: 5px;
+
+  position: fixed;
+  /* Fixe le header en haut */
+  top: 0;
+  left: 245px;
+  width: calc(100% - 260px);
+  /* Ajuste la largeur pour éviter qu'il dépasse */
+  height: 60px;
+  /* Hauteur du header */
+  background: #fff;
+  /* Fond du header */
   display: flex;
-  height: calc(100vh - 60px);
-  /* Assurer que la hauteur soit égale */
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  /* Ombre subtile */
+
+  align-items: center;
+  justify-content: space-between;
+  /* Sépare la barre de recherche et l'icône */
+  padding: 0 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  /* Assure qu'il est au-dessus du contenu */
 }
 
 .routage {
-  padding: 5px;
+  flex: 1;
+  /* Prend l’espace restant */
+  overflow-y: auto;
+  /* Permet le défilement si le contenu dépasse */
+  height: calc(100vh - 60px);
+  /* Ajuste la hauteur en fonction du header */
+
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding-right: 55px;
+  margin-top: 70px;
+  flex: 1;
+  /* Prend tout l'espace restant */
+  height: 800px;
+  transition: margin-left 0.3s ease;
 }
 
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
-/* Responsive styles */
 
-/* Pour les petits écrans (moins de 768px de large) */
-@media (max-width: 768px) {
+.search-bar {
+  flex: 1;
+  /* Prend tout l'espace possible */
+  max-width: 300px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+}
 
-  .inge {
-    margin-left: 5px;
-    width: 23px;
-    /* Réduit légèrement la taille de l'image pour les petits écrans */
-    height: 20px;
-  }
+.profile-icon {
 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  /* Ajoute un encadrement */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  cursor: pointer;
+}
 
-  .wrapper {
-    flex-direction: column;
-    /* Passe la disposition en colonne pour les petits écrans */
-    height: auto;
-    /* Permet au contenu de se développer selon sa taille */
-  }
-
-  /* On cache le menu latéral sur les petits écrans et le rend accessible sur un clic par exemple */
-  .sidebar {
-    display: none;
-  }
-
-  /* Lorsque le nav est ouvert (par exemple via un bouton ou un hamburger menu) */
-  .sidebar.open {
-    display: block;
-    width: 55%;
-    position: relative;
-    top: 50px;
-    
-  }
-  .log_out {
-    position: absolute;
-    bottom: 1%;
-  }
-  .content-area {
-    margin-left: 0;
-    padding-left: 0px;
-    padding-top: 50px;
-  }
-
-  .content {
-    padding: 10px;
-    height: 50px;
-    /* Réduit la hauteur du header */
-  }
-
-  .header-container {
-    padding: 0px 0px;
-    /* Moins de padding sur les petits écrans */
-  }
-
-  .dot {
-    width: 7px;
-    height: 7px;
-    background-color: #0073e6;
-    border-radius: 50%;
-  }
-
-  h6 {
-    display: none;
-  }
-
-  .profile-details .admin_name {
-    display: none;
-    /* Cache le texte sur les petits écrans */
-  }
-
-  .profile-details img {
-    cursor: pointer;
-    pointer-events: auto;
-    width: 35px;
-    height: 35px;
-  }
-
-  nav {
-    display: none;
-  }
-
-  .inge {
-    height: 30px;
-    position: absolute;
-    left: 0;
-    /* Ajustez la position selon votre besoin */
-    top: 50%;
-    /* Centrer verticalement par rapport à l'élément parent */
-    transform: translateY(-50%);
-    /* Assure que l'image soit parfaitement centrée */
-    margin-right: 10px;
-    /* Espace entre l'image et les dots */
-  }
-
-  .dots {
-    margin-left: 30px;
-    display: flex;
-    align-items: center;
-  }
-
+.profile-icon img {
+  cursor: pointer;
+  pointer-events: auto;
+  width: 45px;
+  height: 45px;
 }
 
 
 
+
+
+
+
+/* Responsive styles */
+/* Responsive styles */
 /* Pour les grands écrans (plus de 1200px de large) */
 @media (min-width: 1200px) {
   .inge {
     display: none;
   }
 
-  .content {
-    padding: 20px;
-    height: 65px;
-    /* Augmente la hauteur du header */
-  }
-
-  .header-container {
-    padding: 0px 0px;
-    /* Plus d'espace sur les grands écrans */
-  }
-
-  h6 {
-    font-size: 1.8rem;
-    /* Augmente la taille du texte sur les grands écrans */
-    letter-spacing: 3px;
-    /* Plus d'espacement entre les lettres */
-  }
-
-  .profile-details img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .profile-details .admin_name {
-    font-size: 18px;
-  }
 }
 
-
-
-
-
-
-
+/* Pour les petits écrans (moins de 768px de large) */
 @media (max-width: 768px) {
+  .sideba {
+    display: none;
+  }
 
-  /* Icône du menu */
-  .menu-icon {
+
+
+
+  .content-area {
+    margin-left: -3px;
+    padding: 10px;
+    transition: margin-left 0.3s ease;
+    height: 100vh;
+    /* Hauteur complète de l'écran */
+
+  }
+
+  .headerNew {
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    flex: 1;
+    /* Prend tout l'espace restant */
+    margin-top: 5px;
+
     position: fixed;
-    top: 10px;
+    /* Fixe le header en haut */
+    top: 0;
     left: 10px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 1000;
-  }
-
-  /* Liste des liens */
-  .nav-links {
-    list-style: none;
-    padding: -50px;
-    margin: 0;
-    width: 100%;
+    width: 95%;
+    height: 60px;
+    background: #fff;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* Espacement de 10px entre les liens */
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Ombre subtile */
+
+    align-items: center;
+    justify-content: space-between;
+    /* Sépare la barre de recherche et l'icône */
+    padding: 0 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    /* Assure qu'il est au-dessus du contenu */
   }
 
-  /* Style des liens */
-  .nav-links a {
+  .routage {
+    flex: 1;
+    /* Prend l’espace restant */
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+
+    border-radius: 5px;
+    padding-right: 55px;
+    margin-top: 70px;
+    flex: 1;
+    height: 585px;
+    transition: margin-left 0.3s ease;
+  }
+
+  .inge {
+    height: 35px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 10px;
+  }
+
+
+  .search-bar {
+    flex: 1px;
+    left: 150px;
+    max-width: 300px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+  }
+
+
+  .search-container  {
+    margin-left: 90px;
+  }
+
+  .profile-icon {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    margin-right: -15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-    color: rgb(8, 8, 8);
-    background: white;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
-    width: 100%;
+    background: #f9f9f9;
+    cursor: pointer;
+  }
+
+  .profile-icon img {
+    cursor: pointer;
+    pointer-events: auto;
+    width: 45px;
+    height: 45px;
   }
 
 
-  /* Conteneur du menu */
-  .sidebar {
-    
-    background: #cccccc;
-    
-  }
+  .sideba.open {
+    display: block;
+    width: 55%;
+    position: relative;
+    top: 50px;
+}
+
 
 }
+
+
+  
+
