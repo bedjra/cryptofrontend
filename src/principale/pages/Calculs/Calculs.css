@@ -43,6 +43,7 @@
     background: white;
     width: 165px;
     padding: 20px;
+    margin-left: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -55,6 +56,12 @@
 
 
 }
+
+
+
+
+
+
   
 /* Styles du popup */
 .moda {
@@ -68,36 +75,42 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-
+.last{
+  font-weight: bold;
+  
+}
 .moda-content {
   background: white;
   padding: 20px;
+  margin-top: 50px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 90%;
   max-width: 500px;
   text-align: left;
+  font-weight: 100;
+
 }
 
-.carre h3  {
-  text-align: center;
-  margin-bottom: 10px;
-}
 
 .list {
   list-style: none;
-  padding: 0;
+  padding: 10px;
+  font-weight: 100;
+
 }
 
 .list-item {
-  padding: 10px 0;
+  padding: 5px 0;
   padding-bottom: 15px;
+  font-weight: 100;
+
 }
 
 .close-btn {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   margin-top: 50px;
   background: #e74c3c;;
   color: white;

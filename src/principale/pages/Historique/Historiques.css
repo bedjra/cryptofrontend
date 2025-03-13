@@ -9,10 +9,27 @@
 .label{
     width: 300px;
   }
+
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre les éléments */
+  }
+  
+  .label label {
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  }
+  
+  .label select {
+    margin-top: 30px;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
 @media (max-width: 600px) {
     .historique {
-        margin-right: -70px;
-        margin-left: 5px;
+        margin-right: -45px;
+        margin-left: 15px;
         padding-bottom: 10px;
 
     }

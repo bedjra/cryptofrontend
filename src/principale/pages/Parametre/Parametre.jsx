@@ -6,6 +6,7 @@ import { FaLock, FaSignOutAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 const apiUrl = "http://127.0.0.1:5000";
 
 const Parametre = () => {
+    
     const [user, setUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({

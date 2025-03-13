@@ -57,12 +57,11 @@ const Principale = () => {
         <nav className={`sideba ${isNavOpen ? "open" : ""}`}>
 
           <div className="dots">
-            <span className="dot"></span>
-            <span className="dot"></span>
-            <span className="dot"></span>
-            <h6>Crypto</h6>
-          </div>
+            <img src="/logo.png" alt="Profile"  />
 
+            <h3>Analyse</h3>
+          </div>
+<hr />
           <ul className="nav-links">
             <li>
               <NavLink to="accueil" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>

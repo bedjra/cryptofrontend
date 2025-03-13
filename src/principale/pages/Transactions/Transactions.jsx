@@ -7,6 +7,7 @@ import { format } from "date-fns";
 const apiUrl = "http://127.0.0.1:5000";
 
 const Transactions = () => {
+  
   const [montantFCFA, setMontantFCFA] = useState("");
   const [tauxConv, setTauxConv] = useState("");
   const [montantUSDT, setMontantUSDT] = useState("");
@@ -27,7 +28,7 @@ const Transactions = () => {
 
   useEffect(() => {
     if (montantFCFA && tauxConv) {
-      setMontantUSDT((parseFloat(montantFCFA) / parseFloat(tauxConv)).toFixed(2));
+      setMontantUSDT(parseFloat(montantFCFA) / parseFloat(tauxConv));
     } else {
       setMontantUSDT("");
     }
@@ -91,35 +92,35 @@ const Transactions = () => {
   return (
     <div className="container">
       <div className="left-box">
-        <h2>{editingTransactionId ? "Modifier" : "Ajouter"} une Transaction</h2>
+        <h4>{editingTransactionId ? "Modifier" : "Ajouter"} une Transaction</h4>
         <div className="input-group">
-          <label>Montant FCFA</label>
+          <span>Montant FCFA</span>
           <input type="number" value={montantFCFA} onChange={(e) => setMontantFCFA(e.target.value)} required />
         </div>
         <div className="input-group">
-          <label>Taux de Conversion</label>
+          <span>Taux de Conversion</span>
           <input type="number" value={tauxConv} onChange={(e) => setTauxConv(e.target.value)} required />
         </div>
         <div className="input-group">
-          <label>Montant USDT</label>
-          <input type="text" value={montantUSDT} disabled placeholder="Montant calculé en USDT" />
+          <span>Montant USDT</span>
+          <input type="text" value={montantUSDT} disabled placeholder="Montant calculé automatiquement" />
         </div>
-        <div className="button-group">
-          <button className="btn" onClick={handleEnregistrer}>
-            {editingTransactionId ? "MODIFIER" : "ENREGISTRER"}
+        <div className="but">
+          <button className="save" onClick={handleEnregistrer}>
+            {editingTransactionId ? "Modifier" : "Enregistrer"}
           </button>
         </div>
       </div>
 
       <div className="right-box">
-        <h2 style={{ marginBottom: 30 }}> Gestion des Transactions</h2>
+        <h4 style={{ marginBottom: 25 }}> Gestion des Transactions</h4>
         <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Montant FCFA</th>
+              <th>Id</th>
+              <th>Mtt FCFA</th>
               <th>Taux</th>
-              <th>Montant USDT</th>
+              <th>Mtt USDT</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -139,7 +140,7 @@ const Transactions = () => {
                 <td>
                   <button onClick={() => handleEdit(transaction)} className="action-btn">
                     <Edit size={20} color="blue" />
-                  </button>
+                  </button> &nbsp;
                   <button onClick={() => handleDelete(transaction.id)} className="action-btn">
                     <Trash2 size={20} color="red" />
                   </button>

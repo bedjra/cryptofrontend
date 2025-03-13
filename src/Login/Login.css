@@ -94,7 +94,7 @@ label {
   font-weight: 500;
 }
 
-input {
+.password-container  input {
   display: block;
   height: 50px;
   width: 100%;
@@ -107,8 +107,7 @@ input {
   font-size: 14px;
   font-weight: 300;
 }
-
-button {
+.connexion {
   margin-top: 50px;
   width: 100%;
   background: linear-gradient(#23a2f6, #23a2f6);
@@ -164,7 +163,7 @@ button {
     font-size: 28px;
   }
 
-  input {
+  .password-container  input {
     height: 45px;
     font-size: 13px;
   }
@@ -204,7 +203,7 @@ button {
     font-size: 24px;
   }
 
-  input {
+  .password-container  input {
     height: 40px;
     font-size: 18px;
   }

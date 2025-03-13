@@ -1,120 +1,4 @@
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    gap: 20px;
-
-}
-
-.left-box {
-    width: 30%;
-    background-color: #f3f4f6;
-    color: black;
-    border-radius: 10px;
-    padding: 20px;
-    margin-left: 10px;
-    min-width: 300px;
-    height: 500%;
-}
-
-.left-box {
-    width: 30%;
-    min-width: 370px;
-    margin-left: 10px;
-}
-
-.right-box {
-    min-width: 390px;
-    width: 70%;
-    background-color: #f3f4f6;
-    color: black;
-    border-radius: 10px;
-    padding: 20px;
-    margin-right: -70px;
-}
-
-.menuLeft, .menuRight {
-    width: 100%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-
-
-.input-group {
-    margin-top: 20px;
-}
-
-.input-group label {
-    display: block;
-    font-weight: bold;
-
-}
-
-.input-group input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.button-group {
-    text-align: center;
-}
-
-.btn {
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: white;
-}
-
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-
-.action-btn:hover svg {
-    opacity: 0.7;
-}
-
-td {
-    white-space: nowrap;
-}
-
-.action-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 1px;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-td:last-child {
-    display: flex;
-    gap: 1px; /* Espacement entre les boutons */
-}
-
-
 @media only screen and (max-width: 768px) {
     .container {
         flex-direction: column; /* Affichage en colonne */
@@ -131,13 +15,10 @@ td:last-child {
         border-radius: 10px;
         padding: 20px;
         width: 95vw; /* Pleine largeur */
-        margin-left: 5px;
+        margin-left: 17px;
     }
 
 
-    h2 {
-        font-size: 1.1rem;
-    }
 
     .input-group {
         margin-bottom: -10px;
@@ -175,7 +56,7 @@ td:last-child {
         padding: 20px;
         width: 99vw;
         max-width: 99vw;
-        margin: 0; /* Pas de marge pour la boîte de droite */
+        margin-left: 5px; /* Pas de marge pour la boîte de droite */
     }
 
     .right-box h2 {
@@ -223,7 +104,6 @@ td:last-child {
     }
 
     .input-group.beneficiaires-row {
-
         margin-top: 12px;
     }
 }
@@ -237,6 +117,11 @@ td:last-child {
     margin-bottom: 10px;
 }
 
+.input-group.beneficiaires-row  p{
+   padding-top: 10px;
+    font-size: 1.1rem;
+    color: rgb(27, 27, 27);
+}
 .a {
     cursor: pointer;
     margin-right: 150px;
@@ -254,17 +139,9 @@ td:last-child {
     cursor: pointer;
 }
 
-.input-group.beneficiaires-row h3 {
-    margin: 0;
-    font-size: 1.5em;
-}
 
-.input-group.beneficiaires-row button {
-    padding: 5px 15px;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+
+
 
 
 /* Style pour les lignes des bénéficiaires */
@@ -276,9 +153,13 @@ td:last-child {
 }
 
 .beneficiaire-row input {
-    width: 45%;
-    padding: 8px;
     margin-right: 10px;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .beneficiaire-row button {
@@ -294,7 +175,7 @@ td:last-child {
 
 
 /* Overlay (fond sombre) */
-.popup-overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -308,11 +189,10 @@ td:last-child {
 }
 
 /* Contenu de la popup */
-.popup-content {
+.content {
     background: #fff;
     padding: 10px;
     border-radius: 12px;
-    font-size: 15px;
     width: 120vw;
     max-width: 600px;
     max-height: 95vh;
@@ -362,25 +242,19 @@ td:last-child {
 .popup-body {
     font-size: 1rem;
     color: #555;
-    line-height: 1.5;
+    line-height: 1;
     padding-top: 10px;
 
 }
 
-.popup-body h3 {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
+
 
 .popup-body p {
     margin: 10px 0;
+    height: 20px;
+
 }
 
-.beneficiaire {
-    margin-bottom: 15px;
-}
 
 .beneficiaire p {
     margin: 10px 0;
@@ -410,10 +284,7 @@ td:last-child {
     margin-bottom: 10px;
     border-radius: 5px;
   }
-  h5{
-    color: red;
-  }
-  
+
 
 /* Animation d'ouverture (transparence et échelle) */
 @keyframes fadeIn {

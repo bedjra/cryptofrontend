@@ -72,12 +72,15 @@ function Login() {
           <label htmlFor="email">
             <FaEnvelope /> Email
           </label>
+          <div className="password-container">
+
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          </div>
           <label htmlFor="password">
             <FaLock /> Password
           </label>
@@ -96,7 +99,7 @@ function Login() {
             </span>
           </div>
 
-          <button type="submit">Connexion</button>
+          <button type="submit" className="connexion">Connexion</button>
         </form>
       </div>
     </div>

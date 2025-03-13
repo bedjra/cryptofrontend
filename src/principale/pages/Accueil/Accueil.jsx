@@ -73,7 +73,7 @@ const Accueil = () => {
         setLoading(false);
       });
 
-    fetch("http://localhost:5000/acc/last")
+    fetch(`${apiUrl}/acc/last`)
       .then((res) => res.json())
       .then((data) => setTransactions(data.transactions))
       .catch((err) => console.error("Erreur lors de la récupération :", err));
@@ -82,13 +82,87 @@ const Accueil = () => {
   }, []);
 
   return (
-    <main >
+    <main className="dash">
 
-      <div className="accueil">
+      <div className="container">
+        <div className="left-section">
+          <h4>Répartition du Budget</h4>
 
+          <table>
+            <thead>
+              <tr>
+                <th >Bénéficiaire</th>
+                <th >Commission</th>
+                <th > Bénéfice (FCFA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {beneficiaires.map((b) => (
+                <tr key={b.id}>
+                  <td >{b.nom}</td>
+                  <td>{b.commission_USDT} </td>
+                  <td>{b.benefice_FCFA} </td> 
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
+        </div>
+
+        {/* Section Droite */}
+        <div className="right-section">
+          <h4>Taux des Transactions </h4>
+
+          <table>
+            <thead>
+              <tr>
+                <th >Id</th>
+                <th >Fournisseur</th>
+                <th >Taux </th>
+              </tr>
+            </thead>
+            <tbody>
+              {fournisseurs.map((f) => (
+                <tr key={f.id}>
+                  <td>{f.id}</td>
+                  <td>{f.nom}</td>
+                  <td>{f.taux_jour}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
 
+
+      <div className="historique" >
+        <h3 >Historique </h3>
+        <table >
+          <thead >
+            <tr>
+              <th >Date & Heure</th>
+              <th>Montant</th>
+              <th>Fournisseur</th>
+              <th>Bénéfice (FCFA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((t, index) => (
+              <tr key={index}>
+                <td>{t.date}</td>
+                <td>{t.montant_FCFA}</td>
+                <td>
+                  {t.fournisseurs.length > 0
+                    ? t.fournisseurs.map((f) => f.nom).join(", ")
+                    : "Aucun"}
+                </td>
+                <td>{t.benefice_total} </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
 
 
@@ -98,3 +172,16 @@ const Accueil = () => {
 };
 
 export default Accueil;
+
+
+
+
+
+
+
+
+
+
+
+
+

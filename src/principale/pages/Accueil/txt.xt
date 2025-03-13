@@ -312,235 +312,224 @@ export default Accueil;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Layout des cartes */
 .summary {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8rem;
-  margin: 20px;
-
-}
-
-@media (max-width: 1024px) {
-  .summary {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8rem;
+    margin: 20px;
+  
   }
-}
-
-@media (max-width: 600px) {
-  .summary {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    margin-right: -20px;
-    height: 420px;
+  
+  @media (max-width: 1024px) {
+    .summary {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
-}
-
-/* Style des cartes */
-.car {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-  overflow: hidden;
-  margin-right: -60px;
-}
-
-.car-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  height: 70%;
-}
-
-.car-text {
-  flex: 1;
-}
-
-.car-text h3 {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-}
-
-.car-bottom h1 {
-  font-size: 1rem;
-  color: #555;
-
-}
-
-
-.car-text p {
-  font-size: 2rem;
-  color: #0073e6;
-  font-weight: bold;
-  text-align: center;
-}
-
-.car-chart {
-  width: 80px;
-  height: 80px;
-}
-
-.car-bottom {
-  height: 30%;
-  background: #2196f3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-
-.car-bottom .icon {
-  font-size: 30px;
-  color: white;
-}
-
-@media (max-width: 768px) {
+  
+  @media (max-width: 600px) {
+    .summary {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-right: -20px;
+      height: 420px;
+    }
+  }
+  
+  /* Style des cartes */
   .car {
-    width: 120%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+    margin-right: -60px;
+  }
+  
+  .car-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    height: 70%;
+  }
+  
+  .car-text {
+    flex: 1;
+  }
+  
+  .car-text h3 {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  .car-bottom h1 {
+    font-size: 1rem;
+    color: #555;
+  
+  }
+  
+  
+  .car-text p {
+    font-size: 2rem;
+    color: #0073e6;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .car-chart {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .car-bottom {
+    height: 30%;
+    background: #2196f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  .car-bottom .icon {
+    font-size: 30px;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .car {
+      width: 120%;
+      border-radius: 10px;
+  
+    }
+  
+    .car-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+    }
+  
+    .car-bottom h1 {
+      font-size: 1rem;
+    }
+  
+  
+  
+    .car-chart {
+      width: 60px;
+      height: 70px;
+    }
+  
+    .car-bottom {
+      height: 50px;
+    }
+  
+    .car-bottom .icon {
+      font-size: 25px;
+    }
+  
+  
+  
+    .date-heure {
+      white-space: pre-line;
+      /* Permet le saut de ligne */
+    }
+  }
+  
+
+  
+  .container {
+    display: flex;
+    gap: 5%;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-left: 7px;
+  }
+  
+  .left-section {
+    flex: 6;
+    background-color: #f0f0f0;
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+
+
+  }
+  
+  .right-section {
+    flex: 4;
+    background-color: #f0f0f0;
+    margin-right: -60px;
+    padding: 10px;
+    color: black;
     border-radius: 10px;
 
   }
-
-  .car-top {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    height: 100%;
+  
+  .right-section table{
+    padding-top: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+  
   }
-
-  .car-bottom h1 {
-    font-size: 1rem;
+  
+  
+  .leftsection {
+    flex: 6;
+    background-color: #f0f0f0;
   }
-
-
-
-  .car-chart {
-    width: 60px;
-    height: 70px;
-  }
-
-  .car-bottom {
-    height: 50px;
-  }
-
-  .car-bottom .icon {
-    font-size: 25px;
-  }
-
-
-  /* Ajustement du tableau */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    overflow-x: auto;
-    display: block;
-  }
-
-  th,
-  td {
-    padding: 8px;
-  }
-
-  .date-heure {
-    white-space: pre-line;
-    /* Permet le saut de ligne */
-  }
-}
-
-.dif {
-  background-color: #555;
-}
-
-.global-container {
-  display: flex;
-  gap: 5%;
-  width: 100%;
-  height: auto;
-  padding: 20px;
-
-}
-
-.left-section {
-  flex: 6;
-  background-color: #f0f0f0;
-  padding: 2px;
-  border-radius: 10px;
-}
-
-.right-section {
-  flex: 4;
-  background-color: #f0f0f0;
-  margin-right: -60px;
-  text-align: center;
-}
-
-.right-section table{
-  padding-top: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
-
-}
-
-/* Style pour les tableaux */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-th,
-td {
-  border: 1px solid #ccc;
-  padding: 8px;
-}
-
-th {
-  background-color: #2196f3;
-  color: white;
-}
-
-
-.leftsection {
-  flex: 6;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-}
-
-/* Sections en ligne sur grand écran */
-.left-section,
-.right-section {
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  flex: 1;
-  /* Chaque section prend sa part de l’espace */
-}
-
-@media screen and (max-width: 768px) {
-  .global-container {
-    flex-direction: column;
-    /* On empile les sections */
-    gap: 20px;
-    /* Ajout d’un espace entre les sections */
-  }
-
+  
+  /* Sections en ligne sur grand écran */
   .left-section,
   .right-section {
-    width: 125%;
-    flex: none;
-    margin-left: -12px
-
+    background-color: #f0f0f0;
+    flex: 1;
   }
-  .h2{
-    font-size: 1rem;
-
+  
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .left-section{
+      width: 87%;
+      flex: none;
+      margin-left: 17px
+  
+    }
+    .right-section {
+      width: 70%;
+      flex: none;
+      margin-left: 37px;
+      margin-bottom: 30px
+  
+    }
+    .h2{
+      font-size: 1rem;
+  
+    }
+  
   }
-
-}

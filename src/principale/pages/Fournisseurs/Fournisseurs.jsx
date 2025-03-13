@@ -184,11 +184,11 @@ const Fournisseurs = () => {
   return (
     <div className="container">
 
-      {/* le formulaire d'ajout des Fournisseurs */}
+
       <div className="left-box">
-        <h2>{editingFournisseurId ? "Modifier" : "Ajouter"} un Fournisseur</h2>
+        <h4>{editingFournisseurId ? "Modifier" : "Ajouter"} un Fournisseur</h4>
         <div className="input-group">
-          <label>Nom du Fournisseur</label>
+          <span>Nom du Fournisseur</span>
           <input
             type="text"
             value={nomFournisseur}
@@ -197,7 +197,7 @@ const Fournisseurs = () => {
           />
         </div>
         <div className="input-group">
-          <label>Taux du Jour (FCFA/USDT)</label>
+          <span>Taux du Jour (FCFA/USDT)</span>
           <input
             type="number"
             value={tauxJour}
@@ -206,7 +206,7 @@ const Fournisseurs = () => {
           />
         </div>
         <div className="input-group">
-          <label>Quantité Disponible (USDT)</label>
+          <span>Quantité Disponible (USDT)</span>
           <input
             type="number"
             value={quantiteDisponible}
@@ -215,7 +215,7 @@ const Fournisseurs = () => {
           />
         </div>
         <div className="input-group">
-          <label>Transaction</label>
+          <span>Transaction</span>
           <select
             value={transactionId}
             onChange={(e) => setTransactionId(e.target.value)}
@@ -229,9 +229,9 @@ const Fournisseurs = () => {
             ))}
           </select>
         </div>
-        {/* Section des bénéficiaires */}
+       
         <div className="input-group beneficiaires-row">
-          <h3>Bénéficiaires</h3>
+          <p>Bénéficiaires</p>
           <a className="a" onClick={addBeneficiaire}>
             ➕
           </a>
@@ -249,7 +249,7 @@ const Fournisseurs = () => {
             <input
               type="number"
               name="commission_USDT"
-              placeholder="Commission USDT"
+              placeholder=" USDT"
               value={beneficiaire.commission_USDT}
               onChange={(e) => handleBeneficiaireChange(index, e)}
               required
@@ -266,23 +266,23 @@ const Fournisseurs = () => {
         ))}{" "}
 
 
-        <div className="button-group">
-          <button className="btn" onClick={handleEnregistrer}>
-            {editingFournisseurId ? "MODIFIER" : "ENREGISTRER"}
+
+        <div className="but">
+          <button className="save" onClick={handleEnregistrer}>
+            {editingFournisseurId ? "Modifier" : "Enregistrer"}
           </button>
         </div>
+      
       </div>
-
-      {/* Gestion des Fournisseurs */}
       <div className="right-box">
-        <h2 style={{ marginBottom: 30 }}>Gestion des Fournisseurs & Bénéficiaires</h2>
+        <h4 style={{ marginBottom: 25 }}>Gestion des Fournisseurs </h4>
         <table>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nom du Fournisseur</th>
-              <th>Taux du Jour</th>
-              <th>Quantité</th>
+              <th>Nom </th>
+              <th>Taux </th>
+              <th>Qtté</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -318,54 +318,48 @@ const Fournisseurs = () => {
           </tbody>
         </table>
 
-        {/* Popup Détails */}
         {selectedFournisseur && (
-          <div className="popup-overlay" onClick={handleClosePopup}>
-            <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <div className="overlay" onClick={handleClosePopup}>
+            <div className="content" onClick={(e) => e.stopPropagation()}>
               <div className="popup-content-header">
-                <h2>Détails du fournisseur</h2>
+                <h4>Détails du fournisseur</h4>
               </div>
 
               <div className="popup-body">
-                {/* Conteneur des détails en deux colonnes */}
                 <div className="details-container">
 
-                  {/* Colonne de gauche - Informations du fournisseur */}
                   <div className="column">
                     <h5 >Fournisseur</h5>
-                    <p><strong>ID:</strong> {selectedFournisseur.id}</p>
-                    <p><strong>Nom:</strong> {selectedFournisseur.nom}</p>
-                    <p><strong>Taux du Jour:</strong> {selectedFournisseur.taux_jour}</p>
-                    <p><strong>Quantité Disponible:</strong> {selectedFournisseur.quantite_USDT}</p>
+                    <p>Id: {selectedFournisseur.id}</p>
+                    <p>Nom: {selectedFournisseur.nom}</p>
+                    <p>Taux du Jour: {selectedFournisseur.taux_jour}</p>
+                    <p>Quantité Disponible: {selectedFournisseur.quantite_USDT}</p>
                   </div>
 
-                  {/* Colonne de droite - Détails de la transaction */}
                   {selectedFournisseur.transaction && (
 
                     <div className="column">
                       <h5>Transaction</h5>
-                      <p><strong>ID Transaction:</strong> {selectedFournisseur.transaction.id}</p>
-                      <p><strong>Montant (FCFA):</strong> {selectedFournisseur.transaction.montant_FCFA}</p>
-                      <p><strong>Taux Convenu:</strong> {selectedFournisseur.transaction.taux_convenu}</p>
-                      <p><strong>Montant (USDT):</strong> {selectedFournisseur.transaction.montant_USDT}</p>
+                      <p>ID Transaction: {selectedFournisseur.transaction.id}</p>
+                      <p>Montant (FCFA): {selectedFournisseur.transaction.montant_FCFA}</p>
+                      <p>Taux Convenu: {selectedFournisseur.transaction.taux_convenu}</p>
+                      <p>Montant (USDT): {selectedFournisseur.transaction.montant_USDT}</p>
                     </div>
                   )}
                 </div>
 
-                {/* Section des bénéficiaires */}
 
                 <div className="beneficiaires">
                   {selectedFournisseur.beneficiaires.map((beneficiaire) => (
                     <div key={beneficiaire.id} className="beneficiaire">
                       <h5>Bénéficiaire</h5>
-                      <p><strong>ID:</strong> {beneficiaire.id}</p>
-                      <p><strong>Nom:</strong> {beneficiaire.nom}</p>
-                      <p><strong>Commission (USDT):</strong> {beneficiaire.commission_USDT}</p>
+                      <p>ID: {beneficiaire.id}</p>
+                      <p>Nom: {beneficiaire.nom}</p>
+                      <p>Commission (USDT): {beneficiaire.commission_USDT}</p>
                     </div>
                   ))}
                 </div>
 
-                {/* Bouton de fermeture */}
                 <button className="close-btn" onClick={handleClosePopup}>
                   Fermer
                 </button>
@@ -376,6 +370,7 @@ const Fournisseurs = () => {
 
 
       </div>
+    
     </div>
   );
 };

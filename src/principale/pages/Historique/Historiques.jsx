@@ -35,9 +35,9 @@ const Historique = () => {
 
     <div className="historique">
 
-      <h2>Historique des Transactions</h2>
+      <h3>Historique des Transactions</h3>
       <div className="label">
-        <label htmlFor="periode">Filtrer par période :</label>
+        <label htmlFor="periode">Filtrer par :</label>
         <select id="periode" value={periode} onChange={(e) => setPeriode(e.target.value)}>
           <option value="">Toutes</option>
           <option value="jour">Journalier</option>
@@ -55,13 +55,13 @@ const Historique = () => {
             <tr>
               <th>Id</th>
               <th>Date</th>
-              <th>Montant (FCFA)</th>
+              <th>FCFA</th>
               <th>Taux</th>
-              <th>Montant UDST </th>
-              <th>Fournisseurs</th>
-              <th>Bénéficiaires</th>
-              <th>Bénéfice Bénéficiaire</th>
-              <th>Bénéfice Total </th>
+              <th>UDST </th>
+              <th>Fournisseur</th>
+              <th>Bénéficiaire</th>
+              <th>Bénéfice </th>
+              <th>B. total </th>
             </tr>
           </thead>
           <tbody>
@@ -70,7 +70,7 @@ const Historique = () => {
                 <tr key={index}>
                   <td>{t.transaction_id}</td>
                   <td>{new Date(t.date_transaction).toLocaleDateString()}</td>
-                  <td>{t.montant_FCFA} FCFA</td>
+                  <td>{t.montant_FCFA} </td>
                   <td>{t.taux_convenu}</td>
                   <td>{t.montant_USDT}</td>
                   <td>
@@ -86,9 +86,9 @@ const Historique = () => {
                   <td>
                     {t.repartition_beneficiaires.length > 0
                       ? t.repartition_beneficiaires.map((b) => b.benefice_FCFA).join(", ")
-                      : "0"} FCFA
+                      : "0"} 
                   </td>
-                  <td>{t.resume_global.benefice_total_fournisseurs} FCFA</td>
+                  <td>{t.resume_global.benefice_total_fournisseurs} </td>
                 </tr>
               ))
             ) : (

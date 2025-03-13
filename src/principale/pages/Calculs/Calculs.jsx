@@ -59,9 +59,9 @@ const Calculs = () => {
       <section className="summar grid grid-cols-3 gap-4">
         {transactions.map((transaction) => (
           <div key={transaction.id} className="carre" onClick={() => openPopup(transaction)}>
-            <h3>Transaction {transaction.id}</h3>
-            <p>Montant: {transaction.montantFCFA} FCFA</p>
-            <p>Taux: {transaction.tauxConv} </p>
+            <h4>Transaction {transaction.id}</h4>
+            <p>Montant : {transaction.montantFCFA} FCFA</p>
+            <p>Taux : {transaction.tauxConv} </p>
 
           </div>
         ))}
@@ -70,34 +70,34 @@ const Calculs = () => {
       {selectedTransaction && detailsTransaction && (
         <div className="moda">
           <div className="moda-content">
-            <h3>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h3>
+            <p>CALCUL DE LA TRANSACTION {selectedTransaction.id}</p>
             <hr className="separator" />
-            <h4 >TRANSACTION</h4>
-            <p><strong>ID:</strong> {selectedTransaction.id}</p>
-             <p ><strong>Montant  :</strong> {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
-             <p ><strong> Taux :</strong> {selectedTransaction.tauxConv.toLocaleString()} </p>
-            <p className="fcfa"><strong>UDST  :</strong> {selectedTransaction.montantUSDT.toLocaleString()} </p>
+            <p className="last">Transaction</p>
+            <p>Id: {selectedTransaction.id}</p>
+             <p >Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
+             <p > Taux : {selectedTransaction.tauxConv.toLocaleString()} </p>
+            <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()} </p>
            
-            <h5 >BENEFICIARE FOURNISSEURS</h5>
+            <p className="last">Benefice Fournisseur</p>
             <ul className="list">
               {detailsTransaction.benefices_fournisseurs.map((benef, index) => (
                 <li key={index} className="list-item">
-                  <strong className="">{benef.fournisseur} :</strong> {benef.benefice_total_FCFA.toLocaleString()} FCFA
+                  <strong className="">{benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA</strong>
                 </li>
               ))}
             </ul>
-            <h5 >REPARTITION DES BENEFICIAIRES</h5>
+            <p className="last" >REPARTITION DES BENEFICIAIRES</p>
 
             <ul className="list">
               {detailsTransaction.repartition_beneficiaires.map((benef, index) => (
                 <li key={index} className="list-item">
-                  <strong>{benef.beneficiaire} :</strong> {benef.benefice_FCFA.toLocaleString()} FCFA
+                  {benef.beneficiaire} : {benef.benefice_FCFA.toLocaleString()} FCFA
                 </li>
               ))}
             </ul>
 
-            <h5>RESUME GLOBAL</h5>
-            <p><strong>Total Fournisseurs :</strong> {detailsTransaction.resume_global.benefice_total_fournisseurs.toLocaleString()} FCFA</p>
+            <p className="last">RESUME GLOBAL</p>
+            <p>Total Fournisseurs : {detailsTransaction.resume_global.benefice_total_fournisseurs.toLocaleString()} FCFA</p>
 
             <button className="close-btn" onClick={closePopup}>Fermer</button>
           </div>
