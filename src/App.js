@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 
 // Import des composants
 import Login from "./Login/Login.jsx";
@@ -11,17 +11,27 @@ import Beneficiaires from "./principale/pages/Beneficiaires/Beneficiaires.jsx";
 import Historique from "./principale/pages/Historique/Historiques.jsx";
 import Calculs from "./principale/pages/Calculs/Calculs.jsx";
 import Parametre from "./principale/pages/Parametre/Parametre.jsx";
+
+function RedirectToLogin() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/");
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Route pour la page de login */}
         <Route path="/" element={<Login />} />
 
-        {/* Route principale avec routes enfants */}
+        {/* Redirection vers le login si on actualise une autre page */}
+        <Route path="*" element={<RedirectToLogin />} />
+
         <Route path="" element={<Principale />}>
-          
-          {/* Routes enfants */}
           <Route path="accueil" element={<Accueil />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="fournisseurs" element={<Fournisseurs />} />
@@ -29,9 +39,7 @@ function App() {
           <Route path="historique" element={<Historique />} />
           <Route path="calculs" element={<Calculs />} />
           <Route path="profil" element={<Parametre />} />
-
         </Route>
-        
       </Routes>
     </Router>
   );
