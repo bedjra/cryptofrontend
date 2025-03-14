@@ -53,15 +53,16 @@ const Principale = () => {
     <div className="debut">
 
       <div className="wrappe">
+        {isNavOpen && <div className="overlay" onClick={toggleNav}></div>}
 
         <nav className={`sideba ${isNavOpen ? "open" : ""}`}>
 
           <div className="dots">
-            <img src="/logo.png" alt="Profile"  />
+            <img src="/logo.png" alt="Profile" />
 
             <h3>Analyse</h3>
           </div>
-<hr />
+          <hr />
           <ul className="nav-links">
             <li>
               <NavLink to="accueil" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
@@ -136,7 +137,7 @@ const Principale = () => {
           <div className="routage">
 
             <Outlet />
-    
+
           </div>
 
         </div>

@@ -289,8 +289,26 @@ nav {
     display: block;
     width: 55%;
     position: relative;
-    top: 50px;
+    position: fixed;
+    top: -10px;
+    left: 0;
+    width: 250px; /* Ajuste la largeur du menu */
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1001; /* S'assure que le menu est au-dessus */
   }
-
-
+  
+  /* Quand le menu est ouvert */
+  .sideba.open {
+    transform: translateX(0);
+  }
+  
+ 
+  .log_out {
+    position: absolute;
+    bottom: -3%;
+  }
 }
