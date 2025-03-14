@@ -227,13 +227,11 @@ nav {
     flex: 1;
     /* Prend l’espace restant */
     overflow-y: auto;
-    height: calc(100vh - 60px);
 
     border-radius: 5px;
     padding-right: 55px;
     margin-top: 70px;
     flex: 1;
-    height: 585px;
     transition: margin-left 0.3s ease;
   }
 
