@@ -38,6 +38,8 @@
 @media screen and (max-width: 768px) {
   .summar {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
   }
   .carre {
     background: white;
@@ -49,6 +51,7 @@
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+
   }
   .carre p {
     padding-top: 10px;

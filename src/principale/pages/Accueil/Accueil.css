@@ -144,7 +144,7 @@
   
   .left-section {
     flex: 6;
-    background-color: #f0f0f0;
+    background-color: #f3f4f6;
     padding: 10px;
     color: black;
     border-radius: 10px;
@@ -154,7 +154,7 @@
   
   .right-section {
     flex: 4;
-    background-color: #f0f0f0;
+    background-color: #f3f4f6;
     margin-right: -60px;
     padding: 10px;
     color: black;
