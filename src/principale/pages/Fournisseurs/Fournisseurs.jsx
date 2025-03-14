@@ -279,7 +279,7 @@ const Fournisseurs = () => {
         <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Id</th>
               <th>Nom </th>
               <th>Taux </th>
               <th>Qtté</th>
