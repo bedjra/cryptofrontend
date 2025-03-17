@@ -83,6 +83,81 @@ const Accueil = () => {
 
   return (
     <main className="dash">
+      <div class="dashboard-container">
+        <div class="stat-card">
+          <div class="card-content">
+            <div class="icon-container orange">
+              <DollarSign className="icon" style={{ color: "white", fontSize: "100px" }} />
+            </div>
+            <div class="text-container">
+              <div class="stat-header">
+                <span class="stat-title">BÉNÉFICES</span>
+              </div>
+              <span class="stat-values">{totalBenefices.toLocaleString()}</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="stat-subtitle">Total des bénéfices</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-content">
+            <div class="arr">
+            <div class="icon-container green">
+              <FaExchangeAlt style={{ color: "white", fontSize: "30px" }} />
+            </div>
+            </div>
+           
+            <div class="text-container">
+              <div class="stat-header">
+                <span class="stat-title">TRANSACTIONS</span>
+              </div>
+              <span class="stat-value">{totalTransactions}</span>
+
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="stat-subtitle">Total des transactions</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-content">
+            <div class="icon-container red">
+              <Truck style={{ color: "white", fontSize: "30px" }} />
+            </div>
+            <div class="text-container">
+              <div class="stat-header">
+
+                <span class="stat-title">FOURNISSEURS</span>
+              </div>
+              <span class="stat-value">{fournisseursActifs}</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="stat-subtitle">Total des fournisseurs </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-content">
+            <div class="icon-container blue">
+              <Users style={{ color: "black", fontSize: "30px" }} />
+
+            </div>
+            <div class="text-container">
+              <div class="stat-header">
+                <span class="stat-title">BÉNÉFICIAIRES</span>
+              </div>
+              <span class="stat-value">{totalBeneficiaires}</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="stat-subtitle">Total des bénéficiaires</div>
+        </div>
+      </div>
+
+
+     
+
 
       <div className="container">
         <div className="left-section">
@@ -101,7 +176,7 @@ const Accueil = () => {
                 <tr key={b.id}>
                   <td >{b.nom}</td>
                   <td>{b.commission_USDT} </td>
-                  <td>{b.benefice_FCFA} </td> 
+                  <td>{b.benefice_FCFA} </td>
                 </tr>
               ))}
             </tbody>
