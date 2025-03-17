@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 // Import des composants
 import Login from "./Login/Login.jsx";
@@ -12,25 +12,26 @@ import Historique from "./principale/pages/Historique/Historiques.jsx";
 import Calculs from "./principale/pages/Calculs/Calculs.jsx";
 import Parametre from "./principale/pages/Parametre/Parametre.jsx";
 
-function RedirectToLogin() {
-  const navigate = useNavigate();
-
+function App() {
+  // Détecter le rafraîchissement de la page et rediriger
   useEffect(() => {
-    navigate("/");
+    // Créer une fonction pour vérifier si c'est un rafraîchissement
+    const checkForRefresh = () => {
+      const navigationType = performance.getEntriesByType("navigation")[0].type;
+      if (navigationType === "reload") {
+        window.location.href = "/";
+      }
+    };
+
+    // Exécuter la vérification
+    checkForRefresh();
   }, []);
 
-  return null;
-}
-
-function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-
-        {/* Redirection vers le login si on actualise une autre page */}
-        <Route path="*" element={<RedirectToLogin />} />
-
+        
         <Route path="" element={<Principale />}>
           <Route path="accueil" element={<Accueil />} />
           <Route path="transactions" element={<Transactions />} />
@@ -40,6 +41,9 @@ function App() {
           <Route path="calculs" element={<Calculs />} />
           <Route path="profil" element={<Parametre />} />
         </Route>
+        
+        {/* Redirection par défaut */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

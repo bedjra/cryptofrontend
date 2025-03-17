@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Accueil.css";
 import { DollarSign, Creditcar, Truck, Users } from "lucide-react";
 import { FaExchangeAlt } from "react-icons/fa";
-import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"; // Importer le style
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 const apiUrl = "http://127.0.0.1:5000";
 
@@ -90,29 +88,29 @@ const Accueil = () => {
               <DollarSign className="icon" style={{ color: "white", fontSize: "100px" }} />
             </div>
             <div class="text-container">
+            <span class="stat-values">{totalBenefices.toLocaleString()}</span>
+
               <div class="stat-header">
                 <span class="stat-title">BÉNÉFICES</span>
               </div>
-              <span class="stat-values">{totalBenefices.toLocaleString()}</span>
             </div>
           </div>
           <div class="separator"></div>
           <div class="stat-subtitle">Total des bénéfices</div>
         </div>
-
+ 
         <div class="stat-card">
           <div class="card-content">
-            <div class="arr">
             <div class="icon-container green">
-              <FaExchangeAlt style={{ color: "white", fontSize: "30px" }} />
-            </div>
+              <FaExchangeAlt style={{ color: "white", fontSize: "25px" }} />
             </div>
            
             <div class="text-container">
+            <span class="stat-value">{totalTransactions}</span>
+
               <div class="stat-header">
                 <span class="stat-title">TRANSACTIONS</span>
               </div>
-              <span class="stat-value">{totalTransactions}</span>
 
             </div>
           </div>
@@ -126,11 +124,10 @@ const Accueil = () => {
               <Truck style={{ color: "white", fontSize: "30px" }} />
             </div>
             <div class="text-container">
+            <span class="stat-value">{fournisseursActifs}</span>
               <div class="stat-header">
-
                 <span class="stat-title">FOURNISSEURS</span>
               </div>
-              <span class="stat-value">{fournisseursActifs}</span>
             </div>
           </div>
           <div class="separator"></div>
@@ -140,19 +137,21 @@ const Accueil = () => {
         <div class="stat-card">
           <div class="card-content">
             <div class="icon-container blue">
-              <Users style={{ color: "black", fontSize: "30px" }} />
+              <Users style={{ color: "white", fontSize: "30px" }} />
 
             </div>
             <div class="text-container">
+            <span class="stat-value">{totalBeneficiaires}</span>
+
               <div class="stat-header">
                 <span class="stat-title">BÉNÉFICIAIRES</span>
               </div>
-              <span class="stat-value">{totalBeneficiaires}</span>
             </div>
           </div>
           <div class="separator"></div>
           <div class="stat-subtitle">Total des bénéficiaires</div>
         </div>
+
       </div>
 
 
@@ -184,7 +183,6 @@ const Accueil = () => {
           </table>
         </div>
 
-        {/* Section Droite */}
         <div className="right-section">
           <h4>Taux des Transactions </h4>
 
