@@ -222,7 +222,6 @@ const Accueil = () => {
             </tr>
           </thead>
 
-{/* 
           <tbody>
             {transactions.map((t, index) => (
               <tr key={index}>
@@ -237,7 +236,7 @@ const Accueil = () => {
               </tr>
             ))}
           </tbody>
-*/}
+
         </table>
       </div>
 
