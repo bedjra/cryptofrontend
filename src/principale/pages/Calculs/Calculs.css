@@ -7,7 +7,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
-  
+
+  .separat {
+    height: 1px;
+    background-color: #e5e7eb;
+    margin-top:5px;
+    margin-bottom: 10px;
+    margin-right: 100px;
+  }
+
   .carre {
     background: white;
     padding: 20px;
@@ -126,14 +134,7 @@
   background: #e74c3c;
 }
 
-.separator {
-  border: none;
-  height: 1px;
-  background-color: #ccc; 
-  margin-bottom: 20px;
-  margin-top: 3px;
-
-}
 .fcfa{
-  padding-bottom:20px
+  padding-bottom:10px
 }
+

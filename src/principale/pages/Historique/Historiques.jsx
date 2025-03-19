@@ -35,7 +35,7 @@ const Historique = () => {
 
     <div className="historique">
 
-      <h3>Historique des Transactions</h3>
+      <h2>Historique des Transactions</h2>
       <div className="label">
         <label htmlFor="periode">Filtrer par :</label>
         <select id="periode" value={periode} onChange={(e) => setPeriode(e.target.value)}>

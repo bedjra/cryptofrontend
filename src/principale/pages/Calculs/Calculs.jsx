@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Calculs.css";
 
+const apiUrl = "http://127.0.0.1:5000";
+
 const Calculs = () => {
   const [transactions, setTransactions] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -9,13 +11,13 @@ const Calculs = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch("http://localhost:5000/total/tr");
+        const response = await fetch(`${apiUrl}/total/tr`);
         const data = await response.json();
         const total = data.total;
 
         const transactionDetails = await Promise.all(
           Array.from({ length: total }, async (_, index) => {
-            const transResponse = await fetch(`http://localhost:5000/trans/${index + 1}`);
+            const transResponse = await fetch(`${apiUrl}/trans/${index + 1}`);
             return transResponse.json();
           })
         );
@@ -32,7 +34,7 @@ const Calculs = () => {
   const openPopup = async (transaction) => {
     setSelectedTransaction(transaction);
     try {
-      const response = await fetch(`http://localhost:5000/cal/${transaction.id}`);
+      const response = await fetch(`${apiUrl}/cal/${transaction.id}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -47,6 +49,7 @@ const Calculs = () => {
       setDetailsTransaction(null);
     }
   };
+
 
 
   const closePopup = () => {
@@ -70,19 +73,20 @@ const Calculs = () => {
       {selectedTransaction && detailsTransaction && (
         <div className="moda">
           <div className="moda-content">
-            <p>CALCUL DE LA TRANSACTION {selectedTransaction.id}</p>
-            <hr className="separator" />
+            
+            <h4>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h4>
+            <hr className="separat" />
             <p className="last">Transaction</p>
             <p>Id: {selectedTransaction.id}</p>
-             <p >Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
-             <p > Taux : {selectedTransaction.tauxConv.toLocaleString()} </p>
+            <p >Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
+            <p > Taux : {selectedTransaction.tauxConv.toLocaleString()} </p>
             <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()} </p>
-           
+
             <p className="last">Benefice Fournisseur</p>
             <ul className="list">
               {detailsTransaction.benefices_fournisseurs.map((benef, index) => (
                 <li key={index} className="list-item">
-                  <strong className="">{benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA</strong>
+                  {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
                 </li>
               ))}
             </ul>
@@ -104,7 +108,8 @@ const Calculs = () => {
         </div>
       )}
 
-    </main>
+      
+    </main >
   );
 };
 

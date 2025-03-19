@@ -16,6 +16,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   position: relative;
+  
 }
 
 .card-content {
@@ -84,7 +85,10 @@
   height: 1px;
   background-color: #e5e7eb;
   margin: 0 16px;
+  margin-bottom: 10px;
 }
+
+
 .stat-subtitle{
   display: none;
 }
@@ -310,14 +314,12 @@
   padding: 10px;
   color: black;
   border-radius: 10px;
-
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 
 .right-section {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
   flex: 4;
   background-color: #f3f4f6;
   margin-right: -60px;

@@ -1,242 +1,111 @@
-.dash {
-  padding: 10px;
-}
-
-.summar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.carre {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.carre:hover {
-  transform: scale(1.05);
-}
-
-.carre p {
-  padding-top: 10px;
-}
-
-
-/* Pour les écrans moyens (tablettes) */
-@media screen and (max-width: 1024px) {
-.summar {
-  grid-template-columns: repeat(2, 1fr);
-}
-}
-
-/* Pour les petits écrans (mobiles) */
-@media screen and (max-width: 768px) {
-.summar {
-  grid-template-columns: repeat(2, 1fr);
-}
-.carre {
-  background: white;
-  width: 165px;
-  padding: 20px;
-  margin-left: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.carre p {
-  padding-top: 10px;
-}
+import React, { useEffect, useState } from "react";
+import "./Calculs.css";
+
+const Calculs = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [detailsTransaction, setDetailsTransaction] = useState(null);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/total/tr");
+        const data = await response.json();
+        const total = data.total;
+
+        const transactionDetails = await Promise.all(
+          Array.from({ length: total }, async (_, index) => {
+            const transResponse = await fetch(`http://localhost:5000/trans/${index + 1}`);
+            return transResponse.json();
+          })
+        );
+
+        setTransactions(transactionDetails);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des transactions:", error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  const openPopup = async (transaction) => {
+    setSelectedTransaction(transaction);
+    try {
+      const response = await fetch(`http://localhost:5000/cal/${transaction.id}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Une erreur est survenue");
+      }
+
+      console.log("Détails calculs reçus:", data);
+      setDetailsTransaction(data.calculs_en_temps_reel);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des calculs:", error);
+      alert(error.message || "Aucun fournisseur trouvé pour cette transaction");
+      setDetailsTransaction(null);
+    }
+  };
+
+
+  const closePopup = () => {
+    setSelectedTransaction(null);
+    setDetailsTransaction(null);
+  };
+
+  return (
+    <main className="dash">
+      <section className="summar grid grid-cols-3 gap-4">
+        {transactions.map((transaction) => (
+          <div key={transaction.id} className="carre" onClick={() => openPopup(transaction)}>
+            <h4>Transaction {transaction.id}</h4>
+            <p>Montant : {transaction.montantFCFA} FCFA</p>
+            <p>Taux : {transaction.tauxConv} </p>
+
+          </div>
+        ))}
+      </section>
+
+      {selectedTransaction && detailsTransaction && (
+        <div className="moda">
+          <div className="moda-content">
+            <p>CALCUL DE LA TRANSACTION {selectedTransaction.id}</p>
+            <hr className="separator" />
+            <p className="last">Transaction</p>
+            <p>Id: {selectedTransaction.id}</p>
+             <p >Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
+             <p > Taux : {selectedTransaction.tauxConv.toLocaleString()} </p>
+            <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()} </p>
+           
+            <p className="last">Benefice Fournisseur</p>
+            <ul className="list">
+              {detailsTransaction.benefices_fournisseurs.map((benef, index) => (
+                <li key={index} className="list-item">
+                  <strong className="">{benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA</strong>
+                </li>
+              ))}
+            </ul>
+            <p className="last" >REPARTITION DES BENEFICIAIRES</p>
+
+            <ul className="list">
+              {detailsTransaction.repartition_beneficiaires.map((benef, index) => (
+                <li key={index} className="list-item">
+                  {benef.beneficiaire} : {benef.benefice_FCFA.toLocaleString()} FCFA
+                </li>
+              ))}
+            </ul>
+
+            <p className="last">RESUME GLOBAL</p>
+            <p>Total Fournisseurs : {detailsTransaction.resume_global.benefice_total_fournisseurs.toLocaleString()} FCFA</p>
+
+            <button className="close-btn" onClick={closePopup}>Fermer</button>
+          </div>
+        </div>
+      )}
 
+    </main>
+  );
+};
 
-}
-
-/* Styles du popup */
-.moda {
-display: flex;
-justify-content: center;
-align-items: center;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.5);
-}
-.last{
-font-weight: bold;
-
-}
-.moda-content {
-background: white;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-width: 90%;
-max-width: 500px;
-text-align: left;
-font-weight: 100;
-
-}
-
-.carre h3  {
-text-align: center;
-margin-bottom: 10px;
-}
-
-.list {
-list-style: none;
-padding: 0;
-}
-
-.list-item {
-padding: 5px 0;
-padding-bottom: 15px;
-}
-
-.close-btn {
-display: block;
-width: 100%;
-padding: 5px;
-margin-top: 50px;
-background: #e74c3c;;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-}
-
-.close-btn:hover {
-background: #e74c3c;
-}
-
-.separator {
-border: none;
-height: 1px;
-background-color: #ccc; 
-margin-bottom: 20px;
-margin-top: 3px;
-
-}
-.fcfa{
-padding-bottom:20px
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.carre h3  {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-}
-
-.list-item {
-  padding: 5px 0;
-  padding-bottom: 15px;
-}
-
-.close-btn {
-  display: block;
-  width: 100%;
-  padding: 5px;
-  margin-top: 50px;
-  background: #e74c3c;;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  background: #e74c3c;
-}
-
-.separator {
-  border: none;
-  height: 1px;
-  background-color: #ccc; 
-  margin-bottom: 20px;
-  margin-top: 3px;
-
-}
-.fcfa{
-  padding-bottom:20px
-}
+export default Calculs;

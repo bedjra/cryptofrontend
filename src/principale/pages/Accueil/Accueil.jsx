@@ -81,6 +81,8 @@ const Accueil = () => {
 
   return (
     <main className="dash">
+
+
       <div class="dashboard-container">
         <div class="stat-card">
           <div class="card-content">
@@ -156,7 +158,7 @@ const Accueil = () => {
 
 
      
-
+     
 
       <div className="container">
         <div className="left-section">
@@ -208,7 +210,6 @@ const Accueil = () => {
       </div>
 
 
-
       <div className="historique" >
         <h3 >Historique </h3>
         <table >
@@ -220,6 +221,8 @@ const Accueil = () => {
               <th>Bénéfice (FCFA)</th>
             </tr>
           </thead>
+
+{/* 
           <tbody>
             {transactions.map((t, index) => (
               <tr key={index}>
@@ -234,10 +237,9 @@ const Accueil = () => {
               </tr>
             ))}
           </tbody>
+*/}
         </table>
       </div>
-
-
 
 
     </main>
