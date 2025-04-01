@@ -95,12 +95,12 @@ const Parametre = () => {
             <br />
             <div className="profile-header">
                 <img src="/profil.png" alt="Avatar" className="avatar" />
-                <h3 className="user-name">{user ? user.Nom : "Utilisateur inconnu"}</h3>
+ <br />
             </div>
             <div className="contact-info">
                 <p><strong>Email :</strong> {user ? user.Email : "Non disponible"}</p>
                 <br />
-                <p><strong>Rôle :</strong> {user ? user.Rôle : "Non disponible"}</p>
+                <p><strong>Rôle :</strong> {user ? user.Rôle : "Admin"}</p>
             </div>
             <div className="settings-actions">
                 <button className="change-password" onClick={() => setShowModal(true)}>

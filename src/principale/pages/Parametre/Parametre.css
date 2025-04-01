@@ -179,9 +179,13 @@
   
   /* Bouton Valider */
   .modal-buttons button:first-child {
-    color: #f50707c2;
+    color: #f8f7f7;
   }
-  
+  .modal-buttons .val{
+    background-color: #007bff;
+
+
+  }
 
   
   /* Bouton Annuler */
@@ -189,9 +193,7 @@
     color: #f8f7f7;
   }
   
-  .modal-buttons button:last-child:hover {
-    background-color: #e01616;
-  }
+
   .modal-buttons .ann{
     background-color: #e01616;
 
