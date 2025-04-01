@@ -263,13 +263,12 @@ const Transactions = () => {
 
         {/* Affichage de la modale */}
         {showModal && selectedFournisseurDetails && (
-          <div className="overlay" onClick={() => setShowModal(false)}>
-            <div className="content" onClick={(e) => e.stopPropagation()}>
-              <div className="popup-content-header">
-                <h4>Détails de la Transaction</h4>
+          <div className="overl" onClick={() => setShowModal(false)}>
+            <div className="cont" onClick={(e) => e.stopPropagation()}>
+              <div className="popup-header">
               </div>
 
-              <div className="popup-body">
+              <div className="popup-bod">
                         {/* 
 
                 <div className="details-container">
@@ -288,14 +287,17 @@ const Transactions = () => {
                   <div className="fournisseurs">
                     <h5>Fournisseurs & Bénéficiaires </h5>
                     {selectedFournisseurDetails.fournisseurs.map((fournisseur, index) => (
-                      <div key={index} className="fournisseur">
+                      <div key={index} className="fournisseurs">
                         <p><strong>{index + 1} - Nom :</strong> {fournisseur.nom}</p>
                         <p><strong>Taux :</strong> {fournisseur.tauxJour}</p>
                         <p><strong>Quantité USDT :</strong> {fournisseur.quantiteUSDT}</p>
 
                         {fournisseur.beneficiaires && fournisseur.beneficiaires.length > 0 && (
-                          <div className="beneficiaires">
-                            <h5>Bénéficiaires</h5>
+                         
+
+              
+                         <div className="beneficiaires">
+                            <br />
                             {fournisseur.beneficiaires.map((b, idx) => (
                               <div key={idx} className="beneficiaire">
                                 <p><strong>Nom :</strong> {b.nom}</p>

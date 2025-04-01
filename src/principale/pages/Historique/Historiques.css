@@ -49,16 +49,6 @@ th, td {
   padding: 10px;
 }
 
-/* Fournisseurs */
-.fournisseur {
-  flex: 1;
-  min-width: 200px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background: #fafafa;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
 
 /* Titre des fournisseurs */
 .fournisseur h4 {
