@@ -1,0 +1,164 @@
+.histo {
+   
+    margin: 10px;
+    padding-bottom: 10px;
+}
+
+.rightbox{
+    margin-left: 20px;
+}
+
+
+
+
+/* Overlay (fond sombre) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fond sombre avec transparence */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Contenu de la popup */
+.content {
+    background: #fff;
+    padding: 10px;
+    margin-top: 50px;
+    border-radius: 12px;
+    width: 120vw;
+    max-width: 600px;
+    max-height: 95vh;
+    text-align: left;
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: scaleUp 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 15px;
+
+}
+
+/* Header de la popup */
+.popup-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.popup-content-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+
+}
+
+/* Bouton de fermeture */
+.popup-content button.close-btn {
+    padding: 5px;
+    background: transparent;
+    color: #100f0e;
+    background-color: #e74c3c;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    outline: none;
+}
+
+
+/* Corps de la popup */
+.popup-body {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1;
+    padding-top: 10px;
+
+}
+
+
+
+.popup-body p {
+    margin: 10px 0;
+    height: 20px;
+
+}
+
+
+.beneficiaire p {
+    margin: 10px 0;
+}
+
+.details-container {
+    display: flex;
+    justify-content: space-between; /* Sépare les colonnes avec un espace entre elles */
+    gap: 20px; /* Ajoute un espacement entre les colonnes */
+  }
+  
+  .column {
+    width: 48%; /* Chaque colonne prend 48% de la largeur */
+  }
+  
+  .popup-body {
+    padding: 20px;
+  }
+  
+  .beneficiaires {
+    margin-top: 20px;
+  }
+  
+  .beneficiaire {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+
+/* Animation d'ouverture (transparence et échelle) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.beneficiaires {
+    display: flex;
+    flex-wrap: wrap; /* Permet de revenir à la ligne si nécessaire */
+    gap: 10px; /* Espace entre les bénéficiaires */
+}
+
+.beneficiaire {
+    flex: 1 1 calc(50% - 20px); /* Sur petits écrans, chaque bénéficiaire prend 50% de la largeur */
+}
+
+@media (max-width: 768px) {
+    .beneficiaire {
+        flex: 1 1 calc(50% - 20px); /* Sur petits écrans, chaque bénéficiaire prend 50% de la largeur */
+    }
+}
+

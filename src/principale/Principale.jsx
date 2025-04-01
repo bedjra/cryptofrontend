@@ -70,10 +70,11 @@ const Principale = () => {
                 <span className="links_name">Accueil</span>
               </NavLink>
             </li>
+           
             <li>
               <NavLink to="transactions" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaExchangeAlt className="icon" />
-                <span className="links_name">Transactions</span>
+                <span className="links_name">Transctions</span>
               </NavLink>
             </li>
             <li>

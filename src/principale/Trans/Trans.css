@@ -1,0 +1,348 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mont {
+    font-size: 20px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    color: #121213; /* Bleu (couleur Bootstrap primaire) */
+    padding-top: 7px ; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    display: inline-block; /* Ajustement à la taille du texte */
+  }
+  
+  .icon-dollar {
+    margin-bottom: 5px;
+    font-size: 1.5rem; /* Augmenter la taille */
+    margin-left: 5px; /* Ajouter un petit espace à gauche */
+    vertical-align: middle; /* Aligner verticalement */
+  }
+  
+  .rien{
+    padding-bottom:50px ;
+    padding-bottom: 500px
+  }
+  .affichage{
+    margin-top: 7px ; 
+    color: #222222;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 30px;
+  
+  }
+  
+  .container h4 {
+    font-size: 1.2rem;
+    color: rgb(71, 71, 73);
+    font-weight: bold;
+  
+  }
+  
+  .left-box {
+    width: 30%;
+    background-color: #f3f4f6;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    margin-left: 10px;
+    min-width: 370px;
+    height: auto;
+  }
+  
+  
+  
+  .right-box {
+    min-width: 390px;
+    width: 70%;
+    background-color: #f3f4f6;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    margin-right: -70px;
+  }
+  
+  .menuLeft,
+  .menuRight {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  
+  
+  .input-group {
+    margin-top: 20px;
+  }
+  
+  .input-group span {
+    display: block;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .save {
+    background: linear-gradient(#23a2f6, #23a2f6);
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(17, 17, 17);
+    font-weight: inherit;
+  
+  
+  }
+  .but{
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+  
+  .button-group {
+    text-align: center;
+  }
+  
+  .btn {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  
+  
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-top: 2px solid #ddd;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    
+  }
+  
+  th{
+    font-size: 1rem;
+    color: rgb(71, 71, 73);
+    font-weight: bold;
+  }
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  
+  
+  .action-btn:hover svg {
+    opacity: 0.7;
+  }
+  
+  td {
+    white-space: nowrap;
+  }
+  
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  td:last-child {
+    display: flex;
+    gap: 1px;
+    /* Espacement entre les boutons */
+  }
+  
+  
+  
+  @media only screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      /* Affichage en colonne */
+      align-items: stretch;
+      /* Étire les éléments pour occuper toute la largeur */
+      width: 100vw;
+      /* Pleine largeur */
+      max-width: 100vw;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .left-box {
+      background-color: #f3f4f6;
+      color: black;
+      border-radius: 10px;
+      padding: 20px;
+      width: 95vw;
+      /* Pleine largeur */
+      margin-left: 5px;
+    }
+  
+  
+  
+  
+    .input-group {
+      margin-bottom: -10px;
+    }
+  
+    .input-group label {
+      display: block;
+      font-weight: bold;
+    }
+  
+    .input-group input {
+      width: 100%;
+      padding: 8px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    .button-group {
+      text-align: center;
+    }
+  
+    .btn {
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+    }
+  
+  
+    .right-box {
+      background-color: #f3f4f6;
+      color: black;
+      border-radius: 0;
+      padding: 20px;
+      width: 99vw;
+      max-width: 99vw;
+      margin: 0;
+      /* Pas de marge pour la boîte de droite */
+    }
+  
+    .right-box h2 {
+      font-size: 18px;
+    }
+  
+    h1 {
+      font-size: 8px;
+      text-align: center;
+    }
+  
+    /* Ajustement du tableau */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow-x: auto;
+      display: block;
+    }
+  
+    th,
+    td {
+      padding: 8px;
+      text-align: center;
+    }
+  
+    /* Cache la colonne Date sur petits écrans */
+    th:nth-child(4),
+    td:nth-child(4) {
+      display: none;
+    }
+  
+    /* Ajustement des boutons */
+    .action-btn {
+      margin: 2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      border: none;
+      background-color: transparent;
+    }
+  
+    .action-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  
+  .input-group {
+    display: flex;
+    flex-direction: column; /* Organise chaque groupe en colonne */
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .input-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .input-header span {
+    font-weight: bold;
+    white-space: nowrap; /* Évite le saut de ligne */
+  }
+  
+  .input-header .add-icon {
+    color: green;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: -10px;
+  }
+  
+  .input-header .delete-icon {
+    color: red;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .input-group select {
+    width: 100%;
+    padding: 5px;
+    min-width: 200px;
+  }
+  

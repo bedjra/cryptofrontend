@@ -53,13 +53,13 @@
 
     .right-box {
         background-color: #f3f4f6;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         color: black;
         border-radius: 0;
         padding: 20px;
         width: 99vw;
         max-width: 99vw;
         margin-left: 5px; /* Pas de marge pour la boîte de droite */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .right-box h2 {

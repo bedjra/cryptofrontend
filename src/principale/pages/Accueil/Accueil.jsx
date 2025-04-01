@@ -19,10 +19,23 @@ const Accueil = () => {
 
 
   useEffect(() => {
-    fetch(`${apiUrl}/total/been`)
+    // Récupérer les bénéficiaires depuis l'API
+    fetch(`${apiUrl}/alll/ben`)
       .then((res) => res.json())
-      .then((data) => setTotalBenefices(data.benefice_global_total || 0)) // Correction ici
-      .catch((err) => console.error("Erreur récupération bénéfices :", err));
+      .then((data) => {
+        // Assure-toi que la réponse contient les bénéficiaires
+        if (data && Array.isArray(data.beneficiaires)) {
+          setBeneficiaires(data.beneficiaires);
+        } else {
+          setBeneficiaires([]);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Erreur récupération bénéficiaires :", err);
+        setBeneficiaires([]);
+        setLoading(false);
+      });
 
     fetch(`${apiUrl}/total/tr`)
       .then((res) => res.json())
@@ -71,10 +84,14 @@ const Accueil = () => {
         setLoading(false);
       });
 
-    fetch(`${apiUrl}/acc/last`)
+
+    fetch(`${apiUrl}/accc/last`)
       .then((res) => res.json())
-      .then((data) => setTransactions(data.transactions))
-      .catch((err) => console.error("Erreur lors de la récupération :", err));
+      .then((data) => setTransactions(Array.isArray(data.transactions) ? data.transactions : []))
+      .catch((err) => {
+        console.error("Erreur lors de la récupération :", err);
+        setTransactions([]); // ✅ On met une liste vide si erreur
+      });
 
 
   }, []);
@@ -90,7 +107,7 @@ const Accueil = () => {
               <DollarSign className="icon" style={{ color: "white", fontSize: "100px" }} />
             </div>
             <div class="text-container">
-            <span class="stat-values">{totalBenefices.toLocaleString()}</span>
+              <span class="stat-values">{totalBenefices.toLocaleString()}</span>
 
               <div class="stat-header">
                 <span class="stat-title">BÉNÉFICES</span>
@@ -100,15 +117,15 @@ const Accueil = () => {
           <div class="separator"></div>
           <div class="stat-subtitle">Total des bénéfices</div>
         </div>
- 
+
         <div class="stat-card">
           <div class="card-content">
             <div class="icon-container green">
               <FaExchangeAlt style={{ color: "white", fontSize: "25px" }} />
             </div>
-           
+
             <div class="text-container">
-            <span class="stat-value">{totalTransactions}</span>
+              <span class="stat-value">{totalTransactions}</span>
 
               <div class="stat-header">
                 <span class="stat-title">TRANSACTIONS</span>
@@ -126,7 +143,7 @@ const Accueil = () => {
               <Truck style={{ color: "white", fontSize: "30px" }} />
             </div>
             <div class="text-container">
-            <span class="stat-value">{fournisseursActifs}</span>
+              <span class="stat-value">{fournisseursActifs}</span>
               <div class="stat-header">
                 <span class="stat-title">FOURNISSEURS</span>
               </div>
@@ -143,7 +160,7 @@ const Accueil = () => {
 
             </div>
             <div class="text-container">
-            <span class="stat-value">{totalBeneficiaires}</span>
+              <span class="stat-value">{totalBeneficiaires}</span>
 
               <div class="stat-header">
                 <span class="stat-title">BÉNÉFICIAIRES</span>
@@ -157,31 +174,37 @@ const Accueil = () => {
       </div>
 
 
-     
-     
+
+
 
       <div className="container">
         <div className="left-section">
           <h4>Répartition du Budget</h4>
-
           <table>
             <thead>
               <tr>
-                <th >Bénéficiaire</th>
-                <th >Commission</th>
-                <th > Bénéfice (FCFA)</th>
+                <th>Id</th>
+                <th>Bénéficiaire</th>
+                <th>Comm</th>
               </tr>
             </thead>
             <tbody>
-              {beneficiaires.map((b) => (
-                <tr key={b.id}>
-                  <td >{b.nom}</td>
-                  <td>{b.commission_USDT} </td>
-                  <td>{b.benefice_FCFA} </td>
+              {beneficiaires.length > 0 ? (
+                beneficiaires.map((b) => (
+                  <tr key={b.id}>
+                    <td>{b.id}</td>
+                    <td>{b.nom}</td>
+                    <td>{b.commission_USDT}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" style={{ textAlign: "center" }}>
+                    Aucun bénéficiaire trouvé
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
-
           </table>
         </div>
 
@@ -210,35 +233,36 @@ const Accueil = () => {
       </div>
 
 
-      <div className="historique" >
-        <h3 >Historique </h3>
-        <table >
-          <thead >
+      <div className="historique">
+        <h3>Historique</h3>
+        <table>
+          <thead>
             <tr>
-              <th >Date & Heure</th>
+              <th>Date</th>
               <th>Montant</th>
               <th>Fournisseur</th>
               <th>Bénéfice (FCFA)</th>
             </tr>
           </thead>
-
           <tbody>
-            {transactions.map((t, index) => (
-              <tr key={index}>
-                <td>{t.date}</td>
-                <td>{t.montant_FCFA}</td>
-                <td>
-                  {t.fournisseurs.length > 0
-                    ? t.fournisseurs.map((f) => f.nom).join(", ")
-                    : "Aucun"}
-                </td>
-                <td>{t.benefice_total} </td>
+            {Array.isArray(transactions) && transactions.length > 0 ? (
+              transactions.map((t, index) => (
+                <tr key={index}>
+                  <td>{t.date_transaction ? t.date_transaction.split(" ")[0] : "N/A"}</td>
+                  <td>{t.montant_FCFA || 0}</td>
+                  <td>{t.fournisseur || "Aucun"}</td>
+                  <td>{t.benefice_total_FCFA || 0}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center" }}>Aucune transaction trouvée</td>
               </tr>
-            ))}
+            )}
           </tbody>
-
         </table>
       </div>
+
 
 
     </main>

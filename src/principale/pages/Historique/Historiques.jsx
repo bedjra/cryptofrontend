@@ -14,7 +14,7 @@ const Historique = () => {
 
   const fetchTransactions = () => {
     setLoading(true);
-    let url = `${apiUrl}/cal/peri`;
+    let url = `${apiUrl}/cal/perid`;  // Correction de l'URL
     if (periode) {
       url += `?periode=${periode}`;
     }
@@ -22,19 +22,22 @@ const Historique = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setTransactions(data.transactions || []);
+        if (data && Array.isArray(data.transactions)) {
+          setTransactions(data.transactions);
+        } else {
+          setTransactions([]);
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des transactions:", error);
+        setTransactions([]);  // Sécuriser en cas d'erreur
         setLoading(false);
       });
   };
 
   return (
-
     <div className="historique">
-
       <h2>Historique des Transactions</h2>
       <div className="label">
         <label htmlFor="periode">Filtrer par :</label>
@@ -42,64 +45,72 @@ const Historique = () => {
           <option value="">Toutes</option>
           <option value="jour">Journalier</option>
           <option value="mois">Mensuel</option>
-          <option value="annee">Annuel</option>
         </select>
-
       </div>
 
       {loading ? (
         <p>Chargement des transactions...</p>
       ) : (
         <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Date</th>
-              <th>FCFA</th>
-              <th>Taux</th>
-              <th>UDST </th>
-              <th>Fournisseur</th>
-              <th>Bénéficiaire</th>
-              <th>Bénéfice </th>
-              <th>B. total </th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.length > 0 ? (
-              transactions.map((t, index) => (
-                <tr key={index}>
-                  <td>{t.transaction_id}</td>
-                  <td>{new Date(t.date_transaction).toLocaleDateString()}</td>
-                  <td>{t.montant_FCFA} </td>
-                  <td>{t.taux_convenu}</td>
-                  <td>{t.montant_USDT}</td>
-                  <td>
-                    {t.benefices_fournisseurs.length > 0
-                      ? t.benefices_fournisseurs.map((f) => f.fournisseur).join(", ")
-                      : "Aucun"}
-                  </td>
-                  <td>
-                    {t.repartition_beneficiaires.length > 0
-                      ? t.repartition_beneficiaires.map((b) => b.beneficiaire).join(", ")
-                      : "Aucun"}
-                  </td>
-                  <td>
-                    {t.repartition_beneficiaires.length > 0
-                      ? t.repartition_beneficiaires.map((b) => b.benefice_FCFA).join(", ")
-                      : "0"} 
-                  </td>
-                  <td>{t.resume_global.benefice_total_fournisseurs} </td>
-                </tr>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>FCFA</th>
+            <th>Fournisseur</th>
+            <th>Bénéficiaire</th>
+            <th>Bénéfice</th>
+            <th>B. total</th>
+          </tr>
+        </thead>
+      <tbody>
+  {Array.isArray(transactions) && transactions.length > 0 ? (
+    transactions.map((t, index) => (
+      <tr key={index}>
+        <td>{t.transaction_id}</td>
+        <td>{new Date(t.date_transaction).toLocaleDateString()}</td>
+        <td>{t.montant_FCFA} </td>
+
+        <td>
+          {Array.isArray(t.benefices_fournisseurs) && t.benefices_fournisseurs.length > 0
+            ? t.benefices_fournisseurs.map((f) => (
+                <div className="fournisseur-nom" key={f.fournisseur}>{f.fournisseur}</div>
               ))
-            ) : (
-              <tr>
-                <td colSpan="8" style={{ textAlign: "center" }}>
-                  Aucune transaction trouvée
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            : "Aucun"}
+        </td>
+        <td>
+          {t.details_par_fournisseur
+            ? Object.values(t.details_par_fournisseur)
+                .flatMap((f) => Object.keys(f.benefices_par_beneficiaire))
+                .map((beneficiaire, i) => (
+                  <div className="beneficiaire-nom" key={i}>{beneficiaire}</div>
+                ))
+            : "Aucun"}
+        </td>
+        <td>
+          {t.details_par_fournisseur
+            ? Object.values(t.details_par_fournisseur)
+                .flatMap((f) => Object.values(f.benefices_par_beneficiaire).map(b => (
+                  <div className="benefice-valeur" key={b.benefice_FCFA}>{b.benefice_FCFA}</div>
+                )))
+            : "0"} 
+        </td>
+        <td>{t.resume_global?.benefice_total_fournisseurs || 0} </td>
+        <td></td>
+
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="9" style={{ textAlign: "center" }}>
+        Aucune transaction trouvée
+      </td>
+    </tr>
+  )}
+</tbody>
+
+      </table>
+      
       )}
     </div>
   );

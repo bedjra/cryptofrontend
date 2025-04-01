@@ -184,7 +184,7 @@ const Fournisseurs = () => {
   return (
     <div className="container">
 
-
+ 
       <div className="left-box">
         <h4>{editingFournisseurId ? "Modifier" : "Ajouter"} un Fournisseur</h4>
         <div className="input-group">
@@ -221,6 +221,8 @@ const Fournisseurs = () => {
             onChange={(e) => setTransactionId(e.target.value)}
             required
           >
+
+            
             <option value="">Sélectionner une transaction</option>
             {transactions.map((transaction) => (
               <option key={transaction.id} value={transaction.id}>
@@ -274,18 +276,24 @@ const Fournisseurs = () => {
         </div>
       
       </div>
-      <div className="right-box">
-        <h4 style={{ marginBottom: 25 }}>Gestion des Fournisseurs </h4>
+
+
+      
+      <div className="rightbox">
+        <h2 style={{ marginBottom: 25 }}>Liste des Fournisseurs</h2>
         <table>
           <thead>
             <tr>
               <th>Id</th>
-              <th>Nom </th>
-              <th>Taux </th>
-              <th>Qtté</th>
-              <th>Actions</th>
+              <th>Nom</th>
+              <th>Taux</th>
+              <th>Quantité</th>
+              <th>Bénéficiaires</th>
+              <th>Com_USDT</th>
+
             </tr>
           </thead>
+
           <tbody>
             {fournisseurs.map((fournisseur) => (
               <tr key={fournisseur.id}>
@@ -293,82 +301,39 @@ const Fournisseurs = () => {
                 <td>{fournisseur.nom}</td>
                 <td>{fournisseur.taux_jour}</td>
                 <td>{fournisseur.quantite_USDT}</td>
+
+                {/* Affichage des bénéficiaires sur une ligne séparée */}
                 <td>
-                  <button
-                    onClick={() => handleEdit(fournisseur)}
-                    className="action-btn"
-                  >
-                    <Edit size={20} color="blue" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(fournisseur.id)}
-                    className="action-btn"
-                  >
-                    <Trash2 size={20} color="red" />
-                  </button>
-                  <button
-                    onClick={() => handleShowDetails(fournisseur.id)}
-                    className="action-btn"
-                  >
-                    <Eye size={20} color="green" />
-                  </button>
+                  {fournisseur.beneficiaires && fournisseur.beneficiaires.length > 0 ? (
+                    fournisseur.beneficiaires.map((beneficiaire) => (
+                      <div key={beneficiaire.id}>
+                        {beneficiaire.nom}
+                      </div>
+                    ))
+                  ) : (
+                    "Aucun bénéficiaire"
+                  )}
+                </td>
+
+                {/* Affichage des commissions des bénéficiaires */}
+                <td>
+                  {fournisseur.beneficiaires && fournisseur.beneficiaires.length > 0 ? (
+                    fournisseur.beneficiaires.map((beneficiaire) => (
+                      <div key={beneficiaire.id}>
+                        {beneficiaire.commission_USDT}
+                      </div>
+                    ))
+                  ) : (
+                    "Aucun bénéficiaire"
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
+
+
+
         </table>
-
-        {selectedFournisseur && (
-          <div className="overlay" onClick={handleClosePopup}>
-            <div className="content" onClick={(e) => e.stopPropagation()}>
-              <div className="popup-content-header">
-                <h4>Détails du fournisseur</h4>
-              </div>
-
-              <div className="popup-body">
-                <div className="details-container">
-
-                  <div className="column">
-                    <h5 >Fournisseur</h5>
-                    <p>Id: {selectedFournisseur.id}</p>
-                    <p>Nom: {selectedFournisseur.nom}</p>
-                    <p>Taux du Jour: {selectedFournisseur.taux_jour}</p>
-                    <p>Quantité Disponible: {selectedFournisseur.quantite_USDT}</p>
-                  </div>
-
-                  {selectedFournisseur.transaction && (
-
-                    <div className="column">
-                      <h5>Transaction</h5>
-                      <p>ID Transaction: {selectedFournisseur.transaction.id}</p>
-                      <p>Montant (FCFA): {selectedFournisseur.transaction.montant_FCFA}</p>
-                      <p>Taux Convenu: {selectedFournisseur.transaction.taux_convenu}</p>
-                      <p>Montant (USDT): {selectedFournisseur.transaction.montant_USDT}</p>
-                    </div>
-                  )}
-                </div>
-
-
-                <div className="beneficiaires">
-                  {selectedFournisseur.beneficiaires.map((beneficiaire) => (
-                    <div key={beneficiaire.id} className="beneficiaire">
-                      <h5>Bénéficiaire</h5>
-                      <p>ID: {beneficiaire.id}</p>
-                      <p>Nom: {beneficiaire.nom}</p>
-                      <p>Commission (USDT): {beneficiaire.commission_USDT}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <button className="close-btn" onClick={handleClosePopup}>
-                  Fermer
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-
       </div>
     
     </div>

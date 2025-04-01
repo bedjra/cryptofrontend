@@ -8,21 +8,40 @@ const Calculs = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [detailsTransaction, setDetailsTransaction] = useState(null);
 
+
+
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch(`${apiUrl}/total/tr`);
+        // Étape 1 : Récupérer la liste des transactions
+        const response = await fetch(`${apiUrl}/total/trs`);
         const data = await response.json();
-        const total = data.total;
 
+        if (!Array.isArray(data.transactions)) {
+          throw new Error("Format invalide : 'transactions' doit être une liste");
+        }
+
+        console.log("Liste des transactions récupérées:", data.transactions);
+
+        // Étape 2 : Récupérer chaque transaction par ID
         const transactionDetails = await Promise.all(
-          Array.from({ length: total }, async (_, index) => {
-            const transResponse = await fetch(`${apiUrl}/trans/${index + 1}`);
-            return transResponse.json();
+          data.transactions.map(async (id) => {
+            try {
+              const transResponse = await fetch(`${apiUrl}/tran/${id}`);
+              if (!transResponse.ok) {
+                throw new Error(`Erreur HTTP ${transResponse.status}`);
+              }
+              return await transResponse.json();
+            } catch (error) {
+              console.error(`Erreur pour la transaction ${id}:`, error);
+              return null; // Ignore l'erreur
+            }
           })
         );
 
-        setTransactions(transactionDetails);
+        // Étape 3 : Filtrer les erreurs
+        setTransactions(transactionDetails.filter(tr => tr !== null));
       } catch (error) {
         console.error("Erreur lors de la récupération des transactions:", error);
       }
@@ -31,10 +50,13 @@ const Calculs = () => {
     fetchTransactions();
   }, []);
 
+
+
+  // Fonction pour ouvrir le popup et récupérer les calculs
   const openPopup = async (transaction) => {
     setSelectedTransaction(transaction);
     try {
-      const response = await fetch(`${apiUrl}/cal/${transaction.id}`);
+      const response = await fetch(`${apiUrl}/call/${transaction.id}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -51,7 +73,6 @@ const Calculs = () => {
   };
 
 
-
   const closePopup = () => {
     setSelectedTransaction(null);
     setDetailsTransaction(null);
@@ -64,8 +85,7 @@ const Calculs = () => {
           <div key={transaction.id} className="carre" onClick={() => openPopup(transaction)}>
             <h4>Transaction {transaction.id}</h4>
             <p>Montant : {transaction.montantFCFA} FCFA</p>
-            <p>Taux : {transaction.tauxConv} </p>
-
+            <p>Taux : {transaction.tauxConv}</p>
           </div>
         ))}
       </section>
@@ -73,43 +93,68 @@ const Calculs = () => {
       {selectedTransaction && detailsTransaction && (
         <div className="moda">
           <div className="moda-content">
-            
             <h4>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h4>
             <hr className="separat" />
+
             <p className="last">Transaction</p>
             <p>Id: {selectedTransaction.id}</p>
-            <p >Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
-            <p > Taux : {selectedTransaction.tauxConv.toLocaleString()} </p>
-            <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()} </p>
+            <p>Montant : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
+            <p>Taux : {selectedTransaction.tauxConv.toLocaleString()}</p>
+            <p className="fcfa">UDST : {selectedTransaction.montantUSDT.toLocaleString()}</p>
 
-            <p className="last">Benefice Fournisseur</p>
-            <ul className="list">
-              {detailsTransaction.benefices_fournisseurs.map((benef, index) => (
-                <li key={index} className="list-item">
-                  {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
-                </li>
-              ))}
-            </ul>
-            <p className="last" >REPARTITION DES BENEFICIAIRES</p>
+            {/* Affichage des fournisseurs et de leurs bénéficiaires */}
+            {selectedTransaction && detailsTransaction && (
+              <div className="moda">
+                <div className="moda-content">
+                  <h4>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h4>
+                  <hr className="separat" />
+                  <p className="last">Transaction</p>
+                  <p>Id: {selectedTransaction.id}</p>
+                  <p>Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
+                  <p>Taux : {selectedTransaction.tauxConv.toLocaleString()}</p>
+                  <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()}</p>
 
-            <ul className="list">
-              {detailsTransaction.repartition_beneficiaires.map((benef, index) => (
-                <li key={index} className="list-item">
-                  {benef.beneficiaire} : {benef.benefice_FCFA.toLocaleString()} FCFA
-                </li>
-              ))}
-            </ul>
+                  <p className="last">Bénéfice Fournisseur</p>
+                  <ul className="list">
+                    {detailsTransaction?.benefices_fournisseurs?.map((benef, index) => (
+                      <li key={index} className="list-item">
+                        {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
+                      </li>
+                    ))}
+                  </ul>
 
-            <p className="last">RESUME GLOBAL</p>
-            <p>Total Fournisseurs : {detailsTransaction.resume_global.benefice_total_fournisseurs.toLocaleString()} FCFA</p>
+                  <p className="last">Détails par Fournisseur</p>
+                  <ul className="list">
+                    {Object.entries(detailsTransaction?.details_par_fournisseur || {}).map(([nomFournisseur, details], index) => (
+                      <li key={index} className="list-item">
+                        <strong>{nomFournisseur}</strong>:
+                        Bénéfice Restant: {details.benefice_restant.toLocaleString()} FCFA
+                        <ul>
+                          {Object.entries(details.benefices_par_beneficiaire || {}).map(([nomBenef, benefDetails], idx) => (
+                            <li key={idx} className="list-sub-item">
+                              {nomBenef} : {benefDetails.benefice_FCFA?.toLocaleString() || "N/A"} FCFA
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="last">Résumé Global</p>
+                  <p>Total Fournisseurs : {detailsTransaction?.resume_global?.benefice_total_fournisseurs?.toLocaleString() || "N/A"} FCFA</p>
+
+                  <button className="close-btn" onClick={closePopup}>Fermer</button>
+                </div>
+              </div>
+            )}
+
 
             <button className="close-btn" onClick={closePopup}>Fermer</button>
           </div>
         </div>
       )}
 
-      
-    </main >
+    </main>
   );
 };
 
