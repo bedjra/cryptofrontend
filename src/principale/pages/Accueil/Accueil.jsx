@@ -101,22 +101,7 @@ const Accueil = () => {
 
 
       <div class="dashboard-container">
-        <div class="stat-card">
-          <div class="card-content">
-            <div class="icon-container orange">
-              <DollarSign className="icon" style={{ color: "white", fontSize: "100px" }} />
-            </div>
-            <div class="text-container">
-              <span class="stat-values">{totalBenefices.toLocaleString()}</span>
-
-              <div class="stat-header">
-                <span class="stat-title">BÉNÉFICES</span>
-              </div>
-            </div>
-          </div>
-          <div class="separator"></div>
-          <div class="stat-subtitle">Total des bénéfices</div>
-        </div>
+        
 
         <div class="stat-card">
           <div class="card-content">
@@ -169,6 +154,24 @@ const Accueil = () => {
           </div>
           <div class="separator"></div>
           <div class="stat-subtitle">Total des bénéficiaires</div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="card-content">
+            <div class="icon-container orange">
+              <DollarSign className="icon" style={{ color: "white", fontSize: "100px" }} />
+            </div>
+            <div class="text-container">
+              <span class="stat-values">{totalBenefices.toLocaleString()}</span>
+
+              <div class="stat-header">
+                <span class="stat-title">BÉNÉFICES</span>
+              </div>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="stat-subtitle">Total des bénéfices</div>
         </div>
 
       </div>

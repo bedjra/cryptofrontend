@@ -6,7 +6,7 @@ import { FaLock, FaSignOutAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 const apiUrl = "http://127.0.0.1:5000";
 
 const Parametre = () => {
-    
+
     const [user, setUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({
@@ -64,30 +64,44 @@ const Parametre = () => {
         }
 
         try {
-            console.log("Envoi des données:", formData);
+            const token = localStorage.getItem("token"); // récupère le token
+
             const response = await fetch(`${apiUrl}/change`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` // envoie le token dans les headers
                 },
                 body: JSON.stringify({
-                    oldPassword: formData.oldPassword,
-                    newPassword: formData.newPassword,
+                    old_password: formData.oldPassword,
+                    new_password: formData.newPassword,
+                    confirm_password: formData.confirmPassword
                 }),
             });
 
             console.log("Réponse API changement mdp:", response);
 
             if (!response.ok) {
-                throw new Error("Erreur lors du changement de mot de passe");
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Erreur lors du changement de mot de passe");
             }
+
             alert("Mot de passe changé avec succès");
             setShowModal(false);
         } catch (error) {
             console.error("Erreur:", error);
-            alert("Échec du changement de mot de passe");
+            alert(error.message || "Échec du changement de mot de passe");
         }
     };
+
+    console.log("Données envoyées au backend :", {
+        old_password: formData.oldPassword,
+        new_password: formData.newPassword,
+        confirm_password: formData.confirmPassword
+    });
+    
+    const token = localStorage.getItem("token");
+
 
     return (
         <div className="parametre-container">
@@ -95,7 +109,7 @@ const Parametre = () => {
             <br />
             <div className="profile-header">
                 <img src="/profil.png" alt="Avatar" className="avatar" />
- <br />
+                <br />
             </div>
             <div className="contact-info">
                 <p><strong>Email :</strong> {user ? user.Email : "Non disponible"}</p>
@@ -114,9 +128,9 @@ const Parametre = () => {
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h3>Changer le mot de passe</h3>
                         <div className="modal-content">
-                        <label>Ancien mot de passe</label>
+
+                            <label>Ancien mot de passe</label>
 
                             <div className="input-container">
                                 <FaLock className="lock-icon" />

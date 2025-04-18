@@ -36,6 +36,10 @@ function Login() {
         // Si la réponse est réussie (status 200)
         console.log("Connexion réussie !");
         alert("Connecté avec succès !");
+        // après login réussi
+        const result = await response.json();
+localStorage.setItem("token", result.token);
+
         navigate("/accueil"); // Redirige vers l'accueil
       } else if (response.status === 401) {
         // Si le serveur retourne une erreur 401 (mauvais identifiants)
@@ -74,12 +78,12 @@ function Login() {
           </label>
           <div className="password-container">
 
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <label htmlFor="password">
             <FaLock /> Password

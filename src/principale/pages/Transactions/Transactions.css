@@ -337,131 +337,203 @@ td {
 
 
 
-/* Fond semi-transparent pour la modale */
-/* Fond semi-transparent pour la modale */
-.overl {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+
+
+
+
+/* Overlay sombre et centré */
+.modal-close {
+  position: absolute;
+  top: 5px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #718096;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #e53e3e;
+}
+
+.modal-overlay {
+  position: relative;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
-/* Contenu de la modale */
-.cont {
-
-
-  background: #fff;
-    padding: 10px;
-    margin-top: 50px;
-    border-radius: 12px;
-    width: 120vw;
-    max-width: 600px;
-    max-height: 95vh;
-    text-align: left;
-    overflow-y: auto;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    animation: scaleUp 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 15px;
-
+/* Contenu principal de la modale */
+.modal-content {
+  background: #ffffff;
+  width: 95%;
+  max-width: 720px;
+  max-height: 90vh;
+  padding: 24px;
+  
+  border-radius: 10px;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Animation d’apparition */
-@keyframes fadeIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Titre de la modale */
-.popup-header h4 {
-  margin: 0;
-  padding-bottom: 10px;
-  font-size: 18px;
-  text-align: center;
-  color: #333;
-}
-
-/* Corps de la modale */
-.popup-bod {
+/* Corps */
+.modal-body {
+  font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
-  color: #444;
+  color: #2d3748;
 }
-
-/* Suppression de toute bordure ou encadrement */
-.fournisseurs, .fournisseur, .beneficiaires, .beneficiaire {
-  margin: 10px 0;
-  padding: 0;
-  border: none;
-}
-
-
 
 /* Titres */
-.fournisseurs h5, .beneficiaires h5 {
-  margin-bottom: 8px;
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #1a202c;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.subsection-title {
   font-size: 16px;
-  color: #141414;
+  font-weight: 500;
+  margin-bottom: 8px;
 }
 
-/* Texte des fournisseurs et bénéficiaires */
-.fournisseur p, .beneficiaire p {
-  margin: 2px 0;
-  font-size: 14px;
-  font-weight: normal;
+/* Cartes de contenu */
+.card {
+  border-radius: 8px;
+  padding: 10px;
 }
 
-/* ✅ Mise en page des bénéficiaires (2 par 2 sur mobile et grand écran) */
-.beneficiaires {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
+.detail-block {
+  margin-top: 10px;
 }
 
-/* ✅ Chaque bénéficiaire prend 48% de la largeur (pour afficher 2 par ligne) */
-.beneficiaire {
-  width: 48%;
-  background: #f8f9fa;
-  padding: 8px;
-  border-radius: 6px;
+.detail-title {
+  margin-bottom: 4px;
 }
 
-/* ✅ Sur les petits écrans, forcer l'affichage en une seule colonne */
-@media (max-width: 500px) {
-  .beneficiaire {
-    width: 100%;
-  }
+/* Listes */
+.list {
+  margin-top: 6px;
+  padding-left: 18px;
+}
+
+.sub-total {
+  margin-top: 6px;
+  font-style: italic;
+  color: #4a5568;
+}
+
+/* Mise en avant du résumé */
+.highlight {
+  background-color: #edf2f7;
+  font-weight: bold;
+  text-align: center;
+  color: #2b6cb0;
 }
 
 /* Bouton de fermeture */
-.close-btn {
-  width: 100%;
-  padding: 8px;
-  margin-top: 15px;
-  background: #dc3545;
-  color: white;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.close-btn:hover {
-  background: #c82333;
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+.close-button:hover {
+  transform: scale(1.2);
+  color: #e53935;
+}
+
+
+
+/* Disposition horizontale pour les fournisseurs */
+.fournisseur-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+/* Carte fournisseur (garde le style professionnel) */
+.fournisseur-card {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 300px;
+  flex: 1 1 300px;
+}
+
+
+.beneficiaire-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.beneficiaire-grid .card {
+  min-width: 300px;
+  flex: 1 1 300px;
+}
+
+.benefice-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.benefice-box {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 200px;
+  flex: 1 1 250px;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+
+.detail-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.detail-box {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 260px;
+  flex: 1 1 280px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.h5{
+  margin-bottom: 10px;
 }
 

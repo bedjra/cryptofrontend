@@ -89,70 +89,51 @@ const Calculs = () => {
           </div>
         ))}
       </section>
-
       {selectedTransaction && detailsTransaction && (
         <div className="moda">
           <div className="moda-content">
-            <h4>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h4>
-            <hr className="separat" />
 
-            <p className="last">Transaction</p>
-            <p>Id: {selectedTransaction.id}</p>
-            <p>Montant : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
-            <p>Taux : {selectedTransaction.tauxConv.toLocaleString()}</p>
-            <p className="fcfa">UDST : {selectedTransaction.montantUSDT.toLocaleString()}</p>
+            {/* Bénéfices Fournisseurs */}
+            <p className="last">Bénéfice Fournisseur</p>
+            <ul className="list">
+              {detailsTransaction.benefices_fournisseurs?.map((benef, index) => (
+                <li key={index} className="list-item">
+                  {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
+                  </li>
+              ))}
+            </ul>
 
-            {/* Affichage des fournisseurs et de leurs bénéficiaires */}
-            {selectedTransaction && detailsTransaction && (
-              <div className="moda">
-                <div className="moda-content">
-                  <h4>CALCUL DE LA TRANSACTION {selectedTransaction.id}</h4>
-                  <hr className="separat" />
-                  <p className="last">Transaction</p>
-                  <p>Id: {selectedTransaction.id}</p>
-                  <p>Montant  : {selectedTransaction.montantFCFA.toLocaleString()} FCFA</p>
-                  <p>Taux : {selectedTransaction.tauxConv.toLocaleString()}</p>
-                  <p className="fcfa">UDST  : {selectedTransaction.montantUSDT.toLocaleString()}</p>
-
-                  <p className="last">Bénéfice Fournisseur</p>
-                  <ul className="list">
-                    {detailsTransaction?.benefices_fournisseurs?.map((benef, index) => (
-                      <li key={index} className="list-item">
-                        {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
+            {/* Détails par Fournisseur */}
+            <p className="last">Détails par Bénéficiaire
+            </p>
+            <ul className="list">
+              {Object.entries(detailsTransaction.details_par_fournisseur || {}).map(([nomFournisseur, details], index) => (
+                <li key={index} className="list-item">
+                  <ul>
+                    {Object.entries(details.benefices_par_beneficiaire || {}).map(([nomBenef, benefDetails], idx) => (
+                      <li key={idx} className="list-sub-item">
+                        {nomBenef} : {benefDetails.benefice_FCFA?.toLocaleString() || "N/A"} FCFA
                       </li>
                     ))}
                   </ul>
 
-                  <p className="last">Détails par Fournisseur</p>
-                  <ul className="list">
-                    {Object.entries(detailsTransaction?.details_par_fournisseur || {}).map(([nomFournisseur, details], index) => (
-                      <li key={index} className="list-item">
-                        <strong>{nomFournisseur}</strong>:
-                        Bénéfice Restant: {details.benefice_restant.toLocaleString()} FCFA
-                        <ul>
-                          {Object.entries(details.benefices_par_beneficiaire || {}).map(([nomBenef, benefDetails], idx) => (
-                            <li key={idx} className="list-sub-item">
-                              {nomBenef} : {benefDetails.benefice_FCFA?.toLocaleString() || "N/A"} FCFA
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
-                  </ul>
+                  Bénéfice Restant : {details.benefice_restant.toLocaleString()} FCFA
 
-                  <p className="last">Résumé Global</p>
-                  <p>Total Fournisseurs : {detailsTransaction?.resume_global?.benefice_total_fournisseurs?.toLocaleString() || "N/A"} FCFA</p>
+                </li>
 
-                  <button className="close-btn" onClick={closePopup}>Fermer</button>
-                </div>
-              </div>
-            )}
 
+              ))}
+            </ul>
+
+            {/* Résumé */}
+            <p className="last">Résumé Global</p>
+            <p>Total Fournisseurs : {detailsTransaction.resume_global?.benefice_total_fournisseurs?.toLocaleString() || "N/A"} FCFA</p>
 
             <button className="close-btn" onClick={closePopup}>Fermer</button>
           </div>
         </div>
       )}
+
 
     </main>
   );

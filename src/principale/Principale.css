@@ -18,7 +18,7 @@ span {
 }
 
 .dots h3 {
-  margin-top:  10px;
+  margin-top: 10px;
   font-size: 1.375rem;
   color: rgb(71, 71, 71);
   opacity: 1;
@@ -245,6 +245,16 @@ nav {
     margin-right: 10px;
   }
 
+  .mlauto {
+    padding-left: 18px;
+    background-color: white;
+    border-radius: 4px;
+    margin-left: 50px;
+    left: 150px;
+    max-width: 250px;
+    padding: 5px 12px;
+  }
+
 
   .search-bar {
     flex: 1px;
@@ -291,23 +301,34 @@ nav {
     position: fixed;
     top: -10px;
     left: 0;
-    width: 250px; /* Ajuste la largeur du menu */
+    width: 250px;
+    /* Ajuste la largeur du menu */
     height: 100%;
     background-color: #fff;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
     transform: translateX(-100%);
-    z-index: 1001; /* S'assure que le menu est au-dessus */
+    z-index: 1001;
+    /* S'assure que le menu est au-dessus */
   }
-  
+
   /* Quand le menu est ouvert */
   .sideba.open {
     transform: translateX(0);
   }
-  
- 
+
+
   .log_out {
     position: absolute;
     bottom: -3%;
   }
+}
+
+
+.inputgroup input {
+  width: 100%;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

@@ -70,7 +70,7 @@ const Principale = () => {
                 <span className="links_name">Accueil</span>
               </NavLink>
             </li>
-           
+
             <li>
               <NavLink to="transactions" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaExchangeAlt className="icon" />
@@ -84,12 +84,14 @@ const Principale = () => {
               </NavLink>
             </li>
 
+            {/* Résumé 
             <li>
               <NavLink to="calculs" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
                 <FaCalculator className="icon" />
                 <span className="links_name">Calculs</span>
               </NavLink>
             </li>
+          */}
 
             <li>
               <NavLink to="historique" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeNav}>
@@ -108,7 +110,20 @@ const Principale = () => {
         </nav>
 
         <div className="content-area">
+
+
           <div className="headerNew">
+          <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
+
+            <div class="mlauto">
+              <div class="inputgroup">
+                <input type="text" class="form-control" placeholder="Rechercher..." />
+
+              </div>
+            </div>
+
+
+{/* 
             <img className='inge' src="/menu.png" alt="Menu" onClick={toggleNav} />
 
             <div className={`search-container ${searchActive ? "active" : ""}`}>
@@ -130,6 +145,8 @@ const Principale = () => {
               )}
 
             </div>
+ */}
+
             <div className="profile-icon">
               <img src="/profil.png" alt="Profile" onClick={goToParametre} style={{ cursor: "pointer" }} />
             </div>

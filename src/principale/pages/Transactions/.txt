@@ -77,27 +77,14 @@ const Transactions = () => {
 
   const handleShowDetails = async (transactionId) => {
     try {
-      const [transactionRes, calculsRes] = await Promise.all([
-        fetch(`${apiUrl}/tran/${transactionId}`),
-        fetch(`${apiUrl}/call/${transactionId}`)
-      ]);
-
-      const transactionData = await transactionRes.json();
-      const calculsData = await calculsRes.json();
-
-      // Fusionne les deux
-      const mergedData = {
-        ...transactionData,
-        calculs: calculsData.calculs_en_temps_reel
-      };
-
-      setSelectedFournisseurDetails(mergedData);
+      const response = await fetch(`${apiUrl}/tran/${transactionId}`);
+      const data = await response.json();
+      setSelectedFournisseurDetails(data);
       setShowModal(true);
     } catch (error) {
-      console.error("Erreur lors de la récupération des détails ou des calculs:", error);
+      console.error("Erreur lors de la récupération des détails:", error);
     }
   };
-
 
   const handleEnregistrer = async () => {
     if (!montantFCFA || !tauxConv || selectionnes.length === 0) {
@@ -274,111 +261,112 @@ const Transactions = () => {
           </tbody>
         </table>
 
-
-
-
-
-
-
         {/* Affichage de la modale */}
         {showModal && selectedFournisseurDetails && (
-          <div className="modal-overlay" onClick={() => setShowModal(false)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <div className="modal-body">
+          <div className="overl" onClick={() => setShowModal(false)}>
+            <div className="cont" onClick={(e) => e.stopPropagation()}>
+              <div className="popup-header">
+              </div>
 
-                <div className="modal-header">
-                  <h4 className="modal-title">🧾 Fournisseurs & Bénéficiaires</h4>
-                  <button className="close-button" onClick={() => setShowModal(false)}>x</button>
+              <div className="popup-bod">
+                {/* 
+
+                <div className="details-container">
+                  <div className="column">
+                    <h5>Transaction</h5>
+                    <p><strong>Montant FCFA:</strong> {selectedFournisseurDetails.montantFCFA}</p>
+                    <p><strong>Taux Convenu:</strong> {selectedFournisseurDetails.tauxConv}</p>
+                    <p><strong>Montant USDT:</strong> {selectedFournisseurDetails.montantUSDT}</p>
+                    <p><strong>Date:</strong> {selectedFournisseurDetails.dateTransaction ?
+                      format(new Date(selectedFournisseurDetails.dateTransaction), "dd/MM/yyyy") :
+                      "Date invalide"}</p>
+                  </div>
                 </div>
+*/}
+                {selectedFournisseurDetails.fournisseurs?.length > 0 && (
+                  <div className="fournisseurs">
+                    <h5>Fournisseurs & Bénéficiaires </h5>
+                    {selectedFournisseurDetails.fournisseurs.map((fournisseur, index) => (
+                      <div key={index} className="fournisseurs">
+                        <p><strong>{index + 1} - Nom :</strong> {fournisseur.nom}</p>
+                        <p><strong>Taux :</strong> {fournisseur.tauxJour}</p>
+                        <p><strong>Quantité USDT :</strong> {fournisseur.quantiteUSDT}</p>
 
-                <br />
-                <hr />
-                <br />
+                        {fournisseur.beneficiaires && fournisseur.beneficiaires.length > 0 && (
 
-                {/* Liste des fournisseurs triée */}
-                {selectedFournisseurDetails?.fournisseurs?.length > 0 && selectedFournisseurDetails?.calculs?.benefices_fournisseurs && (
-                  <div className="fournisseur-list">
-                    {selectedFournisseurDetails.calculs.benefices_fournisseurs
-                      .map((bf, index) => {
-                        const fournisseur = selectedFournisseurDetails.fournisseurs.find(f => f.nom === bf.fournisseur);
-                        if (!fournisseur) return null;
 
-                        return (
-                          <div key={index} className="fournisseur-card">
-                            <p><strong>{index + 1} - Nom :</strong> {fournisseur.nom}</p>
-                            <p><strong>Taux :</strong> {fournisseur.tauxJour || "Non spécifié"}</p>
-                            <p><strong>Quantité USDT :</strong> {fournisseur.quantiteUSDT || "Non spécifié"}</p>
+
+                          <div className="beneficiaires">
                             <br />
-                            {fournisseur.beneficiaires?.length > 0 && (
-                              <div className="beneficiaire-list">
-                                {fournisseur.beneficiaires.map((b, idx) => (
-                                  <div key={idx} className="beneficiaire-card">
-                                    <strong>{b.nom} : </strong>  {b.commissionUSDT} USDT
-                                  </div>
-                                ))}
+                            {fournisseur.beneficiaires.map((b, idx) => (
+                              <div key={idx} className="beneficiaire">
+                                <p><strong>Nom :</strong> {b.nom}</p>
+                                <p><strong>Commission (USDT):</strong> {b.commissionUSDT}</p>
                               </div>
-                            )}
+                            ))}
                           </div>
-                        );
-                      })}
+                        )}
+                      </div>
+                    ))}
                   </div>
                 )}
 
-
-                {/* Section Calculs */}
-                {selectedFournisseurDetails?.calculs && (
-                  <section className="section">
-                    <h3 className="section-title">💰 Calculs des Bénéfices</h3>
-
-                    <div className="calculs-grid">
-                      {/* Bénéfice par fournisseur */}
-                      <div className="card calcul-card">
-                        <div className={selectedFournisseurDetails.calculs.benefices_fournisseurs?.length >= 2 ? "benefice-flex" : ""}>
-                          {/* Tri des fournisseurs pour affichage */}
-                          {selectedFournisseurDetails.calculs.benefices_fournisseurs
-                            .sort((a, b) => a.fournisseur.localeCompare(b.fournisseur)) // Tri par nom
-                            .map((bf, index) => (
-                              <div key={index} className="benefice-box">
-                                Bénéfice par USDT : {bf.benefice_par_USDT.toLocaleString()} 
-                                <br />
-                                {bf.fournisseur} : {bf.benefice_total_FCFA.toLocaleString()} FCFA
-                                </div>
-                            ))}
-                        </div>
-                      </div>
-
-                      {/* Détails par bénéficiaire */}
-                      <div className="card calcul-card">
-                        <div className={Object.keys(selectedFournisseurDetails.calculs.details_par_fournisseur || {}).length >= 2 ? "detail-flex" : ""}>
-                          {/* Tri des fournisseurs pour afficher les détails */}
-                          {Object.entries(selectedFournisseurDetails.calculs.details_par_fournisseur || {})
-                            .sort(([a], [b]) => a.localeCompare(b)) // Tri par nom de fournisseur
-                            .map(([nomFournisseur, details], idx) => (
-                              <div key={idx} className="detail-box">
-                                <p className="detail-title">{nomFournisseur}</p>
-                                <ul className="list">
-                                  {/* Tri des bénéficiaires par nom */}
-                                  {Object.entries(details.benefices_par_beneficiaire || {})
-                                    .sort(([a], [b]) => a.localeCompare(b)) // Tri par nom de bénéficiaire
-                                    .map(([nomBeneficiaire, benef], i) => (
-                                      <li key={i}>
-                                        {nomBeneficiaire} : <strong>{benef.benefice_FCFA?.toLocaleString()} FCFA</strong>
-                                      </li>
-                                    ))}
-                                </ul>
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-
-                    </div>
-                  </section>
-                )}
-
+                <button className="close-btn" onClick={() => setShowModal(false)}>
+                  Fermer
+                </button>
               </div>
             </div>
           </div>
+
+          
         )}
+
+
+        {/* Affichage de la modale 
+
+        {selectedTransaction && detailsTransaction && (
+          <div className="moda">
+            <div className="moda-content">
+            
+              <p className="last">Bénéfice Fournisseur</p>
+              <ul className="list">
+                {detailsTransaction.benefices_fournisseurs?.map((benef, index) => (
+                  <li key={index} className="list-item">
+                    {benef.fournisseur} : {benef.benefice_total_FCFA.toLocaleString()} FCFA
+                  </li>
+                ))}
+              </ul>
+
+              <p className="last">Détails par Bénéficiaire
+              </p>
+              <ul className="list">
+                {Object.entries(detailsTransaction.details_par_fournisseur || {}).map(([nomFournisseur, details], index) => (
+                  <li key={index} className="list-item">
+                    <ul>
+                      {Object.entries(details.benefices_par_beneficiaire || {}).map(([nomBenef, benefDetails], idx) => (
+                        <li key={idx} className="list-sub-item">
+                          {nomBenef} : {benefDetails.benefice_FCFA?.toLocaleString() || "N/A"} FCFA
+                        </li>
+                      ))}
+                    </ul>
+
+                    Bénéfice Restant : {details.benefice_restant.toLocaleString()} FCFA
+
+                  </li>
+
+
+                ))}
+              </ul>
+
+              <p className="last">Résumé Global</p>
+              <p>Total Fournisseurs : {detailsTransaction.resume_global?.benefice_total_fournisseurs?.toLocaleString() || "N/A"} FCFA</p>
+
+              <button className="close-btn" onClick={closePopup}>Fermer</button>
+            </div>
+          </div>
+        )}
+
+        */}
 
       </div>
     </div>
