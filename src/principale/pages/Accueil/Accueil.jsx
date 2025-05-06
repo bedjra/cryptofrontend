@@ -17,6 +17,9 @@ const Accueil = () => {
   const [beneficiaires, setBeneficiaires] = useState([]);
   const [transactions, setTransactions] = useState([]);
 
+  const [loadingTaux, setLoadingTaux] = useState(true);
+  const [errorTaux, setErrorTaux] = useState(null);
+  
 
   useEffect(() => {
     // Récupérer les bénéficiaires depuis l'API
@@ -52,7 +55,7 @@ const Accueil = () => {
       .then((data) => setTotalBeneficiaires(data.total_beneficiaires || 0))
       .catch((err) => console.error("Erreur récupération bénéficiaires :", err));
 
-    fetch(`${apiUrl}/four/taux`)
+      fetch(`${apiUrl}/four/taux`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des taux");
@@ -60,13 +63,20 @@ const Accueil = () => {
         return response.json();
       })
       .then((data) => {
-        setFournisseurs(data.fournisseurs);
-        setLoading(false);
+        console.log("Taux récupérés :", data);
+        if (Array.isArray(data.transactions_taux)) {
+          setFournisseurs(data.transactions_taux);
+        } else {
+          setFournisseurs([]);
+        }
+        setLoadingTaux(false);
       })
       .catch((err) => {
-        setError("Erreur lors de la récupération des taux");
-        setLoading(false);
+        setErrorTaux("Erreur lors de la récupération des taux");
+        setLoadingTaux(false);
       });
+    
+
 
     fetch(`${apiUrl}/benef/all`)
       .then((response) => {
@@ -101,7 +111,7 @@ const Accueil = () => {
 
 
       <div class="dashboard-container">
-        
+
 
         <div class="stat-card">
           <div class="card-content">
@@ -212,27 +222,44 @@ const Accueil = () => {
         </div>
 
         <div className="right-section">
-          <h4>Taux des Transactions </h4>
+  <h4>Taux des Transactions</h4>
 
-          <table>
-            <thead>
-              <tr>
-                <th >Id</th>
-                <th >Fournisseur</th>
-                <th >Taux </th>
-              </tr>
-            </thead>
-            <tbody>
-              {fournisseurs.map((f) => (
-                <tr key={f.id}>
-                  <td>{f.id}</td>
-                  <td>{f.nom}</td>
-                  <td>{f.taux_jour}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+  {loadingTaux ? (
+    <p>Chargement en cours...</p>
+  ) : errorTaux ? (
+    <p style={{ color: 'red' }}>{errorTaux}</p>
+  ) : (
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Fournisseur</th>
+          <th>Taux</th>
+        </tr>
+      </thead>
+      <tbody>
+        {fournisseurs.length > 0 ? (
+          fournisseurs.map((f) => (
+            <tr key={f.id}>
+              <td>{f.id}</td>
+              <td>{f.fournisseur}</td>
+              <td>{f.taux}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3" style={{ textAlign: 'center' }}>
+              Aucun taux trouvé
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  )}
+</div>
+
+
+
       </div>
 
 

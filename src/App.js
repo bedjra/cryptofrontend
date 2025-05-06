@@ -10,7 +10,7 @@ import Beneficiaires from "./principale/pages/Beneficiaires/Beneficiaires.jsx";
 import Historique from "./principale/pages/Historique/Historiques.jsx";
 import Calculs from "./principale/pages/Calculs/Calculs.jsx";
 import Parametre from "./principale/pages/Parametre/Parametre.jsx";
-import Four from "./principale/pages/Four/Four.jsx";
+import Four from "./principale/pages/Fournisseurs/Four.jsx";
 
 
 
