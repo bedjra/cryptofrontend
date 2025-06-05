@@ -43,7 +43,6 @@ function App() {
           <Route path="fournisseurs" element={<Four />} />
 
           <Route path="historique" element={<Historique />} />
-          <Route path="calculs" element={<Calculs />} />
           <Route path="profil" element={<Parametre />} />
         </Route>
 

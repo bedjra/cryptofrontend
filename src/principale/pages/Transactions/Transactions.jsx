@@ -252,12 +252,10 @@ const Transactions = () => {
                     : "Date invalide"}
                 </td>
                 <td>
-                  {/* 
 
                   <button onClick={() => handleEdit(transaction)} className="action-btn">
                     <Edit size={20} color="blue" />
                   </button>
-                         */}
 
                   <button onClick={() => handleDelete(transaction.id)} className="action-btn">
                     <Trash2 size={20} color="red" />

@@ -292,7 +292,7 @@ const Four = () => {
                 </td>
 
                 <td>
-      {/*
+
                   <button onClick={() => handleEdit(fournisseur)} className="action-btn">
                     <Edit size={20} color="blue" />
                   </button>
@@ -303,7 +303,7 @@ const Four = () => {
                   </button>
              
                 
-                  <button
+                 {/* <button
                     onClick={() => handleShowDetails(fournisseurs.id)}
                     className="action-btn"
                   >
